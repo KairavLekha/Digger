@@ -7,6 +7,7 @@ package DPAT;
 import DB.DBConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,13 +23,15 @@ import javax.swing.JOptionPane;
 //PhoneNumber
 //Address
 //Visits
-public class Screen2 extends javax.swing.JFrame {
+public class Patients extends javax.swing.JFrame {
 
     /**
-     * Creates new form Screen1
+     * Creates new form Login
      */
-    public Screen2() {
+    public Patients() {
         initComponents();
+            ImageIcon pic = new ImageIcon("pulse.png");
+            this.setIconImage(pic.getImage());
         setSize(526, 355);
         setLocationRelativeTo(null);
         try {
@@ -110,7 +113,7 @@ public class Screen2 extends javax.swing.JFrame {
         titleLabel.setText("Digital Patient Acess Terminal");
 
         searchButton.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        searchButton.setText("Search");
+        searchButton.setText("Edit");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
@@ -234,7 +237,7 @@ public class Screen2 extends javax.swing.JFrame {
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
         String selected = patientList.getSelectedValue();
-        new Screen3().setVisible(true);
+        new UpdateInformation().setVisible(true);
         dispose();
     }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -266,13 +269,13 @@ public class Screen2 extends javax.swing.JFrame {
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
-        new Screen1().setVisible(true);
+        new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
     private void newPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPatientButtonActionPerformed
         // TODO add your handling code here
-        new Screen4().setVisible(true);
+        new AddPatient().setVisible(true);
         dispose();
 
     }//GEN-LAST:event_newPatientButtonActionPerformed
@@ -283,7 +286,7 @@ public class Screen2 extends javax.swing.JFrame {
         try {
             ResultSet rs = DBConnector.read(query2);
             
-            String[] names = new String[99999];
+            String[] names = new String[1999999999];
             int i = 0;
             while(rs.next()){
                 String name = rs.getString("firstname");
@@ -324,13 +327,13 @@ public class Screen2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Screen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Screen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Screen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Screen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -338,7 +341,7 @@ public class Screen2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Screen2().setVisible(true);
+                new Patients().setVisible(true);
             }
         });
     }

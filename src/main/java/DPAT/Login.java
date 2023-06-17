@@ -4,6 +4,8 @@
  */
 package DPAT;
 
+import javax.swing.ImageIcon;
+
 
 
 
@@ -11,15 +13,18 @@ package DPAT;
  *
  * @author Kairav
  */
-public class Screen1 extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
 
     /**
      * Creates new form Screen1
      */
-    public Screen1() {
+    public Login() {
 
 
         initComponents();
+            ImageIcon pic = new ImageIcon("pulse.png");
+            this.setIconImage(pic.getImage());
+        
         setSize(526, 355);
         setLocationRelativeTo(null);
 
@@ -149,7 +154,7 @@ public class Screen1 extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
         if (code == Integer.parseInt(PasswordField.getText())) {
-            new Screen2().setVisible(true);
+            new Patients().setVisible(true);
             dispose();
         } else {
             incorrectCodeLabel.setEnabled(true);
@@ -183,18 +188,18 @@ public class Screen1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Screen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Screen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Screen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Screen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold> 
                 /* Create and display the form */java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
-                        new Screen1().setVisible(true);
+                        new Login().setVisible(true);
 
                     }
                 });

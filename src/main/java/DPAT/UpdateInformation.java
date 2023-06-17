@@ -4,11 +4,13 @@
  */
 package DPAT;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Kairav
  */
-public class Screen3 extends javax.swing.JFrame {
+public class UpdateInformation extends javax.swing.JFrame {
 
     /**
      * Creates new form Screen1
@@ -22,8 +24,10 @@ public class Screen3 extends javax.swing.JFrame {
 //PhoneNumber
 //Address
 //Visits
-    public Screen3() {
+    public UpdateInformation() {
         initComponents();
+            ImageIcon pic = new ImageIcon("pulse.png");
+            this.setIconImage(pic.getImage());
         setSize(526, 355);
         setLocationRelativeTo(null);
     }
@@ -324,7 +328,7 @@ public class Screen3 extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-         new Screen2().setVisible(true);
+         new Patients().setVisible(true);
          dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
@@ -361,13 +365,13 @@ public class Screen3 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Screen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Screen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Screen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Screen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -375,7 +379,7 @@ public class Screen3 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Screen3().setVisible(true);
+                new UpdateInformation().setVisible(true);
             }
         });
     }
