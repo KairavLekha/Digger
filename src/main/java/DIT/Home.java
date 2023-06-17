@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DPAT;
+package DIT;
 
 import javax.swing.ImageIcon;
 
@@ -79,7 +79,7 @@ public class Home extends javax.swing.JFrame {
         exitButton.setBackground(new java.awt.Color(30, 30, 30));
         exitButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         exitButton.setForeground(new java.awt.Color(0, 0, 0));
-        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DPAT/logoutIcon.png"))); // NOI18N
+        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DIT/logoutIcon.png"))); // NOI18N
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);

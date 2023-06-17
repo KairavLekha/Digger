@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DPAT;
+package DIT;
 
 import DB.DBConnector;
 import java.sql.ResultSet;
@@ -73,12 +73,6 @@ public class Patients extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Logo = new javax.swing.JButton();
-        PasswordField = new javax.swing.JPasswordField();
-        searchLabel = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
         titleLabel = new javax.swing.JLabel();
         searchButton = new javax.swing.JButton();
         scrollLabel = new javax.swing.JLabel();
@@ -89,21 +83,6 @@ public class Patients extends javax.swing.JFrame {
         instructionLabel1 = new javax.swing.JLabel();
         logoutButton = new javax.swing.JButton();
         newPatientButton = new javax.swing.JButton();
-
-        Logo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Kairav\\OneDrive\\Pictures\\2023-05-13.png")); // NOI18N
-
-        PasswordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               
-            }
-        });
-
-        searchLabel.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        searchLabel.setText("Type In The Patient's Fullname");
-
-        jToggleButton1.setText("jToggleButton1");
-
-        jScrollPane1.setViewportView(jTextPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -116,7 +95,7 @@ public class Patients extends javax.swing.JFrame {
         searchButton.setText("Edit");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                
+                searchButtonActionPerformed(evt);
             }
         });
 
@@ -128,11 +107,6 @@ public class Patients extends javax.swing.JFrame {
         jScrollPane2.setViewportView(patientList);
 
         filterInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        filterInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                
-            }
-        });
         filterInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 filterInputKeyReleased(evt);
@@ -194,7 +168,7 @@ public class Patients extends javax.swing.JFrame {
                                 .addGap(66, 66, 66)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
+                        .addGap(146, 146, 146)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(scrollLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -343,21 +317,15 @@ public class Patients extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Logo;
-    private javax.swing.JPasswordField PasswordField;
     private javax.swing.JButton criteriaButton;
     private javax.swing.JTextField filterInput;
     private javax.swing.JLabel instructionLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton newPatientButton;
     private javax.swing.JList<String> patientList;
     private javax.swing.JLabel scrollLabel;
     private javax.swing.JButton searchButton;
-    private javax.swing.JLabel searchLabel;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

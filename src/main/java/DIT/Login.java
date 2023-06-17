@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DPAT;
+package DIT;
 
 import javax.swing.ImageIcon;
 
@@ -53,15 +53,10 @@ public class Login extends javax.swing.JFrame {
         setUndecorated(true);
 
         Title.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        Title.setText("Digital Patient Acess Terminal");
+        Title.setText("Doctor Information Terminal");
 
         PasswordField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PasswordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        PasswordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                
-            }
-        });
 
         confirmButton.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         confirmButton.setText("Confirm");
@@ -72,11 +67,6 @@ public class Login extends javax.swing.JFrame {
         });
 
         Logo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Kairav\\OneDrive\\Pictures\\2023-05-14 (4).png")); // NOI18N
-        Logo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -108,7 +98,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addComponent(Title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(exitButton)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -159,10 +149,6 @@ public class Login extends javax.swing.JFrame {
             PasswordField.setText("");
         }
     }//GEN-LAST:event_confirmButtonActionPerformed
-
-    private void LogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LogoActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
