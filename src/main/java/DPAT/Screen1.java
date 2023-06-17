@@ -6,6 +6,7 @@ package DPAT;
 
 
 
+
 /**
  *
  * @author Kairav
@@ -16,6 +17,8 @@ public class Screen1 extends javax.swing.JFrame {
      * Creates new form Screen1
      */
     public Screen1() {
+
+
         initComponents();
         setSize(526, 355);
         setLocationRelativeTo(null);
