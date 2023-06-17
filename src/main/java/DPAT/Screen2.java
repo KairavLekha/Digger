@@ -85,7 +85,6 @@ public class Screen2 extends javax.swing.JFrame {
         criteriaButton = new javax.swing.JButton();
         instructionLabel1 = new javax.swing.JLabel();
         logoutButton = new javax.swing.JButton();
-        filterButton1 = new javax.swing.JButton();
         newPatientButton = new javax.swing.JButton();
 
         Logo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Kairav\\OneDrive\\Pictures\\2023-05-13.png")); // NOI18N
@@ -104,7 +103,6 @@ public class Screen2 extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setName("frame2"); // NOI18N
         setUndecorated(true);
         setSize(new java.awt.Dimension(526, 350));
 
@@ -119,7 +117,7 @@ public class Screen2 extends javax.swing.JFrame {
             }
         });
 
-        scrollLabel.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        scrollLabel.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         scrollLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         scrollLabel.setText("List Of Patients");
 
@@ -132,6 +130,11 @@ public class Screen2 extends javax.swing.JFrame {
                 filterInputActionPerformed(evt);
             }
         });
+        filterInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                filterInputKeyReleased(evt);
+            }
+        });
 
         criteriaButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         criteriaButton.setText("Change Search Criteria");
@@ -141,7 +144,7 @@ public class Screen2 extends javax.swing.JFrame {
             }
         });
 
-        instructionLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        instructionLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         instructionLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         instructionLabel1.setText("Search Criteria: Firstname");
 
@@ -149,14 +152,6 @@ public class Screen2 extends javax.swing.JFrame {
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logoutButtonActionPerformed(evt);
-            }
-        });
-
-        filterButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        filterButton1.setText("Apply Filter");
-        filterButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filterButton1ActionPerformed(evt);
             }
         });
 
@@ -196,11 +191,8 @@ public class Screen2 extends javax.swing.JFrame {
                                 .addGap(66, 66, 66)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(209, 209, 209)
-                        .addComponent(filterButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(151, 151, 151)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(scrollLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(90, Short.MAX_VALUE))
@@ -212,24 +204,22 @@ public class Screen2 extends javax.swing.JFrame {
                 .addComponent(titleLabel)
                 .addGap(2, 2, 2)
                 .addComponent(criteriaButton)
-                .addGap(2, 2, 2)
-                .addComponent(instructionLabel1)
-                .addGap(6, 6, 6)
-                .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(filterButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollLabel)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
+                        .addGap(15, 15, 15)
+                        .addComponent(instructionLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrollLabel)
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(newPatientButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
+                        .addGap(211, 211, 211)
                         .addComponent(logoutButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -249,7 +239,7 @@ public class Screen2 extends javax.swing.JFrame {
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void filterInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterInputActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_filterInputActionPerformed
 
     private void criteriaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criteriaButtonActionPerformed
@@ -287,13 +277,13 @@ public class Screen2 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_newPatientButtonActionPerformed
 
-    private void filterButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButton1ActionPerformed
+    private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
-               String query2 = "select firstname, surname, PatientNumber FROM Patient WHERE "+Criteria+" LIKE '%"+filterInput.getText()+"%'ORDER BY firstname;";
+                String query2 = "select firstname, surname, PatientNumber FROM Patient WHERE "+Criteria+" LIKE '%"+filterInput.getText()+"%'ORDER BY firstname;";
         try {
             ResultSet rs = DBConnector.read(query2);
             
-            String[] names = new String[9999];
+            String[] names = new String[99999];
             int i = 0;
             while(rs.next()){
                 String name = rs.getString("firstname");
@@ -307,7 +297,7 @@ public class Screen2 extends javax.swing.JFrame {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null,"Error in SQL query");
         }
-    }//GEN-LAST:event_filterButton1ActionPerformed
+    }//GEN-LAST:event_filterInputKeyReleased
 
     /**
      * @param args the command line arguments
@@ -357,7 +347,6 @@ public class Screen2 extends javax.swing.JFrame {
     private javax.swing.JButton Logo;
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JButton criteriaButton;
-    private javax.swing.JButton filterButton1;
     private javax.swing.JTextField filterInput;
     private javax.swing.JLabel instructionLabel1;
     private javax.swing.JScrollPane jScrollPane1;
