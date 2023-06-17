@@ -13,12 +13,12 @@ import javax.swing.ImageIcon;
  *
  * @author Kairav
  */
-public class Login extends javax.swing.JFrame {
+public class Home extends javax.swing.JFrame {
 
     /**
      * Creates new form Screen1
      */
-    public Login() {
+    public Home() {
 
 
         initComponents();
@@ -41,13 +41,14 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jOptionPane1 = new javax.swing.JOptionPane();
         Title = new javax.swing.JLabel();
-        PasswordField = new javax.swing.JPasswordField();
-        confirmButton = new javax.swing.JButton();
+        patientButton = new javax.swing.JButton();
         Logo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        incorrectCodeLabel = new javax.swing.JLabel();
         exitButton = new javax.swing.JButton();
+        medicationButton = new javax.swing.JButton();
+        illnessButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -55,19 +56,11 @@ public class Login extends javax.swing.JFrame {
         Title.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         Title.setText("Digital Patient Acess Terminal");
 
-        PasswordField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        PasswordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        PasswordField.addActionListener(new java.awt.event.ActionListener() {
+        patientButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        patientButton.setText("Patients");
+        patientButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                
-            }
-        });
-
-        confirmButton.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        confirmButton.setText("Confirm");
-        confirmButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmButtonActionPerformed(evt);
+                patientButtonActionPerformed(evt);
             }
         });
 
@@ -80,24 +73,32 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Enter Your Code");
+        jLabel1.setText("What Would You Like To View");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        incorrectCodeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        incorrectCodeLabel.setForeground(new java.awt.Color(153, 0, 0));
-        incorrectCodeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        incorrectCodeLabel.setText("Invalid Code");
-        incorrectCodeLabel.setToolTipText("");
-        incorrectCodeLabel.setEnabled(false);
-        incorrectCodeLabel.setInheritsPopupMenu(false);
-
-        exitButton.setBackground(new java.awt.Color(255, 0, 0));
+        exitButton.setBackground(new java.awt.Color(30, 30, 30));
         exitButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         exitButton.setForeground(new java.awt.Color(0, 0, 0));
-        exitButton.setText("x");
+        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DPAT/logoutIcon.png"))); // NOI18N
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
+            }
+        });
+
+        medicationButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        medicationButton.setText("Medication");
+        medicationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                medicationButtonActionPerformed(evt);
+            }
+        });
+
+        illnessButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        illnessButton.setText("Illnesses");
+        illnessButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                illnessButtonActionPerformed(evt);
             }
         });
 
@@ -108,37 +109,44 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addComponent(Title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(exitButton)
-                .addContainerGap())
+                .addContainerGap(90, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(incorrectCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(185, 185, 185))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(133, 133, 133))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(medicationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(illnessButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(patientButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(136, 136, 136)
+                        .addComponent(exitButton)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Title)
-                    .addComponent(exitButton))
-                .addGap(14, 14, 14)
+                .addComponent(Title)
+                .addGap(20, 20, 20)
                 .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(incorrectCodeLabel)
                 .addGap(18, 18, 18)
-                .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addComponent(illnessButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(medicationButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(patientButton)
+                .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(exitButton)
+                .addContainerGap())
         );
 
         pack();
@@ -146,19 +154,10 @@ public class Login extends javax.swing.JFrame {
 
     //Variables
     int code = 4807;
-
-   
     //Verifying The code From The User
-    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        // TODO add your handling code here:
-        if (code == Integer.parseInt(PasswordField.getText())) {
-            new Home().setVisible(true);
-            dispose();
-        } else {
-            incorrectCodeLabel.setEnabled(true);
-            PasswordField.setText("");
-        }
-    }//GEN-LAST:event_confirmButtonActionPerformed
+    private void patientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientButtonActionPerformed
+
+    }//GEN-LAST:event_patientButtonActionPerformed
 
     private void LogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoActionPerformed
         // TODO add your handling code here:
@@ -166,8 +165,21 @@ public class Login extends javax.swing.JFrame {
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
+        new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void illnessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_illnessButtonActionPerformed
+        // TODO add your handling code here:
+        new Illness().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_illnessButtonActionPerformed
+
+    private void medicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicationButtonActionPerformed
+        // TODO add your handling code here:
+         new Medication().setVisible(true);
+         dispose();
+    }//GEN-LAST:event_medicationButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,8 +207,7 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold> 
-                /* Create and display the form */
-                java.awt.EventQueue.invokeLater(new Runnable() {
+                /* Create and display the form */java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
                         new Login().setVisible(true);
 
@@ -206,11 +217,12 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Logo;
-    private javax.swing.JPasswordField PasswordField;
     private javax.swing.JLabel Title;
-    private javax.swing.JButton confirmButton;
     private javax.swing.JButton exitButton;
-    private javax.swing.JLabel incorrectCodeLabel;
+    private javax.swing.JButton illnessButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JOptionPane jOptionPane1;
+    private javax.swing.JButton medicationButton;
+    private javax.swing.JButton patientButton;
     // End of variables declaration//GEN-END:variables
 }

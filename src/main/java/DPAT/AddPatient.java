@@ -325,7 +325,7 @@ public class AddPatient extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-         new Patients().setVisible(true);
+         new Home().setVisible(true);
          dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 

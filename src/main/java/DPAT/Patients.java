@@ -94,7 +94,7 @@ public class Patients extends javax.swing.JFrame {
 
         PasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PasswordFieldActionPerformed(evt);
+               
             }
         });
 
@@ -116,7 +116,7 @@ public class Patients extends javax.swing.JFrame {
         searchButton.setText("Edit");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButtonActionPerformed(evt);
+                
             }
         });
 
@@ -130,7 +130,7 @@ public class Patients extends javax.swing.JFrame {
         filterInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         filterInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filterInputActionPerformed(evt);
+                
             }
         });
         filterInput.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -230,9 +230,7 @@ public class Patients extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordFieldActionPerformed
+
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
@@ -241,9 +239,7 @@ public class Patients extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_searchButtonActionPerformed
 
-    private void filterInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterInputActionPerformed
-
-    }//GEN-LAST:event_filterInputActionPerformed
+    
 
     private void criteriaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criteriaButtonActionPerformed
         // TODO add your handling code here:
@@ -286,7 +282,7 @@ public class Patients extends javax.swing.JFrame {
         try {
             ResultSet rs = DBConnector.read(query2);
             
-            String[] names = new String[1999999999];
+            String[] names = new String[2144444444];
             int i = 0;
             while(rs.next()){
                 String name = rs.getString("firstname");
