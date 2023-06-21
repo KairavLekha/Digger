@@ -22,8 +22,8 @@ public class Home extends javax.swing.JFrame {
 
 
         initComponents();
-            ImageIcon pic = new ImageIcon("pulse.png");
-            this.setIconImage(pic.getImage());
+//            ImageIcon pic = new ImageIcon("pulse.png");
+//            this.setIconImage(pic.getImage());
         
         setSize(526, 355);
         setLocationRelativeTo(null);
@@ -44,8 +44,7 @@ public class Home extends javax.swing.JFrame {
         jOptionPane1 = new javax.swing.JOptionPane();
         Title = new javax.swing.JLabel();
         patientButton = new javax.swing.JButton();
-        Logo = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        optionsLabel = new javax.swing.JLabel();
         exitButton = new javax.swing.JButton();
         medicationButton = new javax.swing.JButton();
         illnessButton = new javax.swing.JButton();
@@ -64,17 +63,10 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        Logo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Kairav\\OneDrive\\Pictures\\2023-05-14 (4).png")); // NOI18N
-        Logo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("What Would You Like To View");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        optionsLabel.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        optionsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        optionsLabel.setText("What Would You Like To View");
+        optionsLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         exitButton.setBackground(new java.awt.Color(30, 30, 30));
         exitButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -119,10 +111,7 @@ public class Home extends javax.swing.JFrame {
                                     .addComponent(Title)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(41, 41, 41)
-                                        .addComponent(jLabel1))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(185, 185, 185)
-                                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(optionsLabel))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(168, 168, 168)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,10 +126,8 @@ public class Home extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(Title)
-                .addGap(19, 19, 19)
-                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel1)
+                .addGap(145, 145, 145)
+                .addComponent(optionsLabel)
                 .addGap(12, 12, 12)
                 .addComponent(illnessButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -158,15 +145,11 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //Variables
-    int code = 4807;
+   
     //Verifying The code From The User
     private void patientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientButtonActionPerformed
 
     }//GEN-LAST:event_patientButtonActionPerformed
-
-    private void LogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LogoActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
@@ -214,20 +197,19 @@ public class Home extends javax.swing.JFrame {
         //</editor-fold> 
                 /* Create and display the form */java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
-                        new Login().setVisible(true);
+                        new Home().setVisible(true);
 
                     }
                 });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Logo;
     private javax.swing.JLabel Title;
     private javax.swing.JButton exitButton;
     private javax.swing.JButton illnessButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JButton medicationButton;
+    private javax.swing.JLabel optionsLabel;
     private javax.swing.JButton patientButton;
     // End of variables declaration//GEN-END:variables
 }

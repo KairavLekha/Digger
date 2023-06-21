@@ -30,7 +30,7 @@ public class Patients extends javax.swing.JFrame {
      */
     public Patients() {
         initComponents();
-            ImageIcon pic = new ImageIcon("pulse.png");
+             ImageIcon pic = new ImageIcon("pulseNew.png");
             this.setIconImage(pic.getImage());
         setSize(526, 355);
         setLocationRelativeTo(null);
@@ -257,7 +257,7 @@ public class Patients extends javax.swing.JFrame {
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
-        new Login().setVisible(true);
+        new Home().setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
 

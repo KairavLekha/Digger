@@ -17,7 +17,7 @@ public class Illness extends javax.swing.JFrame {
      */
     public Illness() {
         initComponents();
-        ImageIcon pic = new ImageIcon("pulse.png");
+        ImageIcon pic = new ImageIcon("pulseNew.png");
             this.setIconImage(pic.getImage());
         
         setSize(526, 355);

@@ -4,6 +4,8 @@
  */
 package DIT;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Kairav
@@ -15,6 +17,11 @@ public class Medication extends javax.swing.JFrame {
      */
     public Medication() {
         initComponents();
+         ImageIcon pic = new ImageIcon("pulseNew.png");
+            this.setIconImage(pic.getImage());
+        
+        setSize(526, 355);
+        setLocationRelativeTo(null);
     }
 
     /**

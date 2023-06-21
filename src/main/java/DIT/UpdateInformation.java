@@ -26,7 +26,7 @@ public class UpdateInformation extends javax.swing.JFrame {
 //Visits
     public UpdateInformation() {
         initComponents();
-            ImageIcon pic = new ImageIcon("pulse.png");
+            ImageIcon pic = new ImageIcon("pulseNew.png");
             this.setIconImage(pic.getImage());
         setSize(526, 355);
         setLocationRelativeTo(null);
