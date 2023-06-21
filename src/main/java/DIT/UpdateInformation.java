@@ -4,8 +4,6 @@
  */
 package DIT;
 
-import DIT.Broken.Home;
-import DIT.Broken.Patients;
 import javax.swing.ImageIcon;
 
 /**
@@ -28,9 +26,8 @@ public class UpdateInformation extends javax.swing.JFrame {
 //Visits
     public UpdateInformation() {
         initComponents();
-            ImageIcon pic = new ImageIcon("C:\\Users\\Kairav\\OneDrive\\Documents\\NetBeansProjects\\PAT\\src\\main\\java\\Data\\pulseNew.png\\");
-            this.setIconImage(pic.getImage());
-        setSize(526, 355);
+            
+        setSize(526, 360);
         setLocationRelativeTo(null);
     }
 

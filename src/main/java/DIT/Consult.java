@@ -2,10 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DIT.Broken;
+package DIT;
 
-import DIT.Broken.Patients;
+import DB.DBConnector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,9 +21,8 @@ public class Consult extends javax.swing.JFrame {
      */
     public Consult() {
         initComponents();
-         ImageIcon pic = new ImageIcon("C:\\Users\\Kairav\\OneDrive\\Documents\\NetBeansProjects\\PAT\\src\\main\\java\\Data\\pulseNew.png\\");
-            this.setIconImage(pic.getImage());
-        setSize(526, 355);
+       
+        setSize(526, 360);
         setLocationRelativeTo(null);
     }
 
@@ -35,10 +37,13 @@ public class Consult extends javax.swing.JFrame {
 
         exitButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        DiagnosisButton = new javax.swing.JButton();
+        MedicationButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Data/logoutIcon.png"))); // NOI18N
+        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoutIcon.png"))); // NOI18N
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
@@ -48,16 +53,36 @@ public class Consult extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Consultation");
 
+        DiagnosisButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        DiagnosisButton.setText("Diagnose Patient");
+        DiagnosisButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DiagnosisButtonActionPerformed(evt);
+            }
+        });
+
+        MedicationButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        MedicationButton.setText("Perscribe Medication");
+        MedicationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MedicationButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(170, 170, 170)
+                .addGap(196, 196, 196)
                 .addComponent(jLabel1)
-                .addContainerGap(222, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(196, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(DiagnosisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(MedicationButton)
+                .addGap(38, 38, 38)
                 .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -65,9 +90,16 @@ public class Consult extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
-                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(MedicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DiagnosisButton)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
+                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -79,6 +111,18 @@ public class Consult extends javax.swing.JFrame {
         new Patients().setVisible(true);
          dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void DiagnosisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiagnosisButtonActionPerformed
+        // TODO add your handling code here:
+         new Diagnosis().setVisible(true);
+         dispose();
+    }//GEN-LAST:event_DiagnosisButtonActionPerformed
+
+    private void MedicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MedicationButtonActionPerformed
+        // TODO add your handling code here:
+         new Perscribe().setVisible(true);
+         dispose();
+    }//GEN-LAST:event_MedicationButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,6 +160,8 @@ public class Consult extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DiagnosisButton;
+    private javax.swing.JButton MedicationButton;
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

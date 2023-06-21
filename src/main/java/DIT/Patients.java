@@ -2,16 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DIT.Broken;
+package DIT;
 
 import DB.DBConnector;
-import DIT.AddPatient;
-import DIT.Login;
-import DIT.UpdateInformation;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import Backend.Methods;
+
 
 /**
  *
@@ -33,8 +31,7 @@ public class Patients extends javax.swing.JFrame {
      */
     public Patients() {
         initComponents();
-            ImageIcon pic = new ImageIcon("C:\\Users\\Kairav\\OneDrive\\Documents\\NetBeansProjects\\PAT\\src\\main\\java\\Data\\pulseNew.png\\");
-            this.setIconImage(pic.getImage());
+           
         setSize(526, 355);
         setLocationRelativeTo(null);
         
@@ -66,7 +63,7 @@ public class Patients extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
     }
-    String Criteria = "firstname";
+    String Criteria = "Firstname";
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,7 +152,7 @@ public class Patients extends javax.swing.JFrame {
             }
         });
 
-        deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Data/deleteIcon.png"))); // NOI18N
+        deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/deleteIcon.png"))); // NOI18N
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
@@ -238,33 +235,17 @@ public class Patients extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_editButtonActionPerformed
 
-    
-
     private void criteriaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criteriaButtonActionPerformed
         // TODO add your handling code here:
 
-        if (Criteria=="firstname") {
-            instructionLabel1.setText("Search Criteria: Surname");
-            Criteria = "surname";
-        } else if (Criteria=="surname") {
-            instructionLabel1.setText("Search Criteria: Address");
-            Criteria = "address";
-        } else if (Criteria=="address") {
-            instructionLabel1.setText("Search Criteria: Phone Number");
-            Criteria = "phoneNumber";
-        } else if (Criteria=="phoneNumber") {
-            instructionLabel1.setText("Search Criteria: Date Of Birth");
-            Criteria = "dateOfBirth";
-        } else if (Criteria=="dateOfBirth") {
-            instructionLabel1.setText("Search Criteria: Firstname");
-            Criteria = "firstname";
-        }
+            Criteria=Backend.Methods.criteria(Criteria);
+            instructionLabel1.setText("Search Criteria: "+Criteria);
 
     }//GEN-LAST:event_criteriaButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
-        new Login().setVisible(true);
+        new Home().setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
@@ -277,7 +258,7 @@ public class Patients extends javax.swing.JFrame {
 
     private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
-                String query2 = "select firstname, surname, PatientNumber FROM Patient WHERE "+Criteria+" LIKE '%"+filterInput.getText()+"%'ORDER BY firstname;";
+        String query2 = "select firstname, surname, PatientNumber FROM Patient WHERE "+Criteria+" LIKE '%"+filterInput.getText()+"%'ORDER BY firstname;";
         try {
             ResultSet rs = DBConnector.read(query2);
             
@@ -300,6 +281,9 @@ public class Patients extends javax.swing.JFrame {
     private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
         // TODO add your handling code here:
          String selected = patientList.getSelectedValue();
+          new Consult()
+                  .setVisible(true);
+         dispose();
     }//GEN-LAST:event_viewButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed

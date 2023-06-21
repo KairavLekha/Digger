@@ -4,9 +4,6 @@
  */
 package DIT;
 
-import DIT.Broken.Patients;
-import javax.swing.ImageIcon;
-
 
 
 
@@ -23,11 +20,9 @@ public class Login extends javax.swing.JFrame {
 
 
         initComponents();
-            ImageIcon pic = new ImageIcon("C:\\Users\\Kairav\\OneDrive\\Documents\\NetBeansProjects\\PAT\\src\\main\\java\\Data\\pulseNew.png\\");
-            this.setIconImage(pic.getImage());
             
         
-        setSize(526, 355);
+        setSize(526, 360);
         setLocationRelativeTo(null);
 
     }
@@ -46,10 +41,10 @@ public class Login extends javax.swing.JFrame {
         Title = new javax.swing.JLabel();
         PasswordField = new javax.swing.JPasswordField();
         confirmButton = new javax.swing.JButton();
-        Logo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         incorrectCodeLabel = new javax.swing.JLabel();
         exitButton = new javax.swing.JButton();
+        icon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -67,8 +62,6 @@ public class Login extends javax.swing.JFrame {
                 confirmButtonActionPerformed(evt);
             }
         });
-
-        Logo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Kairav\\OneDrive\\Pictures\\2023-05-14 (4).png")); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -93,6 +86,9 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pulseNew.png"))); // NOI18N
+        icon.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,13 +101,14 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(incorrectCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(185, 185, 185))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(incorrectCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(180, 180, 180))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,9 +117,9 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Title)
                     .addComponent(exitButton))
-                .addGap(14, 14, 14)
-                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(icon)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,7 +141,7 @@ public class Login extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
         if (code == Integer.parseInt(PasswordField.getText())) {
-            new UpdateInformation().setVisible(true);
+            new Home().setVisible(true);
             dispose();
         } else {
             incorrectCodeLabel.setEnabled(true);
@@ -193,11 +190,11 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Logo;
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JLabel Title;
     private javax.swing.JButton confirmButton;
     private javax.swing.JButton exitButton;
+    private javax.swing.JLabel icon;
     private javax.swing.JLabel incorrectCodeLabel;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

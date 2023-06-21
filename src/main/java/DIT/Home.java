@@ -2,15 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DIT.Broken;
-
-import DIT.Broken.Illness;
-import DIT.Broken.Medication;
-import DIT.Broken.Patients;
-import DIT.Login;
-import javax.swing.ImageIcon;
-
-
+package DIT;
 
 
 /**
@@ -24,16 +16,12 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
 
-
         initComponents();
-            ImageIcon pic = new ImageIcon("C:\\Users\\Kairav\\OneDrive\\Documents\\NetBeansProjects\\PAT\\src\\main\\java\\Data\\pulseNew.png\\");
-            this.setIconImage(pic.getImage());
-            
-        setSize(526, 355);
+
+        setSize(526, 360);
         setLocationRelativeTo(null);
 
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,11 +36,11 @@ public class Home extends javax.swing.JFrame {
         jOptionPane1 = new javax.swing.JOptionPane();
         Title = new javax.swing.JLabel();
         patientButton = new javax.swing.JButton();
-        Logo = new javax.swing.JButton();
         optionsLabel = new javax.swing.JLabel();
         exitButton = new javax.swing.JButton();
         medicationButton = new javax.swing.JButton();
         illnessButton = new javax.swing.JButton();
+        icon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -68,17 +56,15 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Data/pulseNew.png"))); // NOI18N
-
         optionsLabel.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         optionsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         optionsLabel.setText("What Would You Like To View");
         optionsLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        exitButton.setBackground(new java.awt.Color(30, 30, 30));
+        exitButton.setBackground(new java.awt.Color(255, 255, 255));
         exitButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         exitButton.setForeground(new java.awt.Color(0, 0, 0));
-        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Data/logoutIcon.png"))); // NOI18N
+        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoutIcon.png"))); // NOI18N
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
@@ -101,23 +87,22 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pulseNew.png"))); // NOI18N
+        icon.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(optionsLabel)
-                        .addGap(133, 133, 133))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(medicationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                            .addComponent(illnessButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(patientButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(147, 147, 147)
-                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(medicationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                    .addComponent(illnessButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(patientButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(136, 136, 136)
+                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -125,36 +110,38 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(Title))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(178, 178, 178)
-                        .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(90, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(optionsLabel)
+                .addGap(132, 132, 132))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(Title)
-                .addGap(20, 20, 20)
-                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(optionsLabel)
-                .addGap(18, 18, 18)
-                .addComponent(illnessButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(medicationButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(patientButton)
-                        .addGap(0, 11, Short.MAX_VALUE))
-                    .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(Title)
+                        .addGap(44, 44, 44)
+                        .addComponent(icon)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(optionsLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(illnessButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(medicationButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(patientButton)))
+                .addGap(16, 16, 16))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     //Variables
-
     //Verifying The code From The User
     private void patientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientButtonActionPerformed
         new Patients().setVisible(true);
@@ -176,8 +163,8 @@ public class Home extends javax.swing.JFrame {
 
     private void medicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicationButtonActionPerformed
         // TODO add your handling code here:
-         new Medication().setVisible(true);
-         dispose();
+        new Medication().setVisible(true);
+        dispose();
     }//GEN-LAST:event_medicationButtonActionPerformed
 
     /**
@@ -206,18 +193,19 @@ public class Home extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold> 
-                /* Create and display the form */java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        new Home().setVisible(true);
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Home().setVisible(true);
 
-                    }
-                });
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Logo;
     private javax.swing.JLabel Title;
     private javax.swing.JButton exitButton;
+    private javax.swing.JLabel icon;
     private javax.swing.JButton illnessButton;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JButton medicationButton;
