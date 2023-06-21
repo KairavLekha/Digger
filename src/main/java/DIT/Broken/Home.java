@@ -2,8 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DIT;
+package DIT.Broken;
 
+import DIT.Broken.Illness;
+import DIT.Broken.Medication;
+import DIT.Broken.Patients;
+import DIT.Login;
 import javax.swing.ImageIcon;
 
 
@@ -22,9 +26,7 @@ public class Home extends javax.swing.JFrame {
 
 
         initComponents();
-//            ImageIcon pic = new ImageIcon("pulse.png");
-//            this.setIconImage(pic.getImage());
-        
+            
         setSize(526, 355);
         setLocationRelativeTo(null);
 
@@ -44,6 +46,7 @@ public class Home extends javax.swing.JFrame {
         jOptionPane1 = new javax.swing.JOptionPane();
         Title = new javax.swing.JLabel();
         patientButton = new javax.swing.JButton();
+        Logo = new javax.swing.JButton();
         optionsLabel = new javax.swing.JLabel();
         exitButton = new javax.swing.JButton();
         medicationButton = new javax.swing.JButton();
@@ -53,7 +56,7 @@ public class Home extends javax.swing.JFrame {
         setUndecorated(true);
 
         Title.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        Title.setText("Doctor Information Terminal");
+        Title.setText("Digital Patient Acess Terminal");
 
         patientButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         patientButton.setText("Patients");
@@ -63,6 +66,8 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Data/pulseNew.png"))); // NOI18N
+
         optionsLabel.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         optionsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         optionsLabel.setText("What Would You Like To View");
@@ -71,7 +76,7 @@ public class Home extends javax.swing.JFrame {
         exitButton.setBackground(new java.awt.Color(30, 30, 30));
         exitButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         exitButton.setForeground(new java.awt.Color(0, 0, 0));
-        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DIT/logoutIcon.png"))); // NOI18N
+        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Data/logoutIcon.png"))); // NOI18N
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
@@ -98,46 +103,48 @@ public class Home extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(exitButton))
+                        .addComponent(optionsLabel)
+                        .addGap(133, 133, 133))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(medicationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                            .addComponent(illnessButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(patientButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(147, 147, 147)
+                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(90, 90, 90)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Title)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(41, 41, 41)
-                                        .addComponent(optionsLabel))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(168, 168, 168)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(medicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(illnessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(patientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 99, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(90, 90, 90)
+                        .addComponent(Title))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(178, 178, 178)
+                        .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(Title)
-                .addGap(145, 145, 145)
+                .addGap(20, 20, 20)
+                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(optionsLabel)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(illnessButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(medicationButton)
-                .addGap(11, 11, 11)
-                .addComponent(patientButton)
-                .addContainerGap(20, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(exitButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(patientButton)
+                        .addGap(0, 11, Short.MAX_VALUE))
+                    .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -145,7 +152,7 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //Variables
-   
+    int code = 4807;
     //Verifying The code From The User
     private void patientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientButtonActionPerformed
 
@@ -204,6 +211,7 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Logo;
     private javax.swing.JLabel Title;
     private javax.swing.JButton exitButton;
     private javax.swing.JButton illnessButton;
