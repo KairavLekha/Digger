@@ -26,6 +26,8 @@ public class Home extends javax.swing.JFrame {
 
 
         initComponents();
+            ImageIcon pic = new ImageIcon("C:\\Users\\Kairav\\OneDrive\\Documents\\NetBeansProjects\\PAT\\src\\main\\java\\Data\\pulseNew.png\\");
+            this.setIconImage(pic.getImage());
             
         setSize(526, 355);
         setLocationRelativeTo(null);
@@ -152,9 +154,11 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //Variables
-    int code = 4807;
+
     //Verifying The code From The User
     private void patientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientButtonActionPerformed
+        new Patients().setVisible(true);
+        dispose();
 
     }//GEN-LAST:event_patientButtonActionPerformed
 

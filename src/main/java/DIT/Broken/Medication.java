@@ -18,7 +18,7 @@ public class Medication extends javax.swing.JFrame {
     public Medication() {
         initComponents();
          ImageIcon pic = new ImageIcon("C:\\Users\\Kairav\\OneDrive\\Documents\\NetBeansProjects\\PAT\\src\\main\\java\\Data\\pulseNew.png\\");
-            this.setIconImage(pic.getImage());
+         this.setIconImage(pic.getImage());
         
         setSize(526, 355);
         setLocationRelativeTo(null);

@@ -18,7 +18,7 @@ public class Consult extends javax.swing.JFrame {
      */
     public Consult() {
         initComponents();
-        ImageIcon pic = new ImageIcon("C:\\Users\\Kairav\\OneDrive\\Documents\\NetBeansProjects\\PAT\\src\\main\\java\\Data\\pulseNew.png\\");
+         ImageIcon pic = new ImageIcon("C:\\Users\\Kairav\\OneDrive\\Documents\\NetBeansProjects\\PAT\\src\\main\\java\\Data\\pulseNew.png\\");
             this.setIconImage(pic.getImage());
         setSize(526, 355);
         setLocationRelativeTo(null);
