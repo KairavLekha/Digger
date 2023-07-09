@@ -8,7 +8,6 @@ import DB.DBConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import Backend.Methods;
 
 
 /**
@@ -77,12 +76,12 @@ public class Patients extends javax.swing.JFrame {
 
         titleLabel = new javax.swing.JLabel();
         editButton = new javax.swing.JButton();
-        scrollLabel = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        listLabel = new javax.swing.JLabel();
+        PatientList = new javax.swing.JScrollPane();
         patientList = new javax.swing.JList<>();
         filterInput = new javax.swing.JTextField();
         criteriaButton = new javax.swing.JButton();
-        instructionLabel1 = new javax.swing.JLabel();
+        instructionLabel = new javax.swing.JLabel();
         logoutButton = new javax.swing.JButton();
         newPatientButton = new javax.swing.JButton();
         viewButton = new javax.swing.JButton();
@@ -103,12 +102,12 @@ public class Patients extends javax.swing.JFrame {
             }
         });
 
-        scrollLabel.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        scrollLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        scrollLabel.setText("List Of Patients");
+        listLabel.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        listLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        listLabel.setText("List Of Patients");
 
         patientList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jScrollPane2.setViewportView(patientList);
+        PatientList.setViewportView(patientList);
 
         filterInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         filterInput.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -125,9 +124,9 @@ public class Patients extends javax.swing.JFrame {
             }
         });
 
-        instructionLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        instructionLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        instructionLabel1.setText("Search Criteria: Firstname");
+        instructionLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        instructionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        instructionLabel.setText("Search Criteria: Firstname");
 
         logoutButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Kairav\\OneDrive\\Pictures\\logoutIcon.png")); // NOI18N
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +171,7 @@ public class Patients extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(scrollLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(listLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +181,7 @@ public class Patients extends javax.swing.JFrame {
                                         .addComponent(newPatientButton)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(viewButton))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(PatientList, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                                 .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
@@ -193,7 +192,7 @@ public class Patients extends javax.swing.JFrame {
                         .addComponent(criteriaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(151, 151, 151)
-                        .addComponent(instructionLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(instructionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -207,13 +206,13 @@ public class Patients extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(instructionLabel1)
+                        .addComponent(instructionLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollLabel)
+                        .addComponent(listLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PatientList, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(viewButton, javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +230,7 @@ public class Patients extends javax.swing.JFrame {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
         String selected = patientList.getSelectedValue();
-        new UpdateInformation().setVisible(true);
+        new UpdatePatient().setVisible(true);
         dispose();
     }//GEN-LAST:event_editButtonActionPerformed
 
@@ -239,7 +238,7 @@ public class Patients extends javax.swing.JFrame {
         // TODO add your handling code here:
 
             Criteria=Backend.Methods.criteria(Criteria);
-            instructionLabel1.setText("Search Criteria: "+Criteria);
+            instructionLabel.setText("Search Criteria: "+Criteria);
 
     }//GEN-LAST:event_criteriaButtonActionPerformed
 
@@ -251,7 +250,7 @@ public class Patients extends javax.swing.JFrame {
 
     private void newPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPatientButtonActionPerformed
         // TODO add your handling code here
-        new AddPatient().setVisible(true);
+        new AddPaients().setVisible(true);
         dispose();
 
     }//GEN-LAST:event_newPatientButtonActionPerformed
@@ -336,16 +335,16 @@ public class Patients extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane PatientList;
     private javax.swing.JButton criteriaButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
     private javax.swing.JTextField filterInput;
-    private javax.swing.JLabel instructionLabel1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel instructionLabel;
+    private javax.swing.JLabel listLabel;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton newPatientButton;
     private javax.swing.JList<String> patientList;
-    private javax.swing.JLabel scrollLabel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JButton viewButton;
     // End of variables declaration//GEN-END:variables

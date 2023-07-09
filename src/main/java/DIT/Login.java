@@ -41,7 +41,7 @@ public class Login extends javax.swing.JFrame {
         Title = new javax.swing.JLabel();
         PasswordField = new javax.swing.JPasswordField();
         confirmButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        instruction = new javax.swing.JLabel();
         incorrectCodeLabel = new javax.swing.JLabel();
         exitButton = new javax.swing.JButton();
         icon = new javax.swing.JLabel();
@@ -63,10 +63,10 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Enter Your Code");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        instruction.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        instruction.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        instruction.setText("Enter Your Code");
+        instruction.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         incorrectCodeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         incorrectCodeLabel.setForeground(new java.awt.Color(153, 0, 0));
@@ -105,7 +105,7 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(instruction, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(incorrectCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(180, 180, 180))
@@ -120,7 +120,7 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(icon)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addComponent(instruction)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -196,6 +196,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel icon;
     private javax.swing.JLabel incorrectCodeLabel;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel instruction;
     // End of variables declaration//GEN-END:variables
 }

@@ -40,7 +40,7 @@ public class Perscribe extends javax.swing.JFrame {
                 String name = rs.getString("medicationName");
                 medication[i] = "Medication:" + name;
                 i++;
-                illnessList.setListData(medication);
+                MedicationList.setListData(medication);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -61,7 +61,7 @@ public class Perscribe extends javax.swing.JFrame {
         instructions2 = new javax.swing.JLabel();
         IllnessField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        illnessList = new javax.swing.JList<>();
+        MedicationList = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
 
@@ -80,7 +80,7 @@ public class Perscribe extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setViewportView(illnessList);
+        jScrollPane1.setViewportView(MedicationList);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel2.setText("Medication");
@@ -154,7 +154,7 @@ public class Perscribe extends javax.swing.JFrame {
                 String name = rs.getString("medicationName");
                 medication[i] = "Medication:" + name;
                 i++;
-                illnessList.setListData(medication);
+                MedicationList.setListData(medication);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -205,8 +205,8 @@ public class Perscribe extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField IllnessField;
+    private javax.swing.JList<String> MedicationList;
     private javax.swing.JLabel Title;
-    private javax.swing.JList<String> illnessList;
     private javax.swing.JLabel instructions2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

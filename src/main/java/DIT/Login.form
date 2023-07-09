@@ -37,7 +37,7 @@
                   <Component id="icon" min="-2" pref="161" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="PasswordField" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
+                      <Component id="instruction" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
                       <Component id="incorrectCodeLabel" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
                       <Component id="confirmButton" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
                   </Group>
@@ -57,7 +57,7 @@
               <EmptySpace pref="45" max="32767" attributes="0"/>
               <Component id="icon" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="instruction" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="PasswordField" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -97,7 +97,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="instruction">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="3"/>
