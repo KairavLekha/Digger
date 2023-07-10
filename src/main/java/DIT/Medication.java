@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import Backend.Methods;
 
-
 /**
  *
  * @author Kairav
@@ -31,29 +30,15 @@ public class Medication extends javax.swing.JFrame {
      */
     public Medication() {
         initComponents();
-           
+
         setSize(526, 355);
         setLocationRelativeTo(null);
-        
+
         //connect to DB
         Methods.connect();
+        String[] medication = refresh();
+        MedicationList.setListData(medication);
 
-        String query2 = "SELECT medicationName FROM medication ORDER BY idmedication;";
-        try {
-            ResultSet rs = DBConnector.read(query2);
-
-            String[] medication = new String[9999];
-            int i = 0;
-            while (rs.next()) {
-                String name = rs.getString("medicationName");
-                medication[i] = "Medication:" + name;
-                i++;
-                MedicationList.setListData(medication);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
     }
     String Criteria = "Firstname";
 
@@ -190,7 +175,6 @@ public class Medication extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
 //update DB
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
@@ -213,42 +197,61 @@ public class Medication extends javax.swing.JFrame {
 
     }//GEN-LAST:event_newMedicationButtonActionPerformed
 
- //search
+    //search
     private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
-        String query2 = "select firstname, surname, PatientNumber FROM Patient WHERE "+Criteria+" LIKE '%"+filterInput.getText()+"%'ORDER BY firstname;";
+         String query2 = "SELECT medicationName FROM medication WHERE medicationName LIKE '%" + filterInput.getText() + "%'  ORDER BY idmedication";
         try {
             ResultSet rs = DBConnector.read(query2);
-            
-            String[] names = new String[2144444444];
+
+            String[] medication = new String[2144444444];
             int i = 0;
-            while(rs.next()){
-                String name = rs.getString("firstname");
-                String surname = rs.getString("surname");
-                int patientNum = rs.getInt("PatientNumber");
-                names[i] ="Patient ID:"+patientNum+" "+name+ " "+surname;
+            while (rs.next()) {
+                String name = rs.getString("medicationName");
+                medication[i] = name;
                 i++;
-                MedicationList.setListData(names);
+                MedicationList.setListData(medication);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null,"Error in SQL query");
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
+
     }//GEN-LAST:event_filterInputKeyReleased
 
 //delete from DB
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-         String selected = MedicationList.getSelectedValue();
-         String SQL = "DELETE FROM medication WHERE medicationName='"+selected+"';";
-         try {
-            DB.DBConnector.update(SQL);
-            JOptionPane.showMessageDialog(rootPane, selected+"has been deleted");
+        String selected = MedicationList.getSelectedValue();
+        String sql = "DELETE FROM medication WHERE medicationName='" + selected + "';";
+        try {
+            DB.DBConnector.update(sql);
+            JOptionPane.showMessageDialog(rootPane, selected + " has been deleted");
+            String[] medication = refresh();
+            MedicationList.setListData(medication);
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
+
+    public static String[] refresh() {
+        String sql = "SELECT medicationName FROM medication ORDER BY idmedication;";
+        String[] medication = new String[2144444444];
+        try {
+            ResultSet rs = DBConnector.read(sql);
+            int i = 0;
+            while (rs.next()) {
+                String name = rs.getString("medicationName");
+                medication[i] = name;
+                i++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+        return medication;
+    }
 
     /**
      * @param args the command line arguments

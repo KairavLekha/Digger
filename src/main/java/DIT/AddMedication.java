@@ -213,7 +213,7 @@ public class AddMedication extends javax.swing.JFrame {
    
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-         new Home().setVisible(true);
+         new Medication().setVisible(true);
          dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
@@ -226,9 +226,10 @@ public class AddMedication extends javax.swing.JFrame {
         String treatedIllnesses=treatedArea.getText();
         int stock=Integer.parseInt(stockField.getText());
 
-        String SQL = "INSERT INTO medication (medicationName, allergens , sideEffects,illnessTreated, stockRemaining ) VALUES ('" + name + "','" + allergy + "','" + sideEffects + "','" + treatedIllnesses + "','" + stock + "');";
+        String sql = "INSERT INTO medication (medicationName, allergens , sideEffects,illnessTreated, stockRemaining ) VALUES ('" + name + "','" + allergy + "','" + sideEffects + "','" + treatedIllnesses + "','" + stock + "');";
         try {
-            DB.DBConnector.update(SQL);
+            DB.DBConnector.update(sql);
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");

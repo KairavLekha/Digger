@@ -242,9 +242,9 @@ public class AddPaients extends javax.swing.JFrame {
         String conditions=conditionsArea.getText();
         
 
-        String SQL = "INSERT INTO patient (Firstname, Surname, DateOfBirth, Medical_Conditions, PhoneNumber, Address, Allergy ) VALUES ('" + firstname + "','" + surname + "','" + DOB + "','" + conditions + "','" + phoneNumber + "','" + address + "','" + allergy + "');";
+        String sql = "INSERT INTO patient (Firstname, Surname, DateOfBirth, Medical_Conditions, PhoneNumber, Address, Allergy ) VALUES ('" + firstname + "','" + surname + "','" + DOB + "','" + conditions + "','" + phoneNumber + "','" + address + "','" + allergy + "');";
         try {
-            DB.DBConnector.update(SQL);
+            DB.DBConnector.update(sql);
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");

@@ -31,9 +31,9 @@ public class Illness extends javax.swing.JFrame {
         
         //connect to DB 
         Methods.connect();
-        String query2 = "select Illness FROM illnesses ORDER BY idIllnesses;";
+        String sql = "select Illness FROM illnesses ORDER BY idIllnesses;";
         try {
-            ResultSet rs = DBConnector.read(query2);
+            ResultSet rs = DBConnector.read(sql);
 
             String[] illness = new String[9999];
             int i = 0;

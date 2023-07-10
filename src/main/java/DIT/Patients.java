@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Kairav
@@ -23,18 +22,18 @@ import javax.swing.JOptionPane;
 //Medical_Conditions
 //PhoneNumber
 //Address
-
 public class Patients extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
     public Patients() {
+
         initComponents();
-           
+
         setSize(526, 355);
         setLocationRelativeTo(null);
-        
+
         //connect to DB
         try {
             DBConnector.init();
@@ -43,26 +42,11 @@ public class Patients extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Could not connect to db");
         }
-
-        String query2 = "select firstname, surname, PatientNumber FROM Patient ORDER BY firstname;";
-        try {
-            ResultSet rs = DBConnector.read(query2);
-
-            String[] names = new String[9999];
-            int i = 0;
-            while (rs.next()) {
-                String name = rs.getString("firstname");
-                String surname = rs.getString("surname");
-                int patientNum = rs.getInt("PatientNumber");
-                names[i] =  name + " " + surname+" Patient ID:" + patientNum;
-                i++;
-                patientList.setListData(names);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        
+        String[]names=refresh();
+        patientList.setListData(names);
     }
+    
     String Criteria = "Firstname";
 
     /**
@@ -227,21 +211,20 @@ public class Patients extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
- //update information
+    //update information
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
         String selected = patientList.getSelectedValue();
         new UpdatePatient().setVisible(true);
-        
+
         dispose();
     }//GEN-LAST:event_editButtonActionPerformed
 //change search criteria
     private void criteriaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criteriaButtonActionPerformed
         // TODO add your handling code here:
 
-            Criteria=Methods.criteria(Criteria);
-            instructionLabel.setText("Search Criteria: "+Criteria);
+        Criteria = Methods.criteria(Criteria);
+        instructionLabel.setText("Search Criteria: " + Criteria);
 
     }//GEN-LAST:event_criteriaButtonActionPerformed
 //change screen
@@ -256,52 +239,60 @@ public class Patients extends javax.swing.JFrame {
         dispose();
 
     }//GEN-LAST:event_newPatientButtonActionPerformed
-
-    //search
+  //search
     private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
-        String query2 = "select firstname, surname, PatientNumber FROM Patient WHERE "+Criteria+" LIKE '%"+filterInput.getText()+"%'ORDER BY firstname;";
-        try {
-            ResultSet rs = DBConnector.read(query2);
-            
-            String[] names = new String[2144444444];
-            int i = 0;
-            while(rs.next()){
-                String name = rs.getString("firstname");
-                String surname = rs.getString("surname");
-                int patientNum = rs.getInt("PatientNumber");
-                names[i] ="Patient ID:"+patientNum+" "+name+ " "+surname;
-                i++;
-                patientList.setListData(names);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null,"Error in SQL query");
-        }
+        String[]names=refresh();
+        patientList.setListData(names);
     }//GEN-LAST:event_filterInputKeyReleased
 
     private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
         // TODO add your handling code here:
-         String selected = patientList.getSelectedValue();
-          new Consult().setVisible(true);
-         dispose();
+        String selected = patientList.getSelectedValue();
+        new Consult().setVisible(true);
+        dispose();
     }//GEN-LAST:event_viewButtonActionPerformed
 
     //delete from DB
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-         String selected = patientList.getSelectedValue();
-         
+        String selected = patientList.getSelectedValue();
+        String[] arrOfStr = selected.split(":", 0);
+        int id=Methods.getId(arrOfStr);
 
-         String SQL = "DELETE FROM patient WHERE'"+selected+"'=PatientNumber+firstname+surname;";
-         try {
+        String SQL = "DELETE FROM patient WHERE'" + id + "'=PatientNumber;";
+        try {
             DB.DBConnector.update(SQL);
-            JOptionPane.showMessageDialog(rootPane, selected+"has been deleted");
+            JOptionPane.showMessageDialog(rootPane, selected + " has been deleted");
+            String[]names=refresh();
+            patientList.setListData(names);
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
+   
+    public static String[] refresh() {
+        String query2 = "select firstname, surname, PatientNumber FROM Patient ORDER BY firstname;";
+        String[] names = new String[2144444444];
+        try {
+            ResultSet rs = DBConnector.read(query2);
+
+            int i = 0;
+            while (rs.next()) {
+                String name = rs.getString("firstname");
+                String surname = rs.getString("surname");
+                int patientNum = rs.getInt("PatientNumber");
+                names[i] = name + " " + surname + " Patient ID:" + patientNum;
+                i++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+        return names;
+    }
+
 
     /**
      * @param args the command line arguments

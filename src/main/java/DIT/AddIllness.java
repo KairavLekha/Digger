@@ -140,7 +140,7 @@ public class AddIllness extends javax.swing.JFrame {
     //change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        new Home().setVisible(true);
+        new Illness().setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
@@ -149,9 +149,9 @@ public class AddIllness extends javax.swing.JFrame {
         // TODO add your handling code here:
         String illness = nameField.getText();
         String symptoms = symptomsArea.getText();
-        String SQL = "INSERT INTO illnesses (Illness, Symptoms) VALUES ('" + illness + "','" + symptoms + "');";
+        String sql = "INSERT INTO illnesses (Illness, Symptoms) VALUES ('" + illness + "','" + symptoms + "');";
         try {
-            DB.DBConnector.update(SQL);
+            DB.DBConnector.update(sql);
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
