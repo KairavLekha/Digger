@@ -4,6 +4,10 @@
  */
 package DIT;
 
+import Backend.Methods;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Kairav
@@ -27,6 +31,7 @@ public class AddPaients extends javax.swing.JFrame {
             
         setSize(526, 360);
         setLocationRelativeTo(null);
+        Methods.connect();
     }
 
     /**
@@ -49,7 +54,7 @@ public class AddPaients extends javax.swing.JFrame {
         numberLabel = new javax.swing.JLabel();
         conditionsLabel = new javax.swing.JLabel();
         SubtitleLabel = new javax.swing.JLabel();
-        editButton = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
         surnameLabel = new javax.swing.JLabel();
         surnameField = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -76,18 +81,8 @@ public class AddPaients extends javax.swing.JFrame {
         firstnameField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         DOBfield.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        DOBfield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DOBfieldActionPerformed(evt);
-            }
-        });
 
         numberField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        numberField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numberFieldActionPerformed(evt);
-            }
-        });
 
         nameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nameLabel.setText("Name:");
@@ -109,11 +104,11 @@ public class AddPaients extends javax.swing.JFrame {
         SubtitleLabel.setText("Patient Information");
         SubtitleLabel.setOpaque(true);
 
-        editButton.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
-        editButton.setText("Add Patient");
-        editButton.addActionListener(new java.awt.event.ActionListener() {
+        addButton.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
+        addButton.setText("Add Patient");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
+                addButtonActionPerformed(evt);
             }
         });
 
@@ -146,7 +141,7 @@ public class AddPaients extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(backButton)
                         .addGap(125, 125, 125)
-                        .addComponent(editButton)
+                        .addComponent(addButton)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -179,11 +174,11 @@ public class AddPaients extends javax.swing.JFrame {
                                 .addGap(52, 52, 52)
                                 .addComponent(addressLabel)))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4))
                         .addContainerGap(29, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -221,7 +216,7 @@ public class AddPaients extends javax.swing.JFrame {
                     .addComponent(conditionsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(editButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -235,17 +230,26 @@ public class AddPaients extends javax.swing.JFrame {
          dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_editButtonActionPerformed
 
-    private void DOBfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DOBfieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DOBfieldActionPerformed
+        String allergy=allergyArea.getText();
+        String firstname=firstnameField.getText();
+        String surname=surnameField.getText();
+        String address=AddressField.getText();
+        String DOB=DOBfield.getText();
+        String phoneNumber=numberField.getText();
+        String conditions=conditionsArea.getText();
+        
 
-    private void numberFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_numberFieldActionPerformed
+        String SQL = "INSERT INTO patient (Firstname, Surname, DateOfBirth, Medical_Conditions, PhoneNumber, Address, Allergy ) VALUES ('" + firstname + "','" + surname + "','" + DOB + "','" + conditions + "','" + phoneNumber + "','" + address + "','" + allergy + "');";
+        try {
+            DB.DBConnector.update(SQL);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+    }//GEN-LAST:event_addButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -288,13 +292,13 @@ public class AddPaients extends javax.swing.JFrame {
     private javax.swing.JLabel AllergyLabel;
     private javax.swing.JTextField DOBfield;
     private javax.swing.JLabel SubtitleLabel;
+    private javax.swing.JButton addButton;
     private javax.swing.JLabel addressLabel;
     private javax.swing.JTextArea allergyArea;
     private javax.swing.JButton backButton;
     private javax.swing.JTextArea conditionsArea;
     private javax.swing.JLabel conditionsLabel;
     private javax.swing.JLabel dateLabel;
-    private javax.swing.JButton editButton;
     private javax.swing.JTextField firstnameField;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

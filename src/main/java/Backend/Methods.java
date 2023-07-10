@@ -14,18 +14,16 @@ import javax.swing.JOptionPane;
  */
 public class Methods {
     
-    //connect to db
     public static void connect(){
-//                try {
-//            DBConnector.init();
-//        } catch (ClassNotFoundException ex) {
-//            JOptionPane.showMessageDialog(null, "Could not find DB driver");
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Could not connect to db");
-//        }
+        try {
+            DBConnector.init();
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Could not find DB driver");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Could not connect to db");
+        }  
     }
     
-    //returns all the patients
     
     public static String criteria(String x){
          if (x=="Firstname") {

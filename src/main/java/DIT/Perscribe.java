@@ -7,6 +7,7 @@ package DIT;
 import DB.DBConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,14 +23,9 @@ public class Perscribe extends javax.swing.JFrame {
         initComponents();
         setSize(526, 360);
         setLocationRelativeTo(null);
-
-        try {
-            DBConnector.init();
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Could not find DB driver");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Could not connect to db");
-        }
+        
+        //connect to DB
+        Backend.Methods.connect();
         String query2 = "SELECT medicationName FROM medication ORDER BY idmedication;";
         try {
             ResultSet rs = DBConnector.read(query2);
@@ -62,7 +58,7 @@ public class Perscribe extends javax.swing.JFrame {
         IllnessField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         MedicationList = new javax.swing.JList<>();
-        jLabel2 = new javax.swing.JLabel();
+        medicationLabel = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,8 +78,8 @@ public class Perscribe extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(MedicationList);
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel2.setText("Medication");
+        medicationLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        medicationLabel.setText("Medication");
 
         logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoutIcon.png"))); // NOI18N
         logout.addActionListener(new java.awt.event.ActionListener() {
@@ -99,27 +95,24 @@ public class Perscribe extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(107, 472, Short.MAX_VALUE)
-                        .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(141, 141, 141)
+                        .addComponent(Title))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(instructions2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(IllnessField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(141, 141, 141)
-                                .addComponent(Title))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(106, 106, 106)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(67, 67, 67)
-                                .addComponent(instructions2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jLabel2))
-                                    .addComponent(IllnessField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(12, 12, 12)
+                                .addComponent(medicationLabel)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,17 +124,18 @@ public class Perscribe extends javax.swing.JFrame {
                     .addComponent(instructions2)
                     .addComponent(IllnessField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(medicationLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //search
     private void IllnessFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IllnessFieldKeyReleased
         // TODO add your handling code here:
         String query2 = "SELECT medicationName FROM medication WHERE illnessTreated LIKE '%" + IllnessField.getText() + "%'  ORDER BY idmedication";
@@ -152,7 +146,7 @@ public class Perscribe extends javax.swing.JFrame {
             int i = 0;
             while (rs.next()) {
                 String name = rs.getString("medicationName");
-                medication[i] = "Medication:" + name;
+                medication[i] = name;
                 i++;
                 MedicationList.setListData(medication);
             }
@@ -162,6 +156,7 @@ public class Perscribe extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_IllnessFieldKeyReleased
 
+    //change screen
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
          new Consult().setVisible(true);
@@ -208,8 +203,8 @@ public class Perscribe extends javax.swing.JFrame {
     private javax.swing.JList<String> MedicationList;
     private javax.swing.JLabel Title;
     private javax.swing.JLabel instructions2;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logout;
+    private javax.swing.JLabel medicationLabel;
     // End of variables declaration//GEN-END:variables
 }

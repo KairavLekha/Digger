@@ -5,6 +5,7 @@
 package DIT;
 
 import DB.DBConnector;
+import Backend.Methods;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -22,7 +23,7 @@ import javax.swing.JOptionPane;
 //Medical_Conditions
 //PhoneNumber
 //Address
-//Visits
+
 public class Patients extends javax.swing.JFrame {
 
     /**
@@ -34,7 +35,7 @@ public class Patients extends javax.swing.JFrame {
         setSize(526, 355);
         setLocationRelativeTo(null);
         
-        
+        //connect to DB
         try {
             DBConnector.init();
         } catch (ClassNotFoundException ex) {
@@ -53,7 +54,7 @@ public class Patients extends javax.swing.JFrame {
                 String name = rs.getString("firstname");
                 String surname = rs.getString("surname");
                 int patientNum = rs.getInt("PatientNumber");
-                names[i] = "Patient ID:" + patientNum + " " + name + " " + surname;
+                names[i] =  name + " " + surname+" Patient ID:" + patientNum;
                 i++;
                 patientList.setListData(names);
             }
@@ -178,7 +179,7 @@ public class Patients extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(editButton)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(newPatientButton)
+                                        .addComponent(newPatientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(viewButton))
                                     .addComponent(PatientList, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,8 +216,9 @@ public class Patients extends javax.swing.JFrame {
                         .addComponent(PatientList, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(viewButton, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newPatientButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(newPatientButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(viewButton))
                             .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -226,28 +228,28 @@ public class Patients extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-
+ //update information
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
         String selected = patientList.getSelectedValue();
         new UpdatePatient().setVisible(true);
+        
         dispose();
     }//GEN-LAST:event_editButtonActionPerformed
-
+//change search criteria
     private void criteriaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criteriaButtonActionPerformed
         // TODO add your handling code here:
 
-            Criteria=Backend.Methods.criteria(Criteria);
+            Criteria=Methods.criteria(Criteria);
             instructionLabel.setText("Search Criteria: "+Criteria);
 
     }//GEN-LAST:event_criteriaButtonActionPerformed
-
+//change screen
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
         new Home().setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
-
     private void newPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPatientButtonActionPerformed
         // TODO add your handling code here
         new AddPaients().setVisible(true);
@@ -255,6 +257,7 @@ public class Patients extends javax.swing.JFrame {
 
     }//GEN-LAST:event_newPatientButtonActionPerformed
 
+    //search
     private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
         String query2 = "select firstname, surname, PatientNumber FROM Patient WHERE "+Criteria+" LIKE '%"+filterInput.getText()+"%'ORDER BY firstname;";
@@ -280,14 +283,24 @@ public class Patients extends javax.swing.JFrame {
     private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
         // TODO add your handling code here:
          String selected = patientList.getSelectedValue();
-          new Consult()
-                  .setVisible(true);
+          new Consult().setVisible(true);
          dispose();
     }//GEN-LAST:event_viewButtonActionPerformed
 
+    //delete from DB
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
          String selected = patientList.getSelectedValue();
+         
+
+         String SQL = "DELETE FROM patient WHERE'"+selected+"'=PatientNumber+firstname+surname;";
+         try {
+            DB.DBConnector.update(SQL);
+            JOptionPane.showMessageDialog(rootPane, selected+"has been deleted");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**

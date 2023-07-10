@@ -21,10 +21,8 @@ public class Login extends javax.swing.JFrame {
 
         initComponents();
             
-        
         setSize(526, 360);
         setLocationRelativeTo(null);
-
     }
 
 
@@ -133,11 +131,9 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Variables
-    int code = 4807;
 
-   
-    //Verifying The code From The User
+    //Login
+    int code = 4807;
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
         if (code == Integer.parseInt(PasswordField.getText())) {
@@ -148,12 +144,14 @@ public class Login extends javax.swing.JFrame {
             PasswordField.setText("");
         }
     }//GEN-LAST:event_confirmButtonActionPerformed
-
+    
+    //Close app
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */

@@ -45,7 +45,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="editButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="newPatientButton" min="-2" max="-2" attributes="0"/>
+                                      <Component id="newPatientButton" min="-2" pref="115" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="viewButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -93,8 +93,10 @@
                       <Component id="PatientList" min="-2" pref="101" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="viewButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="newPatientButton" alignment="0" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="newPatientButton" alignment="3" max="32767" attributes="0"/>
+                              <Component id="viewButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="editButton" max="32767" attributes="0"/>
                       </Group>
                   </Group>

@@ -35,14 +35,8 @@ public class Medication extends javax.swing.JFrame {
         setSize(526, 355);
         setLocationRelativeTo(null);
         
-        
-        try {
-            DBConnector.init();
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Could not find DB driver");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Could not connect to db");
-        }
+        //connect to DB
+        Methods.connect();
 
         String query2 = "SELECT medicationName FROM medication ORDER BY idmedication;";
         try {
@@ -79,11 +73,9 @@ public class Medication extends javax.swing.JFrame {
         PatientList = new javax.swing.JScrollPane();
         MedicationList = new javax.swing.JList<>();
         filterInput = new javax.swing.JTextField();
-        criteriaButton = new javax.swing.JButton();
-        instructionLabel = new javax.swing.JLabel();
+        instruction = new javax.swing.JLabel();
         logoutButton = new javax.swing.JButton();
         newMedicationButton = new javax.swing.JButton();
-        viewButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,7 +86,7 @@ public class Medication extends javax.swing.JFrame {
         titleLabel.setText("Digital Patient Acess Terminal");
 
         editButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        editButton.setText("Edit");
+        editButton.setText("Update/View");
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editButtonActionPerformed(evt);
@@ -115,17 +107,9 @@ public class Medication extends javax.swing.JFrame {
             }
         });
 
-        criteriaButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        criteriaButton.setText("Change Search Criteria");
-        criteriaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                criteriaButtonActionPerformed(evt);
-            }
-        });
-
-        instructionLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        instructionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        instructionLabel.setText("Search Criteria: Firstname");
+        instruction.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        instruction.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        instruction.setText("Search ");
 
         logoutButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Kairav\\OneDrive\\Pictures\\logoutIcon.png")); // NOI18N
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
@@ -139,14 +123,6 @@ public class Medication extends javax.swing.JFrame {
         newMedicationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newMedicationButtonActionPerformed(evt);
-            }
-        });
-
-        viewButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        viewButton.setText("View");
-        viewButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewButtonActionPerformed(evt);
             }
         });
 
@@ -165,33 +141,26 @@ public class Medication extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(86, 86, 86)
+                        .addGap(64, 64, 64)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
+                                .addGap(32, 32, 32)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(listLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(instruction, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(filterInput, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(editButton)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(newMedicationButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(viewButton))
-                                    .addComponent(PatientList, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                                        .addComponent(newMedicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(PatientList))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                                 .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(titleLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(criteriaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(instructionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(titleLabel)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -199,24 +168,21 @@ public class Medication extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(titleLabel)
-                .addGap(2, 2, 2)
-                .addComponent(criteriaButton)
-                .addGap(15, 15, 15)
+                .addGap(32, 32, 32)
+                .addComponent(instruction)
+                .addGap(21, 21, 21)
+                .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(instructionLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(listLabel)
                         .addGap(18, 18, 18)
                         .addComponent(PatientList, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(viewButton, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newMedicationButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(editButton)
+                            .addComponent(newMedicationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -225,7 +191,7 @@ public class Medication extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-
+//update DB
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
         String selected = MedicationList.getSelectedValue();
@@ -233,14 +199,7 @@ public class Medication extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_editButtonActionPerformed
 
-    private void criteriaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criteriaButtonActionPerformed
-        // TODO add your handling code here:
-
-            Criteria=Backend.Methods.criteria(Criteria);
-            instructionLabel.setText("Search Criteria: "+Criteria);
-
-    }//GEN-LAST:event_criteriaButtonActionPerformed
-
+//change screen
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
         new Home().setVisible(true);
@@ -254,6 +213,7 @@ public class Medication extends javax.swing.JFrame {
 
     }//GEN-LAST:event_newMedicationButtonActionPerformed
 
+ //search
     private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
         String query2 = "select firstname, surname, PatientNumber FROM Patient WHERE "+Criteria+" LIKE '%"+filterInput.getText()+"%'ORDER BY firstname;";
@@ -276,17 +236,18 @@ public class Medication extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_filterInputKeyReleased
 
-    private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
-        // TODO add your handling code here:
-         String selected = MedicationList.getSelectedValue();
-          new Consult()
-                  .setVisible(true);
-         dispose();
-    }//GEN-LAST:event_viewButtonActionPerformed
-
+//delete from DB
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
          String selected = MedicationList.getSelectedValue();
+         String SQL = "DELETE FROM medication WHERE medicationName='"+selected+"';";
+         try {
+            DB.DBConnector.update(SQL);
+            JOptionPane.showMessageDialog(rootPane, selected+"has been deleted");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
@@ -336,15 +297,13 @@ public class Medication extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> MedicationList;
     private javax.swing.JScrollPane PatientList;
-    private javax.swing.JButton criteriaButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
     private javax.swing.JTextField filterInput;
-    private javax.swing.JLabel instructionLabel;
+    private javax.swing.JLabel instruction;
     private javax.swing.JLabel listLabel;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton newMedicationButton;
     private javax.swing.JLabel titleLabel;
-    private javax.swing.JButton viewButton;
     // End of variables declaration//GEN-END:variables
 }

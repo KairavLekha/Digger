@@ -23,13 +23,8 @@ public class Diagnosis extends javax.swing.JFrame {
         setSize(526, 360);
         setLocationRelativeTo(null);
 
-        try {
-            DBConnector.init();
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Could not find DB driver");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Could not connect to db");
-        }
+   //connect to DB     
+        Backend.Methods.connect();
         String query2 = "select Illness FROM illnesses ORDER BY idIllnesses;";
         try {
             ResultSet rs = DBConnector.read(query2);
@@ -75,11 +70,6 @@ public class Diagnosis extends javax.swing.JFrame {
         instructions2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         instructions2.setText("Enter The Symptoms:");
 
-        symptomsField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                symptomsFieldActionPerformed(evt);
-            }
-        });
         symptomsField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 symptomsFieldKeyReleased(evt);
@@ -150,12 +140,13 @@ public class Diagnosis extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))))
+                        .addGap(24, 24, 24))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //search
     private void symptomsFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_symptomsFieldKeyReleased
         // TODO add your handling code here:
         String query2 = "SELECT Illness FROM illnesses WHERE Symptoms LIKE '%" + symptomsField.getText() + "%'  ORDER BY idIllnesses";
@@ -176,10 +167,7 @@ public class Diagnosis extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_symptomsFieldKeyReleased
 
-    private void symptomsFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_symptomsFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_symptomsFieldActionPerformed
-
+    //change screen
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
          new Consult().setVisible(true);

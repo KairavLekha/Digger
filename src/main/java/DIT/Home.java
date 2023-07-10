@@ -20,7 +20,6 @@ public class Home extends javax.swing.JFrame {
 
         setSize(526, 360);
         setLocationRelativeTo(null);
-
     }
 
     /**
@@ -141,12 +140,11 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Variables
-    //Verifying The code From The User
+    
+    //change screen
     private void patientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientButtonActionPerformed
         new Patients().setVisible(true);
         dispose();
-
     }//GEN-LAST:event_patientButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
@@ -167,6 +165,8 @@ public class Home extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_medicationButtonActionPerformed
 
+    
+    
     /**
      * @param args the command line arguments
      */
