@@ -36,7 +36,7 @@ public class Medication extends javax.swing.JFrame {
 
         //connect to DB
         Methods.connect();
-        String[] medication = refresh();
+        String[] medication = Methods.refreshMed();
         MedicationList.setListData(medication);
 
     }
@@ -179,7 +179,7 @@ public class Medication extends javax.swing.JFrame {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
         String selected = MedicationList.getSelectedValue();
-        new UpdateMedication().setVisible(true);
+        new MedicationUpdate().setVisible(true);
         dispose();
     }//GEN-LAST:event_editButtonActionPerformed
 
@@ -192,7 +192,7 @@ public class Medication extends javax.swing.JFrame {
 
     private void newMedicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedicationButtonActionPerformed
         // TODO add your handling code here
-        new AddMedication().setVisible(true);
+        new MedicationAdd().setVisible(true);
         dispose();
 
     }//GEN-LAST:event_newMedicationButtonActionPerformed
@@ -200,22 +200,8 @@ public class Medication extends javax.swing.JFrame {
     //search
     private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
-         String query2 = "SELECT medicationName FROM medication WHERE medicationName LIKE '%" + filterInput.getText() + "%'  ORDER BY idmedication";
-        try {
-            ResultSet rs = DBConnector.read(query2);
-
-            String[] medication = new String[2144444444];
-            int i = 0;
-            while (rs.next()) {
-                String name = rs.getString("medicationName");
-                medication[i] = name;
-                i++;
-                MedicationList.setListData(medication);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+         String[] medication=Methods.searchMed(filterInput.getText(),"medicationName");
+        MedicationList.setListData(medication);
 
     }//GEN-LAST:event_filterInputKeyReleased
 
@@ -223,48 +209,18 @@ public class Medication extends javax.swing.JFrame {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
         String selected = MedicationList.getSelectedValue();
-        String sql = "DELETE FROM medication WHERE medicationName='" + selected + "';";
-        try {
-            DB.DBConnector.update(sql);
-            JOptionPane.showMessageDialog(rootPane, selected + " has been deleted");
-            String[] medication = refresh();
-            MedicationList.setListData(medication);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        Methods.deleteMed(selected);
+        JOptionPane.showMessageDialog(rootPane, selected + " has been deleted");
+        String names[]=Methods.refreshMed();
+        MedicationList.setListData(names); 
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    public static String[] refresh() {
-        String sql = "SELECT medicationName FROM medication ORDER BY idmedication;";
-        String[] medication = new String[2144444444];
-        try {
-            ResultSet rs = DBConnector.read(sql);
-            int i = 0;
-            while (rs.next()) {
-                String name = rs.getString("medicationName");
-                medication[i] = name;
-                i++;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
-        return medication;
-    }
+
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        try {
-            DBConnector.init();
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Could not find DB driver");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Could not connect to db");
-        }
-
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

@@ -4,6 +4,7 @@
  */
 package DIT;
 
+import Backend.Methods;
 import DB.DBConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,23 +26,12 @@ public class Perscribe extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         //connect to DB
-        Backend.Methods.connect();
-        String query2 = "SELECT medicationName FROM medication ORDER BY idmedication;";
-        try {
-            ResultSet rs = DBConnector.read(query2);
+        Methods.connect();
+        String[] medication = Methods.refreshMed();
+        MedicationList.setListData(medication);
+        
 
-            String[] medication = new String[9999];
-            int i = 0;
-            while (rs.next()) {
-                String name = rs.getString("medicationName");
-                medication[i] = "Medication:" + name;
-                i++;
-                MedicationList.setListData(medication);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        
     }
 
     /**
@@ -138,22 +128,10 @@ public class Perscribe extends javax.swing.JFrame {
     //search
     private void IllnessFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IllnessFieldKeyReleased
         // TODO add your handling code here:
-        String query2 = "SELECT medicationName FROM medication WHERE illnessTreated LIKE '%" + IllnessField.getText() + "%'  ORDER BY idmedication";
-        try {
-            ResultSet rs = DBConnector.read(query2);
+        String[] medication=Methods.searchMed(IllnessField.getText(),"illnessTreated");
+        MedicationList.setListData(medication);
+        
 
-            String[] medication = new String[9999];
-            int i = 0;
-            while (rs.next()) {
-                String name = rs.getString("medicationName");
-                medication[i] = name;
-                i++;
-                MedicationList.setListData(medication);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
     }//GEN-LAST:event_IllnessFieldKeyReleased
 
     //change screen

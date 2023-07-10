@@ -4,15 +4,11 @@
  */
 package DIT;
 
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
-import Backend.Methods;
-
 /**
  *
  * @author Kairav
  */
-public class AddIllness extends javax.swing.JFrame {
+public class IllnessUpdate extends javax.swing.JFrame {
 
     /**
      * Creates new form Screen1
@@ -20,13 +16,12 @@ public class AddIllness extends javax.swing.JFrame {
 //ColumnNames
 //Illness 
 //Symptoms
-    public AddIllness() {
-        initComponents();
 
+    public IllnessUpdate() {
+        initComponents();
+            
         setSize(526, 360);
         setLocationRelativeTo(null);
-
-        Methods.connect();
     }
 
     /**
@@ -40,10 +35,10 @@ public class AddIllness extends javax.swing.JFrame {
 
         titleLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
-        nameField = new javax.swing.JTextField();
+        firstnameField = new javax.swing.JTextField();
         nameLabel = new javax.swing.JLabel();
         subTitleLabel = new javax.swing.JLabel();
-        addButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
         symptomsLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         symptomsArea = new javax.swing.JTextArea();
@@ -61,7 +56,7 @@ public class AddIllness extends javax.swing.JFrame {
             }
         });
 
-        nameField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        firstnameField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         nameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nameLabel.setText("Name:");
@@ -71,11 +66,11 @@ public class AddIllness extends javax.swing.JFrame {
         subTitleLabel.setText("Illness Information");
         subTitleLabel.setOpaque(true);
 
-        addButton.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
-        addButton.setText("Add");
-        addButton.addActionListener(new java.awt.event.ActionListener() {
+        editButton.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
+        editButton.setText("Update");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+                editButtonActionPerformed(evt);
             }
         });
 
@@ -94,7 +89,7 @@ public class AddIllness extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(backButton)
                 .addGap(128, 128, 128)
-                .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 191, Short.MAX_VALUE))
             .addComponent(subTitleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -102,14 +97,17 @@ public class AddIllness extends javax.swing.JFrame {
                 .addComponent(titleLabel)
                 .addGap(90, 90, 90))
             .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nameLabel)
-                    .addComponent(symptomsLabel))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addComponent(nameLabel))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(symptomsLabel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(firstnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -119,44 +117,36 @@ public class AddIllness extends javax.swing.JFrame {
                 .addComponent(titleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(subTitleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(firstnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameLabel))
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(symptomsLabel)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(symptomsLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    //change screen
+   
+//change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        new Illness().setVisible(true);
-        dispose();
+         new Illness().setVisible(true);
+         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
-//add to DB
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+    //update DB
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
-        String illness = nameField.getText();
-        String symptoms = symptomsArea.getText();
-        String sql = "INSERT INTO illnesses (Illness, Symptoms) VALUES ('" + illness + "','" + symptoms + "');";
-        try {
-            DB.DBConnector.update(sql);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
-    }//GEN-LAST:event_addButtonActionPerformed
+    }//GEN-LAST:event_editButtonActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -189,16 +179,16 @@ public class AddIllness extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddIllness().setVisible(true);
+                new IllnessUpdate().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
     private javax.swing.JButton backButton;
+    private javax.swing.JButton editButton;
+    private javax.swing.JTextField firstnameField;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel subTitleLabel;
     private javax.swing.JTextArea symptomsArea;

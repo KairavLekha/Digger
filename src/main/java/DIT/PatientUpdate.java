@@ -8,7 +8,7 @@ package DIT;
  *
  * @author Kairav
  */
-public class UpdatePatient extends javax.swing.JFrame {
+public class PatientUpdate extends javax.swing.JFrame {
 
     /**
      * Creates new form Screen1
@@ -22,7 +22,7 @@ public class UpdatePatient extends javax.swing.JFrame {
 //PhoneNumber
 //Address
 //Visits
-    public UpdatePatient() {
+    public PatientUpdate() {
         initComponents();
             
         setSize(526, 360);
@@ -260,7 +260,7 @@ public class UpdatePatient extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdatePatient().setVisible(true);
+                new PatientUpdate().setVisible(true);
             }
         });
     }

@@ -10,13 +10,13 @@ import javax.swing.ImageIcon;
  *
  * @author Kairav
  */
-public class UpdateMedication extends javax.swing.JFrame {
+public class MedicationUpdate extends javax.swing.JFrame {
 
     /**
      * Creates new form Screen1
      */
 
-    public UpdateMedication() {
+    public MedicationUpdate() {
         initComponents();
             
         setSize(526, 365);
@@ -242,7 +242,7 @@ public class UpdateMedication extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateMedication().setVisible(true);
+                new MedicationUpdate().setVisible(true);
             }
         });
     }

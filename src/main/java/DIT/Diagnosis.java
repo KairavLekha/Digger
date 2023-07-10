@@ -4,6 +4,7 @@
  */
 package DIT;
 
+import Backend.Methods;
 import DB.DBConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,23 +25,9 @@ public class Diagnosis extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
    //connect to DB     
-        Backend.Methods.connect();
-        String query2 = "select Illness FROM illnesses ORDER BY idIllnesses;";
-        try {
-            ResultSet rs = DBConnector.read(query2);
-
-            String[] illness = new String[9999];
-            int i = 0;
-            while (rs.next()) {
-                String name = rs.getString("Illness");
-                illness[i] = "Illness:" + name;
-                i++;
-                illnessList.setListData(illness);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        Methods.connect();
+        String[] illness=Methods.refreshIll();
+        illnessList.setListData(illness);
     }
 
     /**
@@ -149,22 +136,8 @@ public class Diagnosis extends javax.swing.JFrame {
     //search
     private void symptomsFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_symptomsFieldKeyReleased
         // TODO add your handling code here:
-        String query2 = "SELECT Illness FROM illnesses WHERE Symptoms LIKE '%" + symptomsField.getText() + "%'  ORDER BY idIllnesses";
-        try {
-            ResultSet rs = DBConnector.read(query2);
-
-            String[] illness = new String[9999];
-            int i = 0;
-            while (rs.next()) {
-                String name = rs.getString("Illness");
-                illness[i] = "Illness:" + name;
-                i++;
-                illnessList.setListData(illness);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        String[] names= Methods.searchIll(symptomsField.getText(), "Symptoms");
+        illnessList.setListData(names);
     }//GEN-LAST:event_symptomsFieldKeyReleased
 
     //change screen

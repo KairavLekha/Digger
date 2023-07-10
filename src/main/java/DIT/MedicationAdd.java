@@ -12,7 +12,7 @@ import Backend.Methods;
  *
  * @author Kairav
  */
-public class AddMedication extends javax.swing.JFrame {
+public class MedicationAdd extends javax.swing.JFrame {
 
     /**
      * Creates new form Screen1
@@ -26,7 +26,7 @@ public class AddMedication extends javax.swing.JFrame {
 //PhoneNumber
 //Address
 //Visits
-    public AddMedication() {
+    public MedicationAdd() {
         initComponents();
             
         setSize(526, 365);
@@ -229,7 +229,7 @@ public class AddMedication extends javax.swing.JFrame {
         String sql = "INSERT INTO medication (medicationName, allergens , sideEffects,illnessTreated, stockRemaining ) VALUES ('" + name + "','" + allergy + "','" + sideEffects + "','" + treatedIllnesses + "','" + stock + "');";
         try {
             DB.DBConnector.update(sql);
-            
+            JOptionPane.showMessageDialog(rootPane, name+" has been added");
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
@@ -267,7 +267,7 @@ public class AddMedication extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddMedication().setVisible(true);
+                new MedicationAdd().setVisible(true);
             }
         });
     }

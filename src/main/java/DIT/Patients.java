@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
 public class Patients extends javax.swing.JFrame {
 
     /**
-     * Creates new form Login
+     * Creates new form Patients
      */
     public Patients() {
 
@@ -35,15 +35,8 @@ public class Patients extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         //connect to DB
-        try {
-            DBConnector.init();
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Could not find DB driver");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Could not connect to db");
-        }
-        
-        String[]names=refresh();
+        Methods.connect();
+        String[]names=Methods.refreshPat();
         patientList.setListData(names);
     }
     
@@ -215,7 +208,7 @@ public class Patients extends javax.swing.JFrame {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
         String selected = patientList.getSelectedValue();
-        new UpdatePatient().setVisible(true);
+        new PatientUpdate().setVisible(true);
 
         dispose();
     }//GEN-LAST:event_editButtonActionPerformed
@@ -235,14 +228,15 @@ public class Patients extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutButtonActionPerformed
     private void newPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPatientButtonActionPerformed
         // TODO add your handling code here
-        new AddPaients().setVisible(true);
+        new PatientAdd().setVisible(true);
         dispose();
 
     }//GEN-LAST:event_newPatientButtonActionPerformed
-  //search
+
+//search
     private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
-        String[]names=refresh();
+        String[]names=Methods.searchPat(filterInput.getText(), Criteria);
         patientList.setListData(names);
     }//GEN-LAST:event_filterInputKeyReleased
 
@@ -259,39 +253,13 @@ public class Patients extends javax.swing.JFrame {
         String selected = patientList.getSelectedValue();
         String[] arrOfStr = selected.split(":", 0);
         int id=Methods.getId(arrOfStr);
-
-        String SQL = "DELETE FROM patient WHERE'" + id + "'=PatientNumber;";
-        try {
-            DB.DBConnector.update(SQL);
-            JOptionPane.showMessageDialog(rootPane, selected + " has been deleted");
-            String[]names=refresh();
-            patientList.setListData(names);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        Methods.deletePat("patients","PatientNumber",id);
+        JOptionPane.showMessageDialog(rootPane, selected + " has been deleted");
+        String names[]=Methods.refreshPat();
+        patientList.setListData(names);
     }//GEN-LAST:event_deleteButtonActionPerformed
    
-    public static String[] refresh() {
-        String query2 = "select firstname, surname, PatientNumber FROM Patient ORDER BY firstname;";
-        String[] names = new String[2144444444];
-        try {
-            ResultSet rs = DBConnector.read(query2);
-
-            int i = 0;
-            while (rs.next()) {
-                String name = rs.getString("firstname");
-                String surname = rs.getString("surname");
-                int patientNum = rs.getInt("PatientNumber");
-                names[i] = name + " " + surname + " Patient ID:" + patientNum;
-                i++;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
-        return names;
-    }
+   
 
 
     /**

@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author Kairav
  */
-public class AddPaients extends javax.swing.JFrame {
+public class PatientAdd extends javax.swing.JFrame {
 
     /**
      * Creates new form Screen1
@@ -26,7 +26,7 @@ public class AddPaients extends javax.swing.JFrame {
 //PhoneNumber
 //Address
 //Visits
-    public AddPaients() {
+    public PatientAdd() {
         initComponents();
             
         setSize(526, 360);
@@ -245,6 +245,7 @@ public class AddPaients extends javax.swing.JFrame {
         String sql = "INSERT INTO patient (Firstname, Surname, DateOfBirth, Medical_Conditions, PhoneNumber, Address, Allergy ) VALUES ('" + firstname + "','" + surname + "','" + DOB + "','" + conditions + "','" + phoneNumber + "','" + address + "','" + allergy + "');";
         try {
             DB.DBConnector.update(sql);
+            JOptionPane.showMessageDialog(rootPane, firstname+" has been added");
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
@@ -282,7 +283,7 @@ public class AddPaients extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddPaients().setVisible(true);
+                new PatientAdd().setVisible(true);
             }
         });
     }
