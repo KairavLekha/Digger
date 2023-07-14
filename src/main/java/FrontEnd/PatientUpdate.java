@@ -28,6 +28,8 @@ public class PatientUpdate extends javax.swing.JFrame {
 //PhoneNumber
 //Address
 //Visits
+    public static int id;
+    
     public PatientUpdate() {
         initComponents();
 
@@ -35,7 +37,8 @@ public class PatientUpdate extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         DBConnector.connect();
-        int id = Integer.parseInt(Update.downloadSelected());
+        id = Integer.parseInt(Update.downloadSelected());
+        //fills in information on selected patient
         String sql = "SELECT Firstname, Surname, DateOfBirth, Medical_Conditions, PhoneNumber, Address, Allergy, numConsult  FROM patient WHERE PatientNumber='" + id + "';";
         try {
             ResultSet rs = DBConnector.read(sql);
@@ -52,7 +55,7 @@ public class PatientUpdate extends javax.swing.JFrame {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
-        Update.clearSelected();
+        
     }
 
     /**
@@ -247,12 +250,30 @@ public class PatientUpdate extends javax.swing.JFrame {
    //change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
+        Update.clearSelected();
         new Patients().setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 //update DB
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
+        String allergy=allergyArea.getText();
+        String firstname=firstnameField.getText();
+        String surname=surnameField.getText();
+        String address=AddressField.getText();
+        String DOB=DOBfield.getText();
+        String phoneNumber=numberField.getText();
+        String conditions=conditionsArea.getText();
+        
+
+        String sql = "UPDATE patient SET Firstname='"+firstname+"', Surname='"+surname+"', DateOfBirth='"+DOB+"', Medical_Conditions='"+conditions+"', PhoneNumber='"+phoneNumber+"', Address= '"+address+"', Allergy='"+allergy+"' WHERE PatientNumber="+id+";";
+        try {
+            DB.DBConnector.update(sql);
+            JOptionPane.showMessageDialog(rootPane,"Information Has Been Updated");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
     }//GEN-LAST:event_editButtonActionPerformed
 
     /**

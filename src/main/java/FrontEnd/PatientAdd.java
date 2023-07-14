@@ -224,13 +224,15 @@ public class PatientAdd extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   
+   //change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
          new Patients().setVisible(true);
          dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
+    //add to db
+    
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
 

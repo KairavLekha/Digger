@@ -33,7 +33,6 @@ public class Illness extends javax.swing.JFrame {
         illnessList.setListData(illness);
     }
 
-    String Criteria = "Firstname";
 
     /**
      * This method is called from within the constructor to initialize the form.

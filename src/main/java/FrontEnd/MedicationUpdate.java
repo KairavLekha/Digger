@@ -8,7 +8,6 @@ import DB.Update;
 import DB.DBConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,20 +19,22 @@ public class MedicationUpdate extends javax.swing.JFrame {
     /**
      * Creates new form Screen1
      */
+    
+    public static String id;
     public MedicationUpdate() {
         initComponents();
 
         setSize(526, 365);
         setLocationRelativeTo(null);
 
-        //connect
+        
         DBConnector.connect();
-        String id = Update.downloadSelected();
+        id = Update.downloadSelected();
 
+        //fills in information on selected option
         String sql = "SELECT medicationName, stockRemaining, sideEffects, allergens, illnessTreated  FROM medication WHERE medicationName='" + id + "';";
         try {
             ResultSet rs = DBConnector.read(sql);
-            int i = 0;
             while (rs.next()) {
                 nameField.setText(rs.getString("medicationName"));
                 allergyArea.setText(rs.getString("allergens"));
@@ -46,7 +47,7 @@ public class MedicationUpdate extends javax.swing.JFrame {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
-        Update.clearSelected();
+        
     }
 
     /**
@@ -229,6 +230,7 @@ public class MedicationUpdate extends javax.swing.JFrame {
    //change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
+        Update.clearSelected();
         new Medication().setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
@@ -236,6 +238,20 @@ public class MedicationUpdate extends javax.swing.JFrame {
     //update DB
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
+    String name=nameField.getText();
+    String effects= effectsArea.getText();
+    String allergens=allergyArea.getText();
+    String treated=treatedArea.getText();
+    int stock=Integer.parseInt(stockField.getText());
+    
+        String sql = "UPDATE medication SET medicationName='"+name+"', stockRemaining='"+stock+"', sideEffects='"+effects+"', allergens='"+allergens+"', illnessTreated='"+treated+"' WHERE medicationName='"+id+"';";
+        try {
+            DB.DBConnector.update(sql);
+            JOptionPane.showMessageDialog(rootPane,"Information Has Been Updated");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
     }//GEN-LAST:event_editButtonActionPerformed
 
     /**

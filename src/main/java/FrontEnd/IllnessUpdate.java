@@ -22,15 +22,21 @@ public class IllnessUpdate extends javax.swing.JFrame {
 //ColumnNames
 //Illness 
 //Symptoms
+    public static String id;
+    
     public IllnessUpdate() {
         initComponents();
 
         setSize(526, 365);
         setLocationRelativeTo(null);
-
+       
+       
         DBConnector.connect();
-        String id = Update.downloadSelected();
         
+    
+        id = Update.downloadSelected();
+        
+        // fills in information on selected option
         String sql = "select Illness,Symptoms FROM illnesses WHERE Illness='"+id+"';";
         try {
             ResultSet rs = DBConnector.read(sql);
@@ -43,7 +49,6 @@ public class IllnessUpdate extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
 
-        Update.clearSelected();
     }
 
     /**
@@ -160,6 +165,7 @@ public class IllnessUpdate extends javax.swing.JFrame {
 //change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
+        Update.clearSelected();
         new Illness().setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
@@ -167,6 +173,17 @@ public class IllnessUpdate extends javax.swing.JFrame {
     //update DB
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
+        String illness=nameField.getText();
+        String symptoms=symptomsArea.getText();
+        
+        String sql = "UPDATE illnesses SET Illness='"+illness+"',Symptoms='"+symptoms+"' WHERE medicationName='"+id+"';";
+        try {
+            DB.DBConnector.update(sql);
+            JOptionPane.showMessageDialog(rootPane,"Information Has Been Updated");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
     }//GEN-LAST:event_editButtonActionPerformed
 
     /**

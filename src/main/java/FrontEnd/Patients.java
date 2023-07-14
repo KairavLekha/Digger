@@ -10,7 +10,6 @@ import DB.Other;
 import DB.Update;
 import DB.Refresh;
 import DB.Search;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -38,9 +37,10 @@ public class Patients extends javax.swing.JFrame {
         setSize(526, 365);
         setLocationRelativeTo(null);
 
-        //connect to DB
+        
         DBConnector.connect();
         String[]names=Refresh.refreshPat();
+        //populates list with patients
         patientList.setListData(names);
     }
     
@@ -244,6 +244,7 @@ public class Patients extends javax.swing.JFrame {
         patientList.setListData(names);
     }//GEN-LAST:event_filterInputKeyReleased
 
+    //change screen
     private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
         // TODO add your handling code here:
         String selected = patientList.getSelectedValue();

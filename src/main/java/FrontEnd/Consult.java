@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Kairav
@@ -20,27 +19,33 @@ public class Consult extends javax.swing.JFrame {
     /**
      * Creates new form Consult
      */
+    public static int id;
+    public static int consults;
+    public static int newestconsult;
+
     public Consult() {
         initComponents();
-        
+
         setSize(526, 370);
         setLocationRelativeTo(null);
-        
+
+        //connect to db
         DBConnector.connect();
-        int id = Integer.parseInt(Update.downloadSelected());
-        
-        String sql = "SELECT Firstname, Surname, Medical_Conditions, numConsult  FROM patient WHERE PatientNumber='" + id + "';";
+        id = Integer.parseInt(Update.downloadSelected());
+
+        String sql = "SELECT Firstname, Surname, Medical_Conditions, numConsult,Allergy  FROM patient WHERE PatientNumber='" + id + "';";
         try {
             ResultSet rs = DBConnector.read(sql);
             while (rs.next()) {
-                fullname.setText(rs.getString("Firstname")+" "+rs.getString("Surname"));
-                conditionsArea.setText(rs.getString("Medical_Conditions"));
+                fullname.setText(rs.getString("Firstname") + " " + rs.getString("Surname"));
+                conditionsArea.setText("Conditions: " + rs.getString("Medical_Conditions") + "\nAllergies: " + rs.getString("Allergy"));
+                consults = rs.getInt("numConsult");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
-        Update.clearSelected();
+
     }
 
     /**
@@ -130,7 +135,7 @@ public class Consult extends javax.swing.JFrame {
         });
 
         conditionsLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        conditionsLabel.setText("Conditions:");
+        conditionsLabel.setText("Conditions and Allergies:");
 
         conditionsArea.setColumns(20);
         conditionsArea.setRows(5);
@@ -158,52 +163,60 @@ public class Consult extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(69, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(DiagnosisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MedicationButton))
+                        .addComponent(MedicationButton)
+                        .addGap(63, 63, 63))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(medicationLabel)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(symptomsLabel)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(32, 32, 32)
-                                        .addComponent(illnessLabel)))
-                                .addComponent(patientName)
-                                .addComponent(dateLabel))
-                            .addComponent(conditionsLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(medicationLabel)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(symptomsLabel)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(32, 32, 32)
+                                            .addComponent(illnessLabel)))
+                                    .addComponent(patientName)
+                                    .addComponent(dateLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(conditionsLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(PreviousConsultButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(NextConsultButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(NextConsultButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LogconsultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(fullname, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jScrollPane1)
                                         .addComponent(medication)
                                         .addComponent(illnesses, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel1)
-                                        .addComponent(fullname, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 135, Short.MAX_VALUE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(LogconsultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(100, 100, 100)
+                                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(PreviousConsultButton)))
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,15 +224,13 @@ public class Consult extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(patientName)
                             .addComponent(fullname, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
+                        .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateLabel)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(NextConsultButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PreviousConsultButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(dateLabel)
+                            .addComponent(PreviousConsultButton)))
+                    .addComponent(NextConsultButton1))
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(illnessLabel)
                     .addComponent(illnesses, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -241,7 +252,7 @@ public class Consult extends javax.swing.JFrame {
                         .addGap(5, 5, 5)
                         .addComponent(LogconsultButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(MedicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(DiagnosisButton))))
                 .addGap(12, 12, 12))
@@ -250,34 +261,101 @@ public class Consult extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
+//change screen
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
+        Update.clearSelected();
         new Patients().setVisible(true);
-         dispose();
+        dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void DiagnosisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiagnosisButtonActionPerformed
         // TODO add your handling code here:
-         new Diagnosis().setVisible(true);
-         dispose();
+        new Diagnosis().setVisible(true);
+        dispose();
     }//GEN-LAST:event_DiagnosisButtonActionPerformed
 
     private void MedicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MedicationButtonActionPerformed
         // TODO add your handling code here:
-         new Perscribe().setVisible(true);
-         dispose();
+        new Perscribe().setVisible(true);
+        dispose();
     }//GEN-LAST:event_MedicationButtonActionPerformed
 
+    //log new consult
     private void LogconsultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogconsultButtonActionPerformed
         // TODO add your handling code here:
+        String diagnosis = illnesses.getText();
+        String symptom = symptoms.getText();
+        String date = dateField.getText();
+        String med = medication.getText();
+        newestconsult = consults;
+
+        String sql = "INSERT INTO consults (idPatient, diagnosis, medication, patientCosult, date, symptom) VALUES ('" + id + "','" + diagnosis + "','" + med + "','" + consults + "','" + date + "','" + symptom + "');";
+        try {
+            DB.DBConnector.update(sql);
+            consults++;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+
+        String qry = "INSERT INTO patient (numConsults) VALUES ('" + consults + "');";
+        try {
+            DB.DBConnector.update(qry);
+            JOptionPane.showMessageDialog(rootPane, "This has been Logged");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+
     }//GEN-LAST:event_LogconsultButtonActionPerformed
 
+    //view ither consults
     private void NextConsultButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextConsultButton1ActionPerformed
         // TODO add your handling code here:
+        consults++;
+        if (consults <= newestconsult) {
+
+            String sql = "SELECT diagnosis, medication, date, symptom FROM consults WHERE patientCosult='" + consults + "';";
+            try {
+                ResultSet rs = DBConnector.read(sql);
+                while (rs.next()) {
+                    illnesses.setText(rs.getString("diagnosis"));
+                    medication.setText(rs.getString("medication"));
+                    symptoms.setText(rs.getString("symptom"));
+                    dateField.setText(rs.getString("date"));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error in SQL query");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "This is the newest consult");
+        }
     }//GEN-LAST:event_NextConsultButton1ActionPerformed
 
     private void PreviousConsultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousConsultButtonActionPerformed
         // TODO add your handling code here:
+        consults--;
+        if (consults > 0) {
+
+            String sql = "SELECT diagnosis, medication, date, symptom FROM consults WHERE patientCosult='" + consults + "';";
+            try {
+                ResultSet rs = DBConnector.read(sql);
+                while (rs.next()) {
+                    illnesses.setText(rs.getString("diagnosis"));
+                    medication.setText(rs.getString("medication"));
+                    symptoms.setText(rs.getString("symptom"));
+                    dateField.setText(rs.getString("date"));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error in SQL query");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "This is the oldest consult");
+        }
     }//GEN-LAST:event_PreviousConsultButtonActionPerformed
 
     /**

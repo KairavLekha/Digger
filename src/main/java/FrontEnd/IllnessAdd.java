@@ -6,7 +6,6 @@ package FrontEnd;
 
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import DB.Update;
 import DB.DBConnector;
 
 /**
@@ -27,6 +26,7 @@ public class IllnessAdd extends javax.swing.JFrame {
         setSize(526, 365);
         setLocationRelativeTo(null);
 
+        //connect to db
         DBConnector.connect();
     }
 

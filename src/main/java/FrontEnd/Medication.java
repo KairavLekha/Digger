@@ -34,14 +34,19 @@ public class Medication extends javax.swing.JFrame {
 
         setSize(526, 365);
         setLocationRelativeTo(null);
+        new Home().setVisible(true);
+        new MedicationUpdate().setVisible(true);
+        new MedicationAdd().setVisible(true);
+        
 
-        //connect to DB
         DBConnector.connect();
         String[] medication = Refresh.refreshMed();
+        
+        //populates the list with medication
         MedicationList.setListData(medication);
 
     }
-    String Criteria = "Firstname";
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -181,20 +186,17 @@ public class Medication extends javax.swing.JFrame {
         // TODO add your handling code here:
         String selected = MedicationList.getSelectedValue();
         Update.uploadSelected(selected);
-        new MedicationUpdate().setVisible(true);
         dispose();
     }//GEN-LAST:event_editButtonActionPerformed
 
 //change screen
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
-        new Home().setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
     private void newMedicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedicationButtonActionPerformed
         // TODO add your handling code here
-        new MedicationAdd().setVisible(true);
         dispose();
 
     }//GEN-LAST:event_newMedicationButtonActionPerformed
