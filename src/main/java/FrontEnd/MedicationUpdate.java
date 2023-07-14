@@ -8,6 +8,7 @@ import DB.Update;
 import DB.DBConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,7 +24,8 @@ public class MedicationUpdate extends javax.swing.JFrame {
     public static String id;
     public MedicationUpdate() {
         initComponents();
-
+        ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
+            this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
 

@@ -8,6 +8,7 @@ import DB.DBConnector;
 import DB.Update;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,7 +26,8 @@ public class Consult extends javax.swing.JFrame {
 
     public Consult() {
         initComponents();
-
+        ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
+        this.setIconImage(pic.getImage());
         setSize(526, 370);
         setLocationRelativeTo(null);
 
@@ -40,7 +42,7 @@ public class Consult extends javax.swing.JFrame {
                 fullname.setText(rs.getString("Firstname") + " " + rs.getString("Surname"));
                 conditionsArea.setText("Conditions: " + rs.getString("Medical_Conditions") + "\nAllergies: " + rs.getString("Allergy"));
                 consults = rs.getInt("numConsult");
-                consults=newestconsult;
+                newestconsult = consults;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -262,7 +264,6 @@ public class Consult extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
 //change screen
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
@@ -312,7 +313,7 @@ public class Consult extends javax.swing.JFrame {
 
     }//GEN-LAST:event_LogconsultButtonActionPerformed
 
-    //view ither consults
+    //view other consults
     private void NextConsultButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextConsultButton1ActionPerformed
         // TODO add your handling code here:
         consults++;
@@ -332,7 +333,11 @@ public class Consult extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error in SQL query");
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "This is the newest consult");
+            JOptionPane.showMessageDialog(rootPane, "This is the newest consult.Click ok to log a new one");
+            illnesses.setText("");
+            medication.setText("");
+            symptoms.setText("");
+            dateField.setText("");
         }
     }//GEN-LAST:event_NextConsultButton1ActionPerformed
 
@@ -340,7 +345,6 @@ public class Consult extends javax.swing.JFrame {
         // TODO add your handling code here:
         consults--;
         if (consults > 0) {
-
             String sql = "SELECT diagnosis, medication, date, symptom FROM consults WHERE patientCosult='" + consults + "';";
             try {
                 ResultSet rs = DBConnector.read(sql);

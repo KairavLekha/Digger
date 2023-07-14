@@ -6,8 +6,8 @@ package FrontEnd;
 
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import DB.Update;
 import DB.DBConnector;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -21,7 +21,8 @@ public class MedicationAdd extends javax.swing.JFrame {
 
     public MedicationAdd() {
         initComponents();
-            
+        ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
+            this.setIconImage(pic.getImage());    
         setSize(526, 365);
         setLocationRelativeTo(null);
         

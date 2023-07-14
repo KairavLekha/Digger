@@ -8,6 +8,7 @@ import DB.DBConnector;
 import DB.Update;
 import DB.Refresh;
 import DB.Search;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -23,7 +24,8 @@ public class Illness extends javax.swing.JFrame {
      */
     public Illness() {
         initComponents();
-
+        ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
+            this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
 

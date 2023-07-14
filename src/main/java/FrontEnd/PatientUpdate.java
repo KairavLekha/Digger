@@ -8,6 +8,7 @@ import DB.Update;
 import DB.DBConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,20 +20,12 @@ public class PatientUpdate extends javax.swing.JFrame {
     /**
      * Creates new form Screen1
      */
-//ColumnNames
-//PatientNumber
-//Firstname
-//Surname
-//DateOfBirth
-//Medical_Conditions
-//PhoneNumber
-//Address
-//Visits
     public static int id;
     
     public PatientUpdate() {
         initComponents();
-
+        ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
+            this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
 

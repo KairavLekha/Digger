@@ -7,6 +7,7 @@ package FrontEnd;
 import DB.Refresh;
 import DB.DBConnector;
 import DB.Search;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,6 +20,8 @@ public class Diagnosis extends javax.swing.JFrame {
      */
     public Diagnosis() {
         initComponents();
+        ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
+            this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
 

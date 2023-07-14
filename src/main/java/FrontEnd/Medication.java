@@ -10,20 +10,12 @@ import DB.Refresh;
 import DB.DBConnector;
 import DB.Delete;
 import DB.Search;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author Kairav
  */
-//ColumnNames
-//PatientNumber
-//Firstname
-//Surname
-//DateOfBirth
-//Medical_Conditions
-//PhoneNumber
-//Address
-//Visits
 public class Medication extends javax.swing.JFrame {
 
     /**
@@ -31,7 +23,8 @@ public class Medication extends javax.swing.JFrame {
      */
     public Medication() {
         initComponents();
-
+        ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
+            this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
         new Home().setVisible(true);

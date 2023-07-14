@@ -7,6 +7,7 @@ package FrontEnd;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import DB.DBConnector;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -22,7 +23,8 @@ public class IllnessAdd extends javax.swing.JFrame {
 //Symptoms
     public IllnessAdd() {
         initComponents();
-
+        ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
+            this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
 

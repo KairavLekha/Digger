@@ -4,6 +4,8 @@
  */
 package FrontEnd;
 
+import javax.swing.ImageIcon;
+
 
 
 
@@ -20,6 +22,7 @@ public class Login extends javax.swing.JFrame {
 
 
         initComponents();
+          
             
         setSize(526, 365);
         setLocationRelativeTo(null);

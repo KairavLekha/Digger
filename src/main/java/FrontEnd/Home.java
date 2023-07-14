@@ -4,6 +4,7 @@
  */
 package FrontEnd;
 
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,7 +18,8 @@ public class Home extends javax.swing.JFrame {
     public Home() {
 
         initComponents();
-
+        ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
+        this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
     }
@@ -140,7 +142,6 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     //change screen
     private void patientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientButtonActionPerformed
         new Patients().setVisible(true);
@@ -165,8 +166,6 @@ public class Home extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_medicationButtonActionPerformed
 
-    
-    
     /**
      * @param args the command line arguments
      */

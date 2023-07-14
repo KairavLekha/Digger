@@ -4,14 +4,10 @@
  */
 package FrontEnd;
 
-import DB.Update;
 import DB.Refresh;
 import DB.DBConnector;
 import DB.Search;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +20,8 @@ public class Perscribe extends javax.swing.JFrame {
      */
     public Perscribe() {
         initComponents();
+        ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
+            this.setIconImage(pic.getImage());
         setSize(526, 360);
         setLocationRelativeTo(null);
         

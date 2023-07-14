@@ -6,25 +6,18 @@ package FrontEnd;
 
 import DB.DBConnector;
 import DB.Delete;
-import DB.Other;
+import Backend.Other;
 import DB.Update;
 import DB.Refresh;
 import DB.Search;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Kairav
  */
-//ColumnNames
-//PatientNumber
-//Firstname
-//Surname
-//DateOfBirth
-//Medical_Conditions
-//PhoneNumber
-//Address
 public class Patients extends javax.swing.JFrame {
 
     /**
@@ -33,7 +26,8 @@ public class Patients extends javax.swing.JFrame {
     public Patients() {
 
         initComponents();
-
+        ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
+            this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
 
