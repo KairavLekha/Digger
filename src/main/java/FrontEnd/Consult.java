@@ -2,7 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DIT;
+package FrontEnd;
+
+import DB.DBConnector;
+import DB.Update;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -16,9 +22,25 @@ public class Consult extends javax.swing.JFrame {
      */
     public Consult() {
         initComponents();
-       
-        setSize(526, 360);
+        
+        setSize(526, 370);
         setLocationRelativeTo(null);
+        
+        DBConnector.connect();
+        int id = Integer.parseInt(Update.downloadSelected());
+        
+        String sql = "SELECT Firstname, Surname, Medical_Conditions, numConsult  FROM patient WHERE PatientNumber='" + id + "';";
+        try {
+            ResultSet rs = DBConnector.read(sql);
+            while (rs.next()) {
+                fullname.setText(rs.getString("Firstname")+" "+rs.getString("Surname"));
+                conditionsArea.setText(rs.getString("Medical_Conditions"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+        Update.clearSelected();
     }
 
     /**

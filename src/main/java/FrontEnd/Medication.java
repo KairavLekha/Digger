@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DIT;
+package FrontEnd;
 
-import DB.DBConnector;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import Backend.Methods;
+import DB.Update;
+import DB.Refresh;
+import DB.DBConnector;
+import DB.Delete;
+import DB.Search;
 
 /**
  *
@@ -31,12 +32,12 @@ public class Medication extends javax.swing.JFrame {
     public Medication() {
         initComponents();
 
-        setSize(526, 355);
+        setSize(526, 365);
         setLocationRelativeTo(null);
 
         //connect to DB
-        Methods.connect();
-        String[] medication = Methods.refreshMed();
+        DBConnector.connect();
+        String[] medication = Refresh.refreshMed();
         MedicationList.setListData(medication);
 
     }
@@ -68,7 +69,7 @@ public class Medication extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(526, 350));
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        titleLabel.setText("Digital Patient Acess Terminal");
+        titleLabel.setText("Doctor Information Terminal");
 
         editButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         editButton.setText("Update/View");
@@ -169,7 +170,7 @@ public class Medication extends javax.swing.JFrame {
                             .addComponent(editButton)
                             .addComponent(newMedicationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -179,6 +180,7 @@ public class Medication extends javax.swing.JFrame {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
         String selected = MedicationList.getSelectedValue();
+        Update.uploadSelected(selected);
         new MedicationUpdate().setVisible(true);
         dispose();
     }//GEN-LAST:event_editButtonActionPerformed
@@ -200,7 +202,7 @@ public class Medication extends javax.swing.JFrame {
     //search
     private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
-         String[] medication=Methods.searchMed(filterInput.getText(),"medicationName");
+         String[] medication=Search.searchMed(filterInput.getText(),"medicationName");
         MedicationList.setListData(medication);
 
     }//GEN-LAST:event_filterInputKeyReleased
@@ -209,9 +211,9 @@ public class Medication extends javax.swing.JFrame {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
         String selected = MedicationList.getSelectedValue();
-        Methods.deleteMed(selected);
+        Delete.deleteMed(selected);
         JOptionPane.showMessageDialog(rootPane, selected + " has been deleted");
-        String names[]=Methods.refreshMed();
+        String names[]=Refresh.refreshMed();
         MedicationList.setListData(names); 
     }//GEN-LAST:event_deleteButtonActionPerformed
 

@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DIT;
+package FrontEnd;
 
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import Backend.Methods;
+import DB.Update;
+import DB.DBConnector;
 
 /**
  *
@@ -17,22 +18,14 @@ public class MedicationAdd extends javax.swing.JFrame {
     /**
      * Creates new form Screen1
      */
-//ColumnNames
-//PatientNumber
-//Firstname
-//Surname
-//DateOfBirth
-//Medical_Conditions
-//PhoneNumber
-//Address
-//Visits
+
     public MedicationAdd() {
         initComponents();
             
         setSize(526, 365);
         setLocationRelativeTo(null);
         
-        Methods.connect();
+        DBConnector.connect();
     }
 
     /**
@@ -228,8 +221,8 @@ public class MedicationAdd extends javax.swing.JFrame {
 
         String sql = "INSERT INTO medication (medicationName, allergens , sideEffects,illnessTreated, stockRemaining ) VALUES ('" + name + "','" + allergy + "','" + sideEffects + "','" + treatedIllnesses + "','" + stock + "');";
         try {
-            DB.DBConnector.update(sql);
             JOptionPane.showMessageDialog(rootPane, name+" has been added");
+            DB.DBConnector.update(sql);
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");

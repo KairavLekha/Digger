@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DIT;
+package FrontEnd;
 
 
 
@@ -21,7 +21,7 @@ public class Login extends javax.swing.JFrame {
 
         initComponents();
             
-        setSize(526, 360);
+        setSize(526, 365);
         setLocationRelativeTo(null);
     }
 

@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DIT;
+package FrontEnd;
 
-import Backend.Methods;
+import DB.Update;
+import DB.DBConnector;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -12,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author Kairav
  */
-public class PatientAdd extends javax.swing.JFrame {
+public class PatientUpdate extends javax.swing.JFrame {
 
     /**
      * Creates new form Screen1
@@ -26,12 +28,31 @@ public class PatientAdd extends javax.swing.JFrame {
 //PhoneNumber
 //Address
 //Visits
-    public PatientAdd() {
+    public PatientUpdate() {
         initComponents();
-            
-        setSize(526, 360);
+
+        setSize(526, 365);
         setLocationRelativeTo(null);
-        Methods.connect();
+
+        DBConnector.connect();
+        int id = Integer.parseInt(Update.downloadSelected());
+        String sql = "SELECT Firstname, Surname, DateOfBirth, Medical_Conditions, PhoneNumber, Address, Allergy, numConsult  FROM patient WHERE PatientNumber='" + id + "';";
+        try {
+            ResultSet rs = DBConnector.read(sql);
+            while (rs.next()) {
+                firstnameField.setText(rs.getString("Firstname"));
+                surnameField.setText(rs.getString("Surname"));
+                AddressField.setText(rs.getString("Address"));
+                DOBfield.setText(rs.getString("DateOfBirth"));
+                numberField.setText(rs.getString("PhoneNumber"));
+                allergyArea.setText(rs.getString("Allergy"));
+                conditionsArea.setText(rs.getString("Medical_Conditions"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+        Update.clearSelected();
     }
 
     /**
@@ -54,7 +75,7 @@ public class PatientAdd extends javax.swing.JFrame {
         numberLabel = new javax.swing.JLabel();
         conditionsLabel = new javax.swing.JLabel();
         SubtitleLabel = new javax.swing.JLabel();
-        addButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
         surnameLabel = new javax.swing.JLabel();
         surnameField = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -104,11 +125,11 @@ public class PatientAdd extends javax.swing.JFrame {
         SubtitleLabel.setText("Patient Information");
         SubtitleLabel.setOpaque(true);
 
-        addButton.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
-        addButton.setText("Add Patient");
-        addButton.addActionListener(new java.awt.event.ActionListener() {
+        editButton.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
+        editButton.setText("Update Information ");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+                editButtonActionPerformed(evt);
             }
         });
 
@@ -138,48 +159,48 @@ public class PatientAdd extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(backButton)
-                        .addGap(125, 125, 125)
-                        .addComponent(addButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(titleLabel)
                         .addGap(90, 90, 90))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(nameLabel)
-                                        .addGap(21, 21, 21))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(dateLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(DOBfield, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(numberLabel))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(firstnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(60, 60, 60)
-                                        .addComponent(surnameLabel))
-                                    .addComponent(AllergyLabel)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(conditionsLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)
-                                .addComponent(addressLabel)))
+                                .addComponent(backButton)
+                                .addGap(97, 97, 97)
+                                .addComponent(editButton))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(nameLabel)
+                                            .addGap(21, 21, 21))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(dateLabel)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(DOBfield, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(numberLabel))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(firstnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(60, 60, 60)
+                                            .addComponent(surnameLabel))
+                                        .addComponent(AllergyLabel)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(conditionsLabel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(52, 52, 52)
+                                    .addComponent(addressLabel))))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(jScrollPane4))
-                        .addContainerGap(29, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(33, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,43 +235,25 @@ public class PatientAdd extends javax.swing.JFrame {
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(addressLabel)))
                     .addComponent(conditionsLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   
+   //change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-         new Patients().setVisible(true);
-         dispose();
+        new Patients().setVisible(true);
+        dispose();
     }//GEN-LAST:event_backButtonActionPerformed
-
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+//update DB
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
-
-        String allergy=allergyArea.getText();
-        String firstname=firstnameField.getText();
-        String surname=surnameField.getText();
-        String address=AddressField.getText();
-        String DOB=DOBfield.getText();
-        String phoneNumber=numberField.getText();
-        String conditions=conditionsArea.getText();
-        
-
-        String sql = "INSERT INTO patient (Firstname, Surname, DateOfBirth, Medical_Conditions, PhoneNumber, Address, Allergy ) VALUES ('" + firstname + "','" + surname + "','" + DOB + "','" + conditions + "','" + phoneNumber + "','" + address + "','" + allergy + "');";
-        try {
-            DB.DBConnector.update(sql);
-            JOptionPane.showMessageDialog(rootPane, firstname+" has been added");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
-    }//GEN-LAST:event_addButtonActionPerformed
+    }//GEN-LAST:event_editButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,7 +286,7 @@ public class PatientAdd extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PatientAdd().setVisible(true);
+                new PatientUpdate().setVisible(true);
             }
         });
     }
@@ -293,13 +296,13 @@ public class PatientAdd extends javax.swing.JFrame {
     private javax.swing.JLabel AllergyLabel;
     private javax.swing.JTextField DOBfield;
     private javax.swing.JLabel SubtitleLabel;
-    private javax.swing.JButton addButton;
     private javax.swing.JLabel addressLabel;
     private javax.swing.JTextArea allergyArea;
     private javax.swing.JButton backButton;
     private javax.swing.JTextArea conditionsArea;
     private javax.swing.JLabel conditionsLabel;
     private javax.swing.JLabel dateLabel;
+    private javax.swing.JButton editButton;
     private javax.swing.JTextField firstnameField;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

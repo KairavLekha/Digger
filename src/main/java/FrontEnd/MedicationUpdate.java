@@ -2,9 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DIT;
+package FrontEnd;
 
+import DB.Update;
+import DB.DBConnector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,12 +20,33 @@ public class MedicationUpdate extends javax.swing.JFrame {
     /**
      * Creates new form Screen1
      */
-
     public MedicationUpdate() {
         initComponents();
-            
+
         setSize(526, 365);
         setLocationRelativeTo(null);
+
+        //connect
+        DBConnector.connect();
+        String id = Update.downloadSelected();
+
+        String sql = "SELECT medicationName, stockRemaining, sideEffects, allergens, illnessTreated  FROM medication WHERE medicationName='" + id + "';";
+        try {
+            ResultSet rs = DBConnector.read(sql);
+            int i = 0;
+            while (rs.next()) {
+                nameField.setText(rs.getString("medicationName"));
+                allergyArea.setText(rs.getString("allergens"));
+                effectsArea.setText(rs.getString("sideEffects"));
+                treatedArea.setText(rs.getString("illnessTreated"));
+                stockField.setText(rs.getString("stockRemaining"));
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+        Update.clearSelected();
     }
 
     /**
@@ -34,22 +60,22 @@ public class MedicationUpdate extends javax.swing.JFrame {
 
         titleLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
-        firstnameField = new javax.swing.JTextField();
+        nameField = new javax.swing.JTextField();
         nameLabel = new javax.swing.JLabel();
         subTitleLabel = new javax.swing.JLabel();
         editButton = new javax.swing.JButton();
-        stockSpinner = new javax.swing.JSpinner();
-        nameLabel1 = new javax.swing.JLabel();
+        stockLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        AllergyArea = new javax.swing.JTextArea();
+        allergyArea = new javax.swing.JTextArea();
         AllergyLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        AllergyArea1 = new javax.swing.JTextArea();
-        AllergyLabel1 = new javax.swing.JLabel();
-        nameLabel2 = new javax.swing.JLabel();
+        effectsArea = new javax.swing.JTextArea();
+        effectsLabel = new javax.swing.JLabel();
+        instructionLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        AllergyArea2 = new javax.swing.JTextArea();
-        AllergyLabel2 = new javax.swing.JLabel();
+        treatedArea = new javax.swing.JTextArea();
+        treatedLabel = new javax.swing.JLabel();
+        stockField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -64,7 +90,7 @@ public class MedicationUpdate extends javax.swing.JFrame {
             }
         });
 
-        firstnameField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nameField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         nameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nameLabel.setText("Name:");
@@ -82,34 +108,32 @@ public class MedicationUpdate extends javax.swing.JFrame {
             }
         });
 
-        stockSpinner.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        stockLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        stockLabel.setText("Stock:");
 
-        nameLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        nameLabel1.setText("Stock:");
-
-        AllergyArea.setColumns(20);
-        AllergyArea.setRows(5);
-        jScrollPane1.setViewportView(AllergyArea);
+        allergyArea.setColumns(20);
+        allergyArea.setRows(5);
+        jScrollPane1.setViewportView(allergyArea);
 
         AllergyLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         AllergyLabel.setText("Allergens:");
 
-        AllergyArea1.setColumns(20);
-        AllergyArea1.setRows(5);
-        jScrollPane2.setViewportView(AllergyArea1);
+        effectsArea.setColumns(20);
+        effectsArea.setRows(5);
+        jScrollPane2.setViewportView(effectsArea);
 
-        AllergyLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AllergyLabel1.setText("Side Effects:");
+        effectsLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        effectsLabel.setText("Side Effects:");
 
-        nameLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        nameLabel2.setText("If no allergens  or Side Effects write 'N/A'");
+        instructionLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        instructionLabel.setText("If no allergens  or Side Effects write 'N/A'");
 
-        AllergyArea2.setColumns(20);
-        AllergyArea2.setRows(5);
-        jScrollPane3.setViewportView(AllergyArea2);
+        treatedArea.setColumns(20);
+        treatedArea.setRows(5);
+        jScrollPane3.setViewportView(treatedArea);
 
-        AllergyLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AllergyLabel2.setText("Illnesses Treated:");
+        treatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        treatedLabel.setText("Illnesses Treated:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,40 +149,41 @@ public class MedicationUpdate extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(titleLabel)
                 .addGap(90, 90, 90))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(AllergyLabel)
+                                .addComponent(instructionLabel)
+                                .addGap(0, 99, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(124, 124, 124)
+                                .addComponent(stockField))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(AllergyLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(effectsLabel))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(nameLabel)
+                                        .addGap(190, 190, 190)
+                                        .addComponent(stockLabel))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(treatedLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(AllergyLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(nameLabel)
-                                .addGap(190, 190, 190)
-                                .addComponent(nameLabel1))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(AllergyLabel2)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(stockSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(firstnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameLabel2))
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,28 +193,32 @@ public class MedicationUpdate extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(subTitleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nameLabel2)
-                .addGap(10, 10, 10)
+                .addComponent(instructionLabel)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(firstnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(stockSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(nameLabel1)
-                        .addComponent(nameLabel)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(stockLabel)
+                                .addComponent(nameLabel))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(stockField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AllergyLabel)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AllergyLabel1))
+                    .addComponent(effectsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(AllergyLabel2)
+                        .addComponent(treatedLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -200,16 +229,14 @@ public class MedicationUpdate extends javax.swing.JFrame {
    //change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-         new Medication().setVisible(true);
-         dispose();
+        new Medication().setVisible(true);
+        dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
     //update DB
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_editButtonActionPerformed
-
-
 
     /**
      * @param args the command line arguments
@@ -248,23 +275,23 @@ public class MedicationUpdate extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea AllergyArea;
-    private javax.swing.JTextArea AllergyArea1;
-    private javax.swing.JTextArea AllergyArea2;
     private javax.swing.JLabel AllergyLabel;
-    private javax.swing.JLabel AllergyLabel1;
-    private javax.swing.JLabel AllergyLabel2;
+    private javax.swing.JTextArea allergyArea;
     private javax.swing.JButton backButton;
     private javax.swing.JButton editButton;
-    private javax.swing.JTextField firstnameField;
+    private javax.swing.JTextArea effectsArea;
+    private javax.swing.JLabel effectsLabel;
+    private javax.swing.JLabel instructionLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
-    private javax.swing.JLabel nameLabel1;
-    private javax.swing.JLabel nameLabel2;
-    private javax.swing.JSpinner stockSpinner;
+    private javax.swing.JTextField stockField;
+    private javax.swing.JLabel stockLabel;
     private javax.swing.JLabel subTitleLabel;
     private javax.swing.JLabel titleLabel;
+    private javax.swing.JTextArea treatedArea;
+    private javax.swing.JLabel treatedLabel;
     // End of variables declaration//GEN-END:variables
 }

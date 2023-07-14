@@ -2,13 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DIT;
+package FrontEnd;
 
-import Backend.Methods;
+import DB.Refresh;
 import DB.DBConnector;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
+import DB.Search;
 
 /**
  *
@@ -21,12 +19,12 @@ public class Diagnosis extends javax.swing.JFrame {
      */
     public Diagnosis() {
         initComponents();
-        setSize(526, 360);
+        setSize(526, 365);
         setLocationRelativeTo(null);
 
    //connect to DB     
-        Methods.connect();
-        String[] illness=Methods.refreshIll();
+        DBConnector.connect();
+        String[] illness=Refresh.refreshIll();
         illnessList.setListData(illness);
     }
 
@@ -123,7 +121,7 @@ public class Diagnosis extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(56, Short.MAX_VALUE))
+                        .addContainerGap(66, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,7 +134,7 @@ public class Diagnosis extends javax.swing.JFrame {
     //search
     private void symptomsFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_symptomsFieldKeyReleased
         // TODO add your handling code here:
-        String[] names= Methods.searchIll(symptomsField.getText(), "Symptoms");
+        String[] names= Search.searchIll(symptomsField.getText(), "Symptoms");
         illnessList.setListData(names);
     }//GEN-LAST:event_symptomsFieldKeyReleased
 

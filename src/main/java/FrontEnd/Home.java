@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DIT;
+package FrontEnd;
 
 
 /**
@@ -18,7 +18,7 @@ public class Home extends javax.swing.JFrame {
 
         initComponents();
 
-        setSize(526, 360);
+        setSize(526, 365);
         setLocationRelativeTo(null);
     }
 
@@ -45,7 +45,7 @@ public class Home extends javax.swing.JFrame {
         setUndecorated(true);
 
         Title.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        Title.setText("Digital Patient Acess Terminal");
+        Title.setText("Doctor Information Terminal");
 
         patientButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         patientButton.setText("Patients");
@@ -110,7 +110,7 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(178, 178, 178)
                         .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(optionsLabel)
@@ -119,7 +119,7 @@ public class Home extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()

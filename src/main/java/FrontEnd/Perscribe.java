@@ -2,10 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DIT;
+package FrontEnd;
 
-import Backend.Methods;
+import DB.Update;
+import DB.Refresh;
 import DB.DBConnector;
+import DB.Search;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
@@ -26,8 +28,8 @@ public class Perscribe extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         //connect to DB
-        Methods.connect();
-        String[] medication = Methods.refreshMed();
+        DBConnector.connect();
+        String[] medication = Refresh.refreshMed();
         MedicationList.setListData(medication);
         
 
@@ -117,7 +119,7 @@ public class Perscribe extends javax.swing.JFrame {
                 .addComponent(medicationLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -128,7 +130,7 @@ public class Perscribe extends javax.swing.JFrame {
     //search
     private void IllnessFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IllnessFieldKeyReleased
         // TODO add your handling code here:
-        String[] medication=Methods.searchMed(IllnessField.getText(),"illnessTreated");
+        String[] medication=Search.searchMed(IllnessField.getText(),"illnessTreated");
         MedicationList.setListData(medication);
         
 
