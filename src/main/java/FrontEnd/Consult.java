@@ -40,6 +40,7 @@ public class Consult extends javax.swing.JFrame {
                 fullname.setText(rs.getString("Firstname") + " " + rs.getString("Surname"));
                 conditionsArea.setText("Conditions: " + rs.getString("Medical_Conditions") + "\nAllergies: " + rs.getString("Allergy"));
                 consults = rs.getInt("numConsult");
+                consults=newestconsult;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
