@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DB;
+package Backend.DB;
 
+import Backend.DB.DBConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
 public class Search {
     
      public static String[] searchIll(String x,String y) {
-        String sql = "SELECT Illness FROM illnesses WHERE "+y+" LIKE '%" + x+ "%'  ORDER BY idIllnesses";
+        String sql = "SELECT Illness FROM illnesses WHERE "+y+" LIKE '" + x+ "%'  ORDER BY idIllnesses";
         String[] illness = new String[10000];
 
         try {
@@ -36,7 +37,7 @@ public class Search {
     }
     
     public static String[] searchMed(String x,String y) {
-        String sql = "SELECT medicationName FROM medication WHERE "+y+" LIKE '%" + x+ "%'  ORDER BY idmedication";
+        String sql = "SELECT medicationName FROM medication WHERE "+y+" LIKE '" + x+ "%'  ORDER BY idmedication";
         String[] medication = new String[10000];
 
         try {
@@ -57,7 +58,7 @@ public class Search {
     }
     
     public static String[] searchPat(String x,String y) {
-        String query2 = "select firstname, surname, PatientNumber FROM Patient WHERE "+y+" LIKE '%"+x+"%'ORDER BY firstname;";
+        String query2 = "select firstname, surname, PatientNumber FROM Patient WHERE "+y+" LIKE '"+x+"%'ORDER BY firstname;";
         String[] names = new String[10000];
         try {
             ResultSet rs = DBConnector.read(query2);  

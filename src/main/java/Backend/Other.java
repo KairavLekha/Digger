@@ -39,4 +39,12 @@ public class Other {
         }
         return id;
     }
+    
+    public static boolean login(String x){
+        int code = Integer.parseInt(x);
+        if (code==4807){
+            return true;
+        }
+        return false;  
+    }
 }

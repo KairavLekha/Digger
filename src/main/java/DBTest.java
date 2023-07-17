@@ -2,13 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DB;
 
+
+import Backend.DB.DBConnector;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,7 +37,7 @@ public class DBTest {
         //select
         String query2 = "SELECT firstname, surname,PatientNumber FROM Patient;";
         try {
-            ResultSet rs = DBConnector.read(query2);
+            ResultSet rs = Backend.DB.DBConnector.read(query2);
             
             String[] names = new String[2];
             int i = 0;

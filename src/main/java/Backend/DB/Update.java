@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DB;
+package Backend.DB;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +17,7 @@ public class Update {
     public static void updateIllness(String x,String y,String z) {
      String sql = "UPDATE illnesses SET Illness='"+x+"',Symptoms='"+y+"' WHERE medicationName='"+z+"';";
         try {
-            DB.DBConnector.update(sql);
+            Backend.DB.DBConnector.update(sql);
             JOptionPane.showMessageDialog(null,"Information Has Been Updated");
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -28,7 +28,7 @@ public class Update {
     public static void updateMedication(String v,int w,String x,String y,String z,String u) {
          String sql = "UPDATE medication SET medicationName='"+v+"', stockRemaining='"+w+"', sideEffects='"+x+"', allergens='"+y+"', illnessTreated='"+z+"' WHERE medicationName='"+u+"';";
         try {
-            DB.DBConnector.update(sql);
+            Backend.DB.DBConnector.update(sql);
             JOptionPane.showMessageDialog(null,"Information Has Been Updated");
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -40,7 +40,7 @@ public class Update {
     public static void updatePatient(String s,String t,String u,String v,String w,String x,String y,int z){
           String sql = "UPDATE patient SET Firstname='"+s+"', Surname='"+t+"', DateOfBirth='"+u+"', Medical_Conditions='"+v+"', PhoneNumber='"+w+"', Address= '"+x+"', Allergy='"+y+"' WHERE PatientNumber="+z+";";
         try {
-            DB.DBConnector.update(sql);
+            Backend.DB.DBConnector.update(sql);
             JOptionPane.showMessageDialog(null,"Information Has Been Updated");
         } catch (SQLException ex) {
             ex.printStackTrace();

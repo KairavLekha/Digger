@@ -5,6 +5,7 @@
 package FrontEnd;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 
 
@@ -137,15 +138,20 @@ public class Login extends javax.swing.JFrame {
 
 
     //Login
-    int code = 4807;
+
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
-        if (code == Integer.parseInt(PasswordField.getText())) {
+        if (PasswordField.getText()==null){
+            JOptionPane.showMessageDialog(null, "Enter A Code Then Press Confirm");
+        }else{
+            if (Backend.Other.login(PasswordField.getText()) == true) {
             new Home().setVisible(true);
             dispose();
         } else {
             incorrectCodeLabel.setEnabled(true);
             PasswordField.setText("");
+        }
+            
         }
     }//GEN-LAST:event_confirmButtonActionPerformed
     

@@ -5,11 +5,11 @@
 package FrontEnd;
 
 import javax.swing.JOptionPane;
-import DB.Update;
-import DB.Load;
-import DB.DBConnector;
-import DB.Delete;
-import DB.Search;
+import Backend.DB.Update;
+import Backend.DB.Load;
+import Backend.DB.DBConnector;
+import Backend.DB.Delete;
+import Backend.DB.Search;
 import javax.swing.ImageIcon;
 
 /**

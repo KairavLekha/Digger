@@ -4,9 +4,9 @@
  */
 package FrontEnd;
 
-import DB.Load;
-import DB.DBConnector;
-import DB.Search;
+import Backend.DB.Load;
+import Backend.DB.DBConnector;
+import Backend.DB.Search;
 import javax.swing.ImageIcon;
 
 /**

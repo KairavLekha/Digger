@@ -4,14 +4,12 @@
  */
 package FrontEnd;
 
-import DB.DBConnector;
-import DB.Delete;
+import Backend.DB.DBConnector;
+import Backend.DB.Delete;
 import Backend.Other;
-import DB.Update;
-import DB.Load;
-import DB.Search;
-import java.lang.invoke.MethodHandles;
-import java.sql.SQLException;
+import Backend.DB.Update;
+import Backend.DB.Load;
+import Backend.DB.Search;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 

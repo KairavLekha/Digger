@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DB;
+package Backend.DB;
 
-import DB.DBConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -13,8 +12,56 @@ import javax.swing.JOptionPane;
  *
  * @author Kairav
  */
-public class Refresh {
-       public static String[] refreshIll() {
+public class Load {
+    
+   public static String loadSingleIllness(String x,String y){
+    String sql = "select Illness,Symptoms FROM illnesses WHERE Illness='"+x+"';";
+        String info=null;
+        try {
+            ResultSet rs = DBConnector.read(sql);
+            while (rs.next()) {
+               info=rs.getString(y);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+       return info;
+   }
+    
+    public static String loadSingleMedication(String x, String y ){
+        String info=null;
+        String sql = "SELECT medicationName, stockRemaining, sideEffects, allergens, illnessTreated  FROM medication WHERE medicationName='" + y + "';";
+        try {
+            ResultSet rs = DBConnector.read(sql);
+            while (rs.next()) {
+                info=rs.getString(x);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+        
+        return info;
+        
+    }
+    
+    public static String loadSinglePatient(String x, int y ){
+        String sql = "SELECT "+ x +" FROM patient WHERE PatientNumber='" + y + "';";
+        String info = null;
+        try {
+            ResultSet rs = DBConnector.read(sql);
+            while (rs.next()) {
+                 info=rs.getString(x);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+        return info;
+    }
+    
+    public static String[] loadIllnessList() {
         String[] illness = new String[10000];
         String sql = "select Illness FROM illnesses ORDER BY idIllnesses;";
         try {
@@ -32,7 +79,7 @@ public class Refresh {
         return illness;
     }
 
-    public static String[] refreshMed() {
+    public static String[] loadMedicationList() {
         String sql = "SELECT medicationName FROM medication ORDER BY idmedication;";
         String[] medication = new String[10000];
         try {
@@ -50,7 +97,7 @@ public class Refresh {
         return medication;
     }
 
-    public static String[] refreshPat() {
+    public static String[] loadPatientList() {
         String sql = "select firstname, surname, PatientNumber FROM Patient ORDER BY firstname;";
         String[] names = new String[10000];
         try {

@@ -4,8 +4,8 @@
  */
 package FrontEnd;
 
-import DB.Add;
-import DB.DBConnector;
+import Backend.DB.Add;
+import Backend.DB.DBConnector;
 import javax.swing.ImageIcon;
 
 /**

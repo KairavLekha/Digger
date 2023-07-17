@@ -4,9 +4,9 @@
  */
 package FrontEnd;
 
-import DB.Update;
-import DB.DBConnector;
-import DB.Load;
+import Backend.DB.Update;
+import Backend.DB.DBConnector;
+import Backend.DB.Load;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;

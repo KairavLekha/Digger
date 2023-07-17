@@ -4,12 +4,12 @@
  */
 package FrontEnd;
 
-import DB.DBConnector;
-import DB.Update;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import Backend.DB.Add;
+import Backend.DB.ChangeConsult;
+import Backend.DB.DBConnector;
+import Backend.DB.Update;
+import Backend.DB.Load;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,30 +27,16 @@ public class Consult extends javax.swing.JFrame {
     public Consult() {
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
-            this.setIconImage(pic.getImage());
+        this.setIconImage(pic.getImage());
         setSize(526, 370);
         setLocationRelativeTo(null);
 
-        
-        
-        
         //connect to db
         DBConnector.connect();
         id = Integer.parseInt(Update.downloadSelected());
-        
-        String sql = "SELECT Firstname, Surname, Medical_Conditions, numConsult,Allergy  FROM patient WHERE PatientNumber='" + id + "';";
-        try {
-            ResultSet rs = DBConnector.read(sql);
-            while (rs.next()) {
-                fullname.setText(rs.getString("Firstname") + " " + rs.getString("Surname"));
-                conditionsArea.setText("Conditions: " + rs.getString("Medical_Conditions") + "\nAllergies: " + rs.getString("Allergy"));
-                consults = rs.getInt("numConsult");
-                newestconsult = consults;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        fullname.setText(Load.loadSinglePatient("Firstname", id) + " " + Load.loadSinglePatient("Surname", id));
+        conditionsArea.setText("Conditions: " + Load.loadSinglePatient("Medical_Conditions", id) + "\nAllergies: " + Load.loadSinglePatient("Allergy", id));
+        consults = Integer.parseInt(Load.loadSinglePatient("numConsult", id));
 
     }
 
@@ -296,23 +282,7 @@ public class Consult extends javax.swing.JFrame {
         String med = medication.getText();
         newestconsult = consults;
 
-        String sql = "INSERT INTO consults (idPatient, diagnosis, medication, patientConsult, date, symptom) VALUES ('" + id + "','" + diagnosis + "','" + med + "','" + consults + "','" + date + "','" + symptom + "');";
-        try {
-            DB.DBConnector.update(sql);
-            consults++;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
-
-        String qry = "INSERT INTO patient (numConsults) VALUES ('" + consults + "');";
-        try {
-            DB.DBConnector.update(qry);
-            JOptionPane.showMessageDialog(rootPane, "This has been Logged");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        Add.addCon(id, diagnosis, med, consults, date, symptom);
 
     }//GEN-LAST:event_LogconsultButtonActionPerformed
 
@@ -320,50 +290,21 @@ public class Consult extends javax.swing.JFrame {
     private void NextConsultButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextConsultButton1ActionPerformed
         // TODO add your handling code here:
         consults++;
-        if (consults <= newestconsult) {
+        illnesses.setText(ChangeConsult.nextCon(consults, newestconsult, "diagnosis"));
+        medication.setText(ChangeConsult.nextCon(consults, newestconsult, "medication"));
+        symptoms.setText(ChangeConsult.nextCon(consults, newestconsult, "symptom"));
+        dateField.setText(ChangeConsult.nextCon(consults, newestconsult, "date"));
 
-            String sql = "SELECT diagnosis, medication, date, symptom FROM consults WHERE patientConsult='" + consults + "';";
-            try {
-                ResultSet rs = DBConnector.read(sql);
-                while (rs.next()) {
-                    illnesses.setText(rs.getString("diagnosis"));
-                    medication.setText(rs.getString("medication"));
-                    symptoms.setText(rs.getString("symptom"));
-                    dateField.setText(rs.getString("date"));
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error in SQL query");
-            }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "This is the newest consult.Click ok to log a new one");
-            illnesses.setText("");
-            medication.setText("");
-            symptoms.setText("");
-            dateField.setText("");
-        }
+
     }//GEN-LAST:event_NextConsultButton1ActionPerformed
 
     private void PreviousConsultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousConsultButtonActionPerformed
         // TODO add your handling code here:
         consults--;
-        if (consults > 0) {
-            String sql = "SELECT diagnosis, medication, date, symptom FROM consults WHERE patientConsult='" + consults + "';";
-            try {
-                ResultSet rs = DBConnector.read(sql);
-                while (rs.next()) {
-                    illnesses.setText(rs.getString("diagnosis"));
-                    medication.setText(rs.getString("medication"));
-                    symptoms.setText(rs.getString("symptom"));
-                    dateField.setText(rs.getString("date"));
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error in SQL query");
-            }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "This is the oldest consult");
-        }
+        illnesses.setText(ChangeConsult.lastCon(consults, "diagnosis"));
+        medication.setText(ChangeConsult.lastCon(consults, "medication"));
+        symptoms.setText(ChangeConsult.lastCon(consults, "symptom"));
+        dateField.setText(ChangeConsult.lastCon(consults, "date"));
     }//GEN-LAST:event_PreviousConsultButtonActionPerformed
 
     /**
@@ -380,16 +321,28 @@ public class Consult extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Consult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Consult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Consult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Consult.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Consult.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Consult.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Consult.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Consult.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
