@@ -6,7 +6,7 @@ package FrontEnd;
 
 import DB.Update;
 import DB.DBConnector;
-import java.sql.ResultSet;
+import DB.Load;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -34,21 +34,12 @@ public class MedicationUpdate extends javax.swing.JFrame {
         id = Update.downloadSelected();
 
         //fills in information on selected option
-        String sql = "SELECT medicationName, stockRemaining, sideEffects, allergens, illnessTreated  FROM medication WHERE medicationName='" + id + "';";
-        try {
-            ResultSet rs = DBConnector.read(sql);
-            while (rs.next()) {
-                nameField.setText(rs.getString("medicationName"));
-                allergyArea.setText(rs.getString("allergens"));
-                effectsArea.setText(rs.getString("sideEffects"));
-                treatedArea.setText(rs.getString("illnessTreated"));
-                stockField.setText(rs.getString("stockRemaining"));
-
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        nameField.setText(Load.loadSingleMedication("medicationName", id));
+        allergyArea.setText(Load.loadSingleMedication("allergens", id));
+        effectsArea.setText(Load.loadSingleMedication("sideEffects", id));
+        treatedArea.setText(Load.loadSingleMedication("illnessTreated", id));
+        stockField.setText(Load.loadSingleMedication("stockRemaining", id));
+        
         
     }
 
@@ -241,19 +232,12 @@ public class MedicationUpdate extends javax.swing.JFrame {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
     String name=nameField.getText();
+    int stock=Integer.parseInt(stockField.getText());
     String effects= effectsArea.getText();
     String allergens=allergyArea.getText();
     String treated=treatedArea.getText();
-    int stock=Integer.parseInt(stockField.getText());
     
-        String sql = "UPDATE medication SET medicationName='"+name+"', stockRemaining='"+stock+"', sideEffects='"+effects+"', allergens='"+allergens+"', illnessTreated='"+treated+"' WHERE medicationName='"+id+"';";
-        try {
-            DB.DBConnector.update(sql);
-            JOptionPane.showMessageDialog(rootPane,"Information Has Been Updated");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+       Update.updateMedication(name, stock, effects, allergens, treated, id);
     }//GEN-LAST:event_editButtonActionPerformed
 
     /**

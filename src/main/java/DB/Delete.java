@@ -17,16 +17,18 @@ public class Delete {
            String sql = "DELETE FROM medication WHERE medicationName ='"+x+"';";
         try {
             DBConnector.update(sql);
+             JOptionPane.showMessageDialog(null, x + " has been deleted");
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
     }
     
-    public static void deletePat(String x ,String y, int z){
-           String sql = "DELETE FROM "+x +"WHERE "+y+"='"+z+"';";
+    public static void deletePat( String w, int x){
+           String sql = "DELETE FROM patient WHERE PatientNumber='"+x+"';";
         try {
             DBConnector.update(sql);
+             JOptionPane.showMessageDialog(null, w + " has been deleted");
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");

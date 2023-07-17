@@ -27,7 +27,7 @@ public class Perscribe extends javax.swing.JFrame {
         
         //connect to DB
         DBConnector.connect();
-        String[] medication = Load.loadMed();
+        String[] medication = Load.loadMedicationList();
         MedicationList.setListData(medication);
         
 

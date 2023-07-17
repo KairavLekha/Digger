@@ -9,6 +9,7 @@ import DB.Update;
 import DB.Load;
 import DB.Search;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,7 +32,7 @@ public class Illness extends javax.swing.JFrame {
 
         //connect to DB 
         DBConnector.connect();
-        String[] illness=Load.loadIll();
+        String[] illness=Load.loadIllnessList();
         illnessList.setListData(illness);
     }
 
@@ -162,10 +163,17 @@ public class Illness extends javax.swing.JFrame {
 
     //update information
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+
         String selected = illnessList.getSelectedValue();
         Update.uploadSelected(selected);
-        new IllnessUpdate().setVisible(true);
-        dispose();
+     
+        if (selected==null) {  
+        JOptionPane.showMessageDialog(null, "Select An option first.");
+        }else{
+            Update.uploadSelected(selected);
+            new IllnessUpdate().setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_editButtonActionPerformed
 
 //change screen

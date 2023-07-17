@@ -6,6 +6,7 @@ package FrontEnd;
 
 import DB.Update;
 import DB.DBConnector;
+import DB.Load;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
@@ -21,34 +22,26 @@ public class PatientUpdate extends javax.swing.JFrame {
      * Creates new form Screen1
      */
     public static int id;
-    
+
     public PatientUpdate() {
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
-            this.setIconImage(pic.getImage());
+        this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
 
         DBConnector.connect();
         id = Integer.parseInt(Update.downloadSelected());
         //fills in information on selected patient
-        String sql = "SELECT Firstname, Surname, DateOfBirth, Medical_Conditions, PhoneNumber, Address, Allergy, numConsult  FROM patient WHERE PatientNumber='" + id + "';";
-        try {
-            ResultSet rs = DBConnector.read(sql);
-            while (rs.next()) {
-                firstnameField.setText(rs.getString("Firstname"));
-                surnameField.setText(rs.getString("Surname"));
-                AddressField.setText(rs.getString("Address"));
-                DOBfield.setText(rs.getString("DateOfBirth"));
-                numberField.setText(rs.getString("PhoneNumber"));
-                allergyArea.setText(rs.getString("Allergy"));
-                conditionsArea.setText(rs.getString("Medical_Conditions"));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
-        
+
+        firstnameField.setText(Load.loadSinglePatient("Firstname", id));
+        surnameField.setText(Load.loadSinglePatient("Surname", id));
+        AddressField.setText(Load.loadSinglePatient("Address", id));
+        DOBfield.setText(Load.loadSinglePatient("DateOfBirth", id));
+        numberField.setText(Load.loadSinglePatient("PhoneNumber", id));
+        allergyArea.setText(Load.loadSinglePatient("Allergy", id));
+        conditionsArea.setText(Load.loadSinglePatient("Medical_Conditions", id));
+
     }
 
     /**
@@ -250,23 +243,14 @@ public class PatientUpdate extends javax.swing.JFrame {
 //update DB
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
-        String allergy=allergyArea.getText();
-        String firstname=firstnameField.getText();
-        String surname=surnameField.getText();
-        String address=AddressField.getText();
-        String DOB=DOBfield.getText();
-        String phoneNumber=numberField.getText();
-        String conditions=conditionsArea.getText();
-        
-
-        String sql = "UPDATE patient SET Firstname='"+firstname+"', Surname='"+surname+"', DateOfBirth='"+DOB+"', Medical_Conditions='"+conditions+"', PhoneNumber='"+phoneNumber+"', Address= '"+address+"', Allergy='"+allergy+"' WHERE PatientNumber="+id+";";
-        try {
-            DB.DBConnector.update(sql);
-            JOptionPane.showMessageDialog(rootPane,"Information Has Been Updated");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        String allergy = allergyArea.getText();
+        String firstname = firstnameField.getText();
+        String surname = surnameField.getText();
+        String address = AddressField.getText();
+        String DOB = DOBfield.getText();
+        String phoneNumber = numberField.getText();
+        String conditions = conditionsArea.getText();
+        Update.updatePatient(firstname, surname, DOB, conditions, phoneNumber, address, allergy, id);
     }//GEN-LAST:event_editButtonActionPerformed
 
     /**

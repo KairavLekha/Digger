@@ -21,22 +21,22 @@ public class Medication extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    String selected;
+
     public Medication() {
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
-            this.setIconImage(pic.getImage());
+        this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
-        
 
         DBConnector.connect();
-        String[] medication = Load.loadMed();
-        
+        String[] medication = Load.loadMedicationList();
+
         //populates the list with medication
         MedicationList.setListData(medication);
 
     }
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -174,10 +174,16 @@ public class Medication extends javax.swing.JFrame {
 //update DB
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
-        String selected = MedicationList.getSelectedValue();
-        Update.uploadSelected(selected);
-        new MedicationUpdate().setVisible(true);
-        dispose();
+
+        selected = MedicationList.getSelectedValue();
+        if (selected == null) {
+            JOptionPane.showMessageDialog(null, "Select An option first.");
+        } else {
+            Update.uploadSelected(selected);
+            new MedicationUpdate().setVisible(true);
+            dispose();
+        }
+
     }//GEN-LAST:event_editButtonActionPerformed
 
 //change screen
@@ -197,7 +203,7 @@ public class Medication extends javax.swing.JFrame {
     //search
     private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
-         String[] medication=Search.searchMed(filterInput.getText(),"medicationName");
+        String[] medication = Search.searchMed(filterInput.getText(), "medicationName");
         MedicationList.setListData(medication);
 
     }//GEN-LAST:event_filterInputKeyReleased
@@ -205,14 +211,16 @@ public class Medication extends javax.swing.JFrame {
 //delete from DB
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-        String selected = MedicationList.getSelectedValue();
-        Delete.deleteMed(selected);
-        JOptionPane.showMessageDialog(rootPane, selected + " has been deleted");
-        String names[]=Load.loadMed();
-        MedicationList.setListData(names); 
+        selected = MedicationList.getSelectedValue();
+        if (selected == null) {
+            JOptionPane.showMessageDialog(null, "Select An option first.");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, selected + " has been deleted");
+            Delete.deleteMed(selected);
+            String names[] = Load.loadMedicationList();
+            MedicationList.setListData(names);
+        }
     }//GEN-LAST:event_deleteButtonActionPerformed
-
-
 
     /**
      * @param args the command line arguments

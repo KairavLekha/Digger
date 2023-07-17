@@ -4,8 +4,7 @@
  */
 package FrontEnd;
 
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
+import DB.Add;
 import DB.DBConnector;
 import javax.swing.ImageIcon;
 
@@ -220,15 +219,8 @@ public class MedicationAdd extends javax.swing.JFrame {
         String sideEffects=sideEffectsArea.getText();
         String treatedIllnesses=treatedArea.getText();
         int stock=Integer.parseInt(stockField.getText());
-
-        String sql = "INSERT INTO medication (medicationName, allergens , sideEffects,illnessTreated, stockRemaining ) VALUES ('" + name + "','" + allergy + "','" + sideEffects + "','" + treatedIllnesses + "','" + stock + "');";
-        try {
-            JOptionPane.showMessageDialog(rootPane, name+" has been added");
-            DB.DBConnector.update(sql);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        
+        Add.addMed(name,allergy,sideEffects,treatedIllnesses,stock);
     }//GEN-LAST:event_AddButtonActionPerformed
 
     /**

@@ -6,7 +6,7 @@ package FrontEnd;
 
 import DB.Update;
 import DB.DBConnector;
-import java.sql.ResultSet;
+import DB.Load;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -20,34 +20,22 @@ public class IllnessUpdate extends javax.swing.JFrame {
     /**
      * Creates new form Screen1
      */
-
     public static String id;
-    
+
     public IllnessUpdate() {
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
-            this.setIconImage(pic.getImage());
+        this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
-       
-       
+
         DBConnector.connect();
-        
-    
+
         id = Update.downloadSelected();
-        
+
         // fills in information on selected option
-        String sql = "select Illness,Symptoms FROM illnesses WHERE Illness='"+id+"';";
-        try {
-            ResultSet rs = DBConnector.read(sql);
-            while (rs.next()) {
-               nameField.setText(rs.getString("Illness"));
-               symptomsArea.setText(rs.getString("Symptoms"));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        nameField.setText(Load.loadSingleIllness(id, "Illness"));
+        symptomsArea.setText(Load.loadSingleIllness(id, "Symptoms"));
 
     }
 
@@ -173,17 +161,10 @@ public class IllnessUpdate extends javax.swing.JFrame {
     //update DB
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
-        String illness=nameField.getText();
-        String symptoms=symptomsArea.getText();
-        
-        String sql = "UPDATE illnesses SET Illness='"+illness+"',Symptoms='"+symptoms+"' WHERE medicationName='"+id+"';";
-        try {
-            DB.DBConnector.update(sql);
-            JOptionPane.showMessageDialog(rootPane,"Information Has Been Updated");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        String illness = nameField.getText();
+        String symptoms = symptomsArea.getText();
+
+        Update.updateIllness(illness, symptoms, id);
     }//GEN-LAST:event_editButtonActionPerformed
 
     /**

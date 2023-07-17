@@ -4,8 +4,7 @@
  */
 package FrontEnd;
 
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
+import DB.Add;
 import DB.DBConnector;
 import javax.swing.ImageIcon;
 
@@ -152,14 +151,7 @@ public class IllnessAdd extends javax.swing.JFrame {
         // TODO add your handling code here:
         String illness = nameField.getText();
         String symptoms = symptomsArea.getText();
-        String sql = "INSERT INTO illnesses (Illness, Symptoms) VALUES ('" + illness + "','" + symptoms + "');";
-        try {
-            DB.DBConnector.update(sql);
-            JOptionPane.showMessageDialog(rootPane, illness+" has been added");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        Add.addIll(illness, symptoms);
     }//GEN-LAST:event_addButtonActionPerformed
 
     /**

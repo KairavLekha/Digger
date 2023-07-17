@@ -4,6 +4,7 @@
  */
 package FrontEnd;
 
+import DB.Add;
 import DB.Update;
 import DB.DBConnector;
 import java.sql.SQLException;
@@ -229,7 +230,6 @@ public class PatientAdd extends javax.swing.JFrame {
     
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-
         String allergy=allergyArea.getText();
         String firstname=firstnameField.getText();
         String surname=surnameField.getText();
@@ -237,16 +237,8 @@ public class PatientAdd extends javax.swing.JFrame {
         String DOB=DOBfield.getText();
         String phoneNumber=numberField.getText();
         String conditions=conditionsArea.getText();
-        
 
-        String sql = "INSERT INTO patient (Firstname, Surname, DateOfBirth, Medical_Conditions, PhoneNumber, Address, Allergy ) VALUES ('" + firstname + "','" + surname + "','" + DOB + "','" + conditions + "','" + phoneNumber + "','" + address + "','" + allergy + "');";
-        try {
-            DB.DBConnector.update(sql);
-            JOptionPane.showMessageDialog(rootPane, firstname+" has been added");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        Add.addPat(firstname, surname, DOB, conditions, phoneNumber, address, allergy);
     }//GEN-LAST:event_addButtonActionPerformed
 
     /**

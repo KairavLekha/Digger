@@ -10,6 +10,7 @@ import Backend.Other;
 import DB.Update;
 import DB.Load;
 import DB.Search;
+import java.lang.invoke.MethodHandles;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -27,17 +28,16 @@ public class Patients extends javax.swing.JFrame {
 
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
-            this.setIconImage(pic.getImage());
+        this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
 
-        
         DBConnector.connect();
-        String[]names=Load.loadPat();
+        String[] names = Load.loadPatientList();
         //populates list with patients
         patientList.setListData(names);
     }
-    
+
     String Criteria = "Firstname";
 
     /**
@@ -203,8 +203,7 @@ public class Patients extends javax.swing.JFrame {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
         String selected = patientList.getSelectedValue();
-        String[] arrOfStr = selected.split(":", 0);
-        String id=""+(Other.getId(arrOfStr));
+        String id = "" + (Other.getId(selected));
         Update.uploadSelected(id);
         new PatientUpdate().setVisible(true);
 
@@ -234,17 +233,22 @@ public class Patients extends javax.swing.JFrame {
 //search
     private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
-        String[]names=Search.searchPat(filterInput.getText(), Criteria);
+        String[] names = Search.searchPat(filterInput.getText(), Criteria);
         patientList.setListData(names);
     }//GEN-LAST:event_filterInputKeyReleased
 
     //change screen
     private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
         // TODO add your handling code here:
-        String selected = patientList.getSelectedValue();
-        String[] arrOfStr = selected.split(":", 0);
-        String id=""+(Other.getId(arrOfStr));
-        Update.uploadSelected(id);
+        
+        try {
+            String selected = patientList.getSelectedValue();
+            String id = "" + (Other.getId(selected));
+            Update.uploadSelected(id);
+        } catch (java.lang.NullPointerException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Select An option first.");
+        }
         new Consult().setVisible(true);
         dispose();
     }//GEN-LAST:event_viewButtonActionPerformed
@@ -252,29 +256,25 @@ public class Patients extends javax.swing.JFrame {
     //delete from DB
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-        String selected = patientList.getSelectedValue();
-        String[] arrOfStr = selected.split(":", 0);
-        int id=Other.getId(arrOfStr);
-        Delete.deletePat("patients","PatientNumber",id);
-        JOptionPane.showMessageDialog(rootPane, selected + " has been deleted");
-        String names[]=Load.loadPat();
-        patientList.setListData(names);
-    }//GEN-LAST:event_deleteButtonActionPerformed
-   
-   
+        try {
+            String selected =  patientList.getSelectedValue();;
+            int id = Other.getId(selected);
+            Delete.deletePat(selected, id);
+            String names[] = Load.loadPatientList();
+            patientList.setListData(names);
+     
+        } catch (java.lang.NullPointerException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Select An option first.");
+        }
 
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        try {
-            DBConnector.init();
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Could not find DB driver");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Could not connect to db");
-        }
+
 
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

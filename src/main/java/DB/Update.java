@@ -14,6 +14,40 @@ import javax.swing.JOptionPane;
  */
 public class Update {
     
+    public static void updateIllness(String x,String y,String z) {
+     String sql = "UPDATE illnesses SET Illness='"+x+"',Symptoms='"+y+"' WHERE medicationName='"+z+"';";
+        try {
+            DB.DBConnector.update(sql);
+            JOptionPane.showMessageDialog(null,"Information Has Been Updated");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+    }
+        
+    public static void updateMedication(String v,int w,String x,String y,String z,String u) {
+         String sql = "UPDATE medication SET medicationName='"+v+"', stockRemaining='"+w+"', sideEffects='"+x+"', allergens='"+y+"', illnessTreated='"+z+"' WHERE medicationName='"+u+"';";
+        try {
+            DB.DBConnector.update(sql);
+            JOptionPane.showMessageDialog(null,"Information Has Been Updated");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+        
+    }
+    
+    public static void updatePatient(String s,String t,String u,String v,String w,String x,String y,int z){
+          String sql = "UPDATE patient SET Firstname='"+s+"', Surname='"+t+"', DateOfBirth='"+u+"', Medical_Conditions='"+v+"', PhoneNumber='"+w+"', Address= '"+x+"', Allergy='"+y+"' WHERE PatientNumber="+z+";";
+        try {
+            DB.DBConnector.update(sql);
+            JOptionPane.showMessageDialog(null,"Information Has Been Updated");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+    }   
+    
     public static String downloadSelected(){
       String sql = "select identifier FROM selected;";
       String id = null;

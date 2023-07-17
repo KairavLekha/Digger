@@ -27,7 +27,7 @@ public class Diagnosis extends javax.swing.JFrame {
 
    //connect to DB     
         DBConnector.connect();
-        String[] illness=Load.loadIll();
+        String[] illness=Load.loadIllnessList();
         illnessList.setListData(illness);
     }
 

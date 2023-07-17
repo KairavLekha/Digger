@@ -10,6 +10,7 @@ package Backend;
  */
 public class Other {
     
+    
     public static String criteria(String x) {
         if (x == "Firstname") {
             x = "Surname";
@@ -26,10 +27,11 @@ public class Other {
 
     }
 
-    public static int getId(String[] x) {
+    public static int getId(String x) {
         int i = 0;
         int id = 0;
-        for (String a : x) {
+        String[] arrOfStr = x.split(":", 0);
+        for (String a : arrOfStr) {
             i++;
             if (i == 2) {
                 id = Integer.parseInt(a);
