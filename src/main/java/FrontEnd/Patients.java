@@ -8,7 +8,7 @@ import DB.DBConnector;
 import DB.Delete;
 import Backend.Other;
 import DB.Update;
-import DB.Refresh;
+import DB.Load;
 import DB.Search;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
@@ -33,7 +33,7 @@ public class Patients extends javax.swing.JFrame {
 
         
         DBConnector.connect();
-        String[]names=Refresh.refreshPat();
+        String[]names=Load.loadPat();
         //populates list with patients
         patientList.setListData(names);
     }
@@ -257,7 +257,7 @@ public class Patients extends javax.swing.JFrame {
         int id=Other.getId(arrOfStr);
         Delete.deletePat("patients","PatientNumber",id);
         JOptionPane.showMessageDialog(rootPane, selected + " has been deleted");
-        String names[]=Refresh.refreshPat();
+        String names[]=Load.loadPat();
         patientList.setListData(names);
     }//GEN-LAST:event_deleteButtonActionPerformed
    

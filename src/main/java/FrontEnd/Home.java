@@ -19,7 +19,7 @@ public class Home extends javax.swing.JFrame {
 
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
-        this.setIconImage(pic.getImage());
+            this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
     }

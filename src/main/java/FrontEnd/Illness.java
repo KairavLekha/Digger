@@ -6,7 +6,7 @@ package FrontEnd;
 
 import DB.DBConnector;
 import DB.Update;
-import DB.Refresh;
+import DB.Load;
 import DB.Search;
 import javax.swing.ImageIcon;
 
@@ -31,7 +31,7 @@ public class Illness extends javax.swing.JFrame {
 
         //connect to DB 
         DBConnector.connect();
-        String[] illness=Refresh.refreshIll();
+        String[] illness=Load.loadIll();
         illnessList.setListData(illness);
     }
 

@@ -27,14 +27,17 @@ public class Consult extends javax.swing.JFrame {
     public Consult() {
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
-        this.setIconImage(pic.getImage());
+            this.setIconImage(pic.getImage());
         setSize(526, 370);
         setLocationRelativeTo(null);
 
+        
+        
+        
         //connect to db
         DBConnector.connect();
         id = Integer.parseInt(Update.downloadSelected());
-
+        
         String sql = "SELECT Firstname, Surname, Medical_Conditions, numConsult,Allergy  FROM patient WHERE PatientNumber='" + id + "';";
         try {
             ResultSet rs = DBConnector.read(sql);
@@ -293,7 +296,7 @@ public class Consult extends javax.swing.JFrame {
         String med = medication.getText();
         newestconsult = consults;
 
-        String sql = "INSERT INTO consults (idPatient, diagnosis, medication, patientCosult, date, symptom) VALUES ('" + id + "','" + diagnosis + "','" + med + "','" + consults + "','" + date + "','" + symptom + "');";
+        String sql = "INSERT INTO consults (idPatient, diagnosis, medication, patientConsult, date, symptom) VALUES ('" + id + "','" + diagnosis + "','" + med + "','" + consults + "','" + date + "','" + symptom + "');";
         try {
             DB.DBConnector.update(sql);
             consults++;
@@ -319,7 +322,7 @@ public class Consult extends javax.swing.JFrame {
         consults++;
         if (consults <= newestconsult) {
 
-            String sql = "SELECT diagnosis, medication, date, symptom FROM consults WHERE patientCosult='" + consults + "';";
+            String sql = "SELECT diagnosis, medication, date, symptom FROM consults WHERE patientConsult='" + consults + "';";
             try {
                 ResultSet rs = DBConnector.read(sql);
                 while (rs.next()) {
@@ -345,7 +348,7 @@ public class Consult extends javax.swing.JFrame {
         // TODO add your handling code here:
         consults--;
         if (consults > 0) {
-            String sql = "SELECT diagnosis, medication, date, symptom FROM consults WHERE patientCosult='" + consults + "';";
+            String sql = "SELECT diagnosis, medication, date, symptom FROM consults WHERE patientConsult='" + consults + "';";
             try {
                 ResultSet rs = DBConnector.read(sql);
                 while (rs.next()) {

@@ -6,7 +6,7 @@ package FrontEnd;
 
 import javax.swing.JOptionPane;
 import DB.Update;
-import DB.Refresh;
+import DB.Load;
 import DB.DBConnector;
 import DB.Delete;
 import DB.Search;
@@ -27,13 +27,10 @@ public class Medication extends javax.swing.JFrame {
             this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
-        new Home().setVisible(true);
-        new MedicationUpdate().setVisible(true);
-        new MedicationAdd().setVisible(true);
         
 
         DBConnector.connect();
-        String[] medication = Refresh.refreshMed();
+        String[] medication = Load.loadMed();
         
         //populates the list with medication
         MedicationList.setListData(medication);
@@ -179,17 +176,20 @@ public class Medication extends javax.swing.JFrame {
         // TODO add your handling code here:
         String selected = MedicationList.getSelectedValue();
         Update.uploadSelected(selected);
+        new MedicationUpdate().setVisible(true);
         dispose();
     }//GEN-LAST:event_editButtonActionPerformed
 
 //change screen
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
+        new Home().setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
     private void newMedicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedicationButtonActionPerformed
         // TODO add your handling code here
+        new MedicationAdd().setVisible(true);
         dispose();
 
     }//GEN-LAST:event_newMedicationButtonActionPerformed
@@ -208,7 +208,7 @@ public class Medication extends javax.swing.JFrame {
         String selected = MedicationList.getSelectedValue();
         Delete.deleteMed(selected);
         JOptionPane.showMessageDialog(rootPane, selected + " has been deleted");
-        String names[]=Refresh.refreshMed();
+        String names[]=Load.loadMed();
         MedicationList.setListData(names); 
     }//GEN-LAST:event_deleteButtonActionPerformed
 

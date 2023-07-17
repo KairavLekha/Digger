@@ -20,8 +20,9 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
 
-
         initComponents();
+        ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
+            this.setIconImage(pic.getImage());
           
             
         setSize(526, 365);
