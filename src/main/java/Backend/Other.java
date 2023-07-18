@@ -12,15 +12,15 @@ public class Other {
     
     
     public static String criteria(String x) {
-        if (x == "Firstname") {
+        if ("Firstname".equals(x)) {
             x = "Surname";
-        } else if (x == "Surname") {
+        } else if ("Surname".equals(x)) {
             x = "Address";
-        } else if (x == "Address") {
-            x = "PhoneNumber";
-        } else if (x == "Phone Number") {
+        } else if ("Address".equals(x)) {
+            x = "Phone Number";
+        } else if ("Phone Number".equals(x)) {
             x = "Date Of Birth";
-        } else if (x == "Date Of Birth") {
+        } else if ("Date Of Birth".equals(x)) {
             x = "Firstname";
         }
         return x;
@@ -28,8 +28,8 @@ public class Other {
     }
 
     public static int getId(String x) {
-        int i = 0;
         int id = 0;
+        int i=0;
         String[] arrOfStr = x.split(":", 0);
         for (String a : arrOfStr) {
             i++;
@@ -42,9 +42,6 @@ public class Other {
     
     public static boolean login(String x){
         int code = Integer.parseInt(x);
-        if (code==4807){
-            return true;
-        }
-        return false;  
+        return code==4807;  
     }
 }

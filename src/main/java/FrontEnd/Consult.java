@@ -290,21 +290,22 @@ public class Consult extends javax.swing.JFrame {
     private void NextConsultButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextConsultButton1ActionPerformed
         // TODO add your handling code here:
         consults++;
-        illnesses.setText(ChangeConsult.nextCon(consults, newestconsult, "diagnosis"));
-        medication.setText(ChangeConsult.nextCon(consults, newestconsult, "medication"));
-        symptoms.setText(ChangeConsult.nextCon(consults, newestconsult, "symptom"));
-        dateField.setText(ChangeConsult.nextCon(consults, newestconsult, "date"));
-
+        illnesses.setText(ChangeConsult.nextCon(id,consults, newestconsult, "diagnosis"));
+        medication.setText(ChangeConsult.nextCon(id,consults, newestconsult, "medication"));
+        symptoms.setText(ChangeConsult.nextCon(id,consults, newestconsult, "symptom"));
+        dateField.setText(ChangeConsult.nextCon(id,consults, newestconsult, "date"));
+        System.out.println(consults);
 
     }//GEN-LAST:event_NextConsultButton1ActionPerformed
 
     private void PreviousConsultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousConsultButtonActionPerformed
         // TODO add your handling code here:
         consults--;
-        illnesses.setText(ChangeConsult.lastCon(consults, "diagnosis"));
-        medication.setText(ChangeConsult.lastCon(consults, "medication"));
-        symptoms.setText(ChangeConsult.lastCon(consults, "symptom"));
-        dateField.setText(ChangeConsult.lastCon(consults, "date"));
+        illnesses.setText(ChangeConsult.lastCon(id,consults, "diagnosis"));
+        medication.setText(ChangeConsult.lastCon(id,consults, "medication"));
+        symptoms.setText(ChangeConsult.lastCon(id,consults, "symptom"));
+        dateField.setText(ChangeConsult.lastCon(id,consults, "date"));
+        System.out.println(consults);
     }//GEN-LAST:event_PreviousConsultButtonActionPerformed
 
     /**

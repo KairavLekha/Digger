@@ -150,8 +150,7 @@ public class Login extends javax.swing.JFrame {
         } else {
             incorrectCodeLabel.setEnabled(true);
             PasswordField.setText("");
-        }
-            
+        }  
         }
     }//GEN-LAST:event_confirmButtonActionPerformed
     

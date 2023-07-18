@@ -38,7 +38,7 @@ public class Add {
     }
     
     public static void addPat(String t,String u,String v, String w, String x, String y, String z) {
-         String sql = "INSERT INTO patient (Firstname, Surname, DateOfBirth, Medical_Conditions, PhoneNumber, Address, Allergy, numConsult ) VALUES ('" + t + "','" + u + "','" + v + "','" + w + "','" + x + "','" + y + "','" + z + "', 0);";
+         String sql = "INSERT INTO patient (Firstname, Surname, Date Of Birth, Medical_Conditions, Phone Number, Address, Allergy, numConsult ) VALUES ('" + t + "','" + u + "','" + v + "','" + w + "','" + x + "','" + y + "','" + z + "', 0);";
         try {
             Backend.DB.DBConnector.update(sql);
             JOptionPane.showMessageDialog(null, t+" has been added");

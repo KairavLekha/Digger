@@ -34,8 +34,8 @@ public class PatientUpdate extends javax.swing.JFrame {
         firstnameField.setText(Load.loadSinglePatient("Firstname", id));
         surnameField.setText(Load.loadSinglePatient("Surname", id));
         AddressField.setText(Load.loadSinglePatient("Address", id));
-        DOBfield.setText(Load.loadSinglePatient("DateOfBirth", id));
-        numberField.setText(Load.loadSinglePatient("PhoneNumber", id));
+        DOBfield.setText(Load.loadSinglePatient("Date Of Birth", id));
+        numberField.setText(Load.loadSinglePatient("Phone Number", id));
         allergyArea.setText(Load.loadSinglePatient("Allergy", id));
         conditionsArea.setText(Load.loadSinglePatient("Medical_Conditions", id));
 
