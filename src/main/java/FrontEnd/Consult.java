@@ -10,6 +10,7 @@ import Backend.DB.DBConnector;
 import Backend.DB.Update;
 import Backend.DB.Load;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,7 +38,7 @@ public class Consult extends javax.swing.JFrame {
         fullname.setText(Load.loadSinglePatient("Firstname", id) + " " + Load.loadSinglePatient("Surname", id));
         conditionsArea.setText("Conditions: " + Load.loadSinglePatient("Medical_Conditions", id) + "\nAllergies: " + Load.loadSinglePatient("Allergy", id));
         consults = Integer.parseInt(Load.loadSinglePatient("numConsult", id));
-
+        newestconsult=consults;
     }
 
     /**
@@ -276,6 +277,7 @@ public class Consult extends javax.swing.JFrame {
     //log new consult
     private void LogconsultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogconsultButtonActionPerformed
         // TODO add your handling code here:
+        consults++;
         String diagnosis = illnesses.getText();
         String symptom = symptoms.getText();
         String date = dateField.getText();
@@ -289,23 +291,37 @@ public class Consult extends javax.swing.JFrame {
     //view other consults
     private void NextConsultButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextConsultButton1ActionPerformed
         // TODO add your handling code here:
-        consults++;
-        illnesses.setText(ChangeConsult.nextCon(id,consults, newestconsult, "diagnosis"));
-        medication.setText(ChangeConsult.nextCon(id,consults, newestconsult, "medication"));
-        symptoms.setText(ChangeConsult.nextCon(id,consults, newestconsult, "symptom"));
-        dateField.setText(ChangeConsult.nextCon(id,consults, newestconsult, "date"));
-        System.out.println(consults);
+        if (consults < newestconsult) {
+            consults++;
+            illnesses.setText(ChangeConsult.nextCon(id, consults, newestconsult, "diagnosis"));
+            medication.setText(ChangeConsult.nextCon(id, consults, newestconsult, "medication"));
+            symptoms.setText(ChangeConsult.nextCon(id, consults, newestconsult, "symptom"));
+            dateField.setText(ChangeConsult.nextCon(id, consults, newestconsult, "date"));
+
+        }else{
+            JOptionPane.showMessageDialog(null, "This is the newest consult.Click Okay to log a new one");
+            illnesses.setText("");
+            medication.setText("");
+            symptoms.setText("");
+            dateField.setText("");
+            
+            
+        }
 
     }//GEN-LAST:event_NextConsultButton1ActionPerformed
 
     private void PreviousConsultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousConsultButtonActionPerformed
         // TODO add your handling code here:
-        consults--;
-        illnesses.setText(ChangeConsult.lastCon(id,consults, "diagnosis"));
-        medication.setText(ChangeConsult.lastCon(id,consults, "medication"));
-        symptoms.setText(ChangeConsult.lastCon(id,consults, "symptom"));
-        dateField.setText(ChangeConsult.lastCon(id,consults, "date"));
-        System.out.println(consults);
+        if (consults > 1) {
+            consults--;
+            illnesses.setText(ChangeConsult.lastCon(id, consults, "diagnosis"));
+            medication.setText(ChangeConsult.lastCon(id, consults, "medication"));
+            symptoms.setText(ChangeConsult.lastCon(id, consults, "symptom"));
+            dateField.setText(ChangeConsult.lastCon(id, consults, "date"));
+        } else{
+            JOptionPane.showMessageDialog(null, "This is the oldest consult.");
+            
+        }
     }//GEN-LAST:event_PreviousConsultButtonActionPerformed
 
     /**
@@ -315,7 +331,7 @@ public class Consult extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -323,27 +339,23 @@ public class Consult extends javax.swing.JFrame {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Consult.class  
+            java.util.logging.Logger.getLogger(Consult.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Consult.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Consult.class  
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Consult.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Consult.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Consult.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Consult.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

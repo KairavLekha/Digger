@@ -59,7 +59,7 @@ public class Add {
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
 
-        String qry = "INSERT INTO patient (numConsults) VALUES ('" + x + "');";
+        String qry = "UPDATE patient SET numConsult='" + x + "'WHERE PatientNumber="+u+";";
         try {
             Backend.DB.DBConnector.update(qry);
             JOptionPane.showMessageDialog(null, "This consult has been Logged");
