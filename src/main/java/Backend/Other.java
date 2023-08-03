@@ -17,10 +17,10 @@ public class Other {
         } else if ("Surname".equals(x)) {
             x = "Address";
         } else if ("Address".equals(x)) {
-            x = "Phone Number";
-        } else if ("Phone Number".equals(x)) {
-            x = "Date Of Birth";
-        } else if ("Date Of Birth".equals(x)) {
+            x = "Phone_Number";
+        } else if ("Phone_Number".equals(x)) {
+            x = "Date_Of_Birth";
+        } else if ("Date_Of_Birth".equals(x)) {
             x = "Firstname";
         }
         return x;

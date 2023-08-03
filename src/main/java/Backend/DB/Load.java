@@ -80,7 +80,7 @@ public class Load {
     }
 
     public static String[] loadMedicationList() {
-        String sql = "SELECT medicationName FROM medication ORDER BY idmedication;";
+        String sql = "SELECT medicationName FROM medication ORDER BY stockRemaining;";
         String[] medication = new String[10000];
         try {
             ResultSet rs = DBConnector.read(sql);

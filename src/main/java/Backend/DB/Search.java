@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class Search {
     
      public static String[] searchIll(String x,String y) {
-        String sql = "SELECT Illness FROM illnesses WHERE "+y+" LIKE '" + x+ "%'  ORDER BY idIllnesses";
+        String sql = "SELECT Illness FROM illnesses WHERE "+y+" LIKE '%" + x+ "%'  ORDER BY idIllnesses";
         String[] illness = new String[10000];
 
         try {
@@ -37,7 +37,7 @@ public class Search {
     }
     
     public static String[] searchMed(String x,String y) {
-        String sql = "SELECT medicationName FROM medication WHERE "+y+" LIKE '" + x+ "%'  ORDER BY idmedication";
+        String sql = "SELECT medicationName FROM medication WHERE "+y+" LIKE '%" + x+ "%'  ORDER BY idmedication";
         String[] medication = new String[10000];
 
         try {

@@ -28,14 +28,14 @@ public class PatientUpdate extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         DBConnector.connect();
-        id = Integer.parseInt(Update.downloadSelected());
+        id = Integer.parseInt(Update.downloadSelected("selected"));
         //fills in information on selected patient
 
         firstnameField.setText(Load.loadSinglePatient("Firstname", id));
         surnameField.setText(Load.loadSinglePatient("Surname", id));
         AddressField.setText(Load.loadSinglePatient("Address", id));
-        DOBfield.setText(Load.loadSinglePatient("Date Of Birth", id));
-        numberField.setText(Load.loadSinglePatient("Phone Number", id));
+        DOBfield.setText(Load.loadSinglePatient("Date_Of_Birth", id));
+        numberField.setText(Load.loadSinglePatient("Phone_Number", id));
         allergyArea.setText(Load.loadSinglePatient("Allergy", id));
         conditionsArea.setText(Load.loadSinglePatient("Medical_Conditions", id));
 
@@ -233,7 +233,7 @@ public class PatientUpdate extends javax.swing.JFrame {
    //change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        Update.clearSelected();
+        Update.clearSelected("selected");
         new Patients().setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
@@ -253,38 +253,7 @@ public class PatientUpdate extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PatientUpdate().setVisible(true);
-            }
-        });
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane AddressField;

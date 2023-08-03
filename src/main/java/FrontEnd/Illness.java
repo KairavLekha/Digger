@@ -63,7 +63,7 @@ public class Illness extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(526, 350));
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        titleLabel.setText("Digital Patient Acess Terminal");
+        titleLabel.setText("Doctor Information Terminal");
 
         editButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         editButton.setText("Update/View");
@@ -131,7 +131,7 @@ public class Illness extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(titleLabel)))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,12 +165,12 @@ public class Illness extends javax.swing.JFrame {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
 
         String selected = illnessList.getSelectedValue();
-        Update.uploadSelected(selected);
+        Update.uploadSelected(selected,"selected");
      
         if (selected==null) {  
         JOptionPane.showMessageDialog(null, "Select An option first.");
         }else{
-            Update.uploadSelected(selected);
+            Update.uploadSelected(selected,"selected");
             new IllnessUpdate().setVisible(true);
             dispose();
         }
@@ -179,7 +179,7 @@ public class Illness extends javax.swing.JFrame {
 //change screen
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
-        new Home().setVisible(true);
+        new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
@@ -201,40 +201,7 @@ public class Illness extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        
 
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Patients.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Illness().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane PatientList;

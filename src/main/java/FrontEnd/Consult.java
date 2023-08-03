@@ -34,7 +34,7 @@ public class Consult extends javax.swing.JFrame {
 
         //connect to db
         DBConnector.connect();
-        id = Integer.parseInt(Update.downloadSelected());
+        id = Integer.parseInt(Update.downloadSelected("selected"));
         fullname.setText(Load.loadSinglePatient("Firstname", id) + " " + Load.loadSinglePatient("Surname", id));
         conditionsArea.setText("Conditions: " + Load.loadSinglePatient("Medical_Conditions", id) + "\nAllergies: " + Load.loadSinglePatient("Allergy", id));
         consults = Integer.parseInt(Load.loadSinglePatient("numConsult", id));
@@ -53,7 +53,7 @@ public class Consult extends javax.swing.JFrame {
         exitButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         DiagnosisButton = new javax.swing.JButton();
-        MedicationButton = new javax.swing.JButton();
+        PerscribeButton = new javax.swing.JButton();
         patientName = new javax.swing.JLabel();
         fullname = new javax.swing.JLabel();
         illnessLabel = new javax.swing.JLabel();
@@ -93,11 +93,11 @@ public class Consult extends javax.swing.JFrame {
             }
         });
 
-        MedicationButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        MedicationButton.setText("Perscribe Medication");
-        MedicationButton.addActionListener(new java.awt.event.ActionListener() {
+        PerscribeButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        PerscribeButton.setText("Perscribe Medication");
+        PerscribeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MedicationButtonActionPerformed(evt);
+                PerscribeButtonActionPerformed(evt);
             }
         });
 
@@ -161,7 +161,7 @@ public class Consult extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(DiagnosisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MedicationButton)
+                        .addComponent(PerscribeButton)
                         .addGap(63, 63, 63))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,7 +246,7 @@ public class Consult extends javax.swing.JFrame {
                         .addComponent(LogconsultButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(MedicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PerscribeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(DiagnosisButton))))
                 .addGap(12, 12, 12))
         );
@@ -257,22 +257,24 @@ public class Consult extends javax.swing.JFrame {
 //change screen
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
-        Update.clearSelected();
+        Update.clearSelected("selected");
         new Patients().setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void DiagnosisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiagnosisButtonActionPerformed
         // TODO add your handling code here:
-        new Diagnosis().setVisible(true);
+        Update.uploadSelected("diag", "selectedscreen");
+        new SearchScreen().setVisible(true);
         dispose();
     }//GEN-LAST:event_DiagnosisButtonActionPerformed
 
-    private void MedicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MedicationButtonActionPerformed
+    private void PerscribeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerscribeButtonActionPerformed
         // TODO add your handling code here:
-        new Perscribe().setVisible(true);
+        Update.uploadSelected("pers", "selectedscreen");
+        new SearchScreen().setVisible(true);
         dispose();
-    }//GEN-LAST:event_MedicationButtonActionPerformed
+    }//GEN-LAST:event_PerscribeButtonActionPerformed
 
     //log new consult
     private void LogconsultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogconsultButtonActionPerformed
@@ -291,7 +293,7 @@ public class Consult extends javax.swing.JFrame {
     //view other consults
     private void NextConsultButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextConsultButton1ActionPerformed
         // TODO add your handling code here:
-        if (consults < newestconsult) {
+        if (consults <=newestconsult) {
             consults++;
             illnesses.setText(ChangeConsult.nextCon(id, consults, newestconsult, "diagnosis"));
             medication.setText(ChangeConsult.nextCon(id, consults, newestconsult, "medication"));
@@ -327,51 +329,12 @@ public class Consult extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Consult.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Consult.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Consult.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Consult.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Consult().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DiagnosisButton;
     private javax.swing.JButton LogconsultButton;
-    private javax.swing.JButton MedicationButton;
     private javax.swing.JButton NextConsultButton1;
+    private javax.swing.JButton PerscribeButton;
     private javax.swing.JButton PreviousConsultButton;
     private javax.swing.JTextArea conditionsArea;
     private javax.swing.JLabel conditionsLabel;

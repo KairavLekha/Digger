@@ -38,7 +38,7 @@ public class Update {
     }
     
     public static void updatePatient(String s,String t,String u,String v,String w,String x,String y,int z){
-          String sql = "UPDATE patient SET Firstname='"+s+"', Surname='"+t+"', DateOfBirth='"+u+"', Medical_Conditions='"+v+"', PhoneNumber='"+w+"', Address= '"+x+"', Allergy='"+y+"' WHERE PatientNumber="+z+";";
+          String sql = "UPDATE patient SET Firstname='"+s+"', Surname='"+t+"', Date_Of_Birth='"+u+"', Medical_Conditions='"+v+"', Phone_Number='"+w+"', Address= '"+x+"', Allergy='"+y+"' WHERE PatientNumber="+z+";";
         try {
             DBConnector.update(sql);
             JOptionPane.showMessageDialog(null,"Information Has Been Updated");
@@ -48,8 +48,8 @@ public class Update {
         }
     }   
     
-    public static String downloadSelected(){
-      String sql = "select identifier FROM selected;";
+    public static String downloadSelected(String x){
+      String sql = "select identifier FROM "+x+";";
       String id = null;
       //download
       try {
@@ -64,8 +64,8 @@ public class Update {
         return id;
     }
     
-    public static void uploadSelected(String x){
-      String sql = "UPDATE selected SET identifier='"+x+"'WHERE selectedID=1;";
+    public static void uploadSelected(String x,String y){
+      String sql = "UPDATE "+x+" SET identifier='"+x+"'WHERE selectedID=1;";
         try {
             DBConnector.update(sql);
         } catch (SQLException ex) {
@@ -74,8 +74,8 @@ public class Update {
         }   
     }
     
-    public static void clearSelected(){
-      String sql = "UPDATE selected SET identifier=''WHERE selectedID=1;";
+    public static void clearSelected(String x){
+      String sql = "UPDATE "+x+" SET identifier=''WHERE selectedID=1;";
         try {
             DBConnector.update(sql);
         } catch (SQLException ex) {
