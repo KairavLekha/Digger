@@ -22,29 +22,25 @@ public class SearchScreen extends javax.swing.JFrame {
     public SearchScreen() {
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
-            this.setIconImage(pic.getImage());
+        this.setIconImage(pic.getImage());
         setSize(526, 365);
         setLocationRelativeTo(null);
         DBConnector.connect();
-        
+        System.out.println(Update.downloadSelected("selectedscreen"));
         //connect to DB
         if ("diag".equals(Update.downloadSelected("selectedscreen"))) {
-        String[] medication = Load.loadMedicationList();
-        List.setListData(medication);   
-        }else{
-        String[] illness = Load.loadIllnessList();
-        List.setListData(illness); 
-        Title.setText("Diagnose Patient");
-        typeLabel.setText("Illness");
-        instructions2.setText("Enter The Symptoms:");
-        instructions.setText("Separate each sypmtom by a comma");
-        
-            
-        }
-        
-        
+            String[] illness = Load.loadIllnessList();
+            List.setListData(illness);
+            Title.setText("Diagnose Patient");
+            typeLabel.setText("Illness");
+            instructions2.setText("Enter The Symptoms:");
+            instructions.setText("Separate each sypmtom by a comma");
+        } else if ("pers".equals(Update.downloadSelected("selectedscreen"))){
+            String[] medication = Load.loadMedicationList();
+            List.setListData(medication);
 
-        
+        }
+
     }
 
     /**
@@ -74,11 +70,6 @@ public class SearchScreen extends javax.swing.JFrame {
         instructions2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         instructions2.setText("Enter The Illness:");
 
-        searchField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchFieldActionPerformed(evt);
-            }
-        });
         searchField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchFieldKeyReleased(evt);
@@ -122,15 +113,11 @@ public class SearchScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                         .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(109, 109, 109)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(207, 207, 207)
-                                .addComponent(instructions)))
+                        .addGap(109, 109, 109)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addComponent(instructions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +125,7 @@ public class SearchScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Title)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(instructions)
+                .addComponent(instructions, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(instructions2)
@@ -147,7 +134,7 @@ public class SearchScreen extends javax.swing.JFrame {
                 .addComponent(typeLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -158,28 +145,22 @@ public class SearchScreen extends javax.swing.JFrame {
     //search
     private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
         // TODO add your handling code here:
-       if ("diag".equals(Update.downloadSelected("selectedscreen"))) {
-        String[] medication = Search.searchMed(searchField.getText(), "illnessTreated");
-        List.setListData(medication);   
-        }else{
-        String[] illness = Search.searchIll(searchField.getText(), "Symptoms");
-        List.setListData(illness); 
-       }
+        if ("diag".equals(Update.downloadSelected("selectedscreen"))) {
+            String[] medication = Search.searchMed(searchField.getText(), "illnessTreated");
+            List.setListData(medication);
+        } else {
+            String[] illness = Search.searchIll(searchField.getText(), "Symptoms");
+            List.setListData(illness);
+        }
 
     }//GEN-LAST:event_searchFieldKeyReleased
 
     //change screen
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
-         new Consult().setVisible(true);
-         dispose();
+        new Consult().setVisible(true);
+        dispose();
     }//GEN-LAST:event_logoutActionPerformed
-
-    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchFieldActionPerformed
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> List;

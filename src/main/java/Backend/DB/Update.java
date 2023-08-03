@@ -65,7 +65,7 @@ public class Update {
     }
     
     public static void uploadSelected(String x,String y){
-      String sql = "UPDATE "+x+" SET identifier='"+x+"'WHERE selectedID=1;";
+      String sql = "UPDATE "+y+" SET identifier='"+x+"'WHERE selectedID=1;";
         try {
             DBConnector.update(sql);
         } catch (SQLException ex) {
