@@ -41,7 +41,6 @@ public class Other {
     }
     
     public static boolean login(String x){
-        int code = Integer.parseInt(x);
-        return code==4807;  
+        return x.equalsIgnoreCase("4807");  
     }
 }

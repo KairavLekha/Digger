@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author Kairav
  */
-public class ChangeConsult {
+public class Consult {
 
     public static String nextCon(int u, int x, int y, String z) {
         String info = null;
@@ -34,7 +34,25 @@ public class ChangeConsult {
         }
         return info;
     }
+    public static void addCon(int u,String v, String w, int x, String y, String z) {
+       String sql = "INSERT INTO consults (idPatient, diagnosis, medication, patientConsult, date, symptom) VALUES ('" + u + "','" + v + "','" + w + "','" + x + "','" + y + "','" + z + "');";
+        try {
+            Backend.DB.DBConnector.update(sql);
+            x++;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
 
+        String qry = "UPDATE patient SET numConsult='" + x + "'WHERE PatientNumber="+u+";";
+        try {
+            Backend.DB.DBConnector.update(qry);
+            JOptionPane.showMessageDialog(null, "This consult has been Logged");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+}
     public static String lastCon(int x, int y, String z) {
         String info = null;
 

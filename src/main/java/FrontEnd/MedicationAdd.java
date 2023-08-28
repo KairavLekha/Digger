@@ -4,8 +4,9 @@
  */
 package FrontEnd;
 
-import Backend.DB.Add;
+import Backend.DB.Patient;
 import Backend.DB.DBConnector;
+import Backend.DB.Medicine;
 import javax.swing.ImageIcon;
 
 /**
@@ -220,7 +221,7 @@ public class MedicationAdd extends javax.swing.JFrame {
         String treatedIllnesses=treatedArea.getText();
         int stock=Integer.parseInt(stockField.getText());
         
-        Add.addMed(name,allergy,sideEffects,treatedIllnesses,stock);
+        Medicine.addMed(name,allergy,sideEffects,treatedIllnesses,stock);
     }//GEN-LAST:event_AddButtonActionPerformed
 
     /**

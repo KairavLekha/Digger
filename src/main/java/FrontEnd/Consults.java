@@ -4,11 +4,10 @@
  */
 package FrontEnd;
 
-import Backend.DB.Add;
-import Backend.DB.ChangeConsult;
+import Backend.DB.Patient;
 import Backend.DB.DBConnector;
-import Backend.DB.Update;
-import Backend.DB.Load;
+import Backend.DB.SelectedOption;
+import Backend.DB.Consult;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -16,16 +15,16 @@ import javax.swing.JOptionPane;
  *
  * @author Kairav
  */
-public class Consult extends javax.swing.JFrame {
+public class Consults extends javax.swing.JFrame {
 
     /**
-     * Creates new form Consult
+     * Creates new form Consults
      */
     public static int id;
     public static int consults;
     public static int newestconsult;
 
-    public Consult() {
+    public Consults() {
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
         this.setIconImage(pic.getImage());
@@ -34,10 +33,10 @@ public class Consult extends javax.swing.JFrame {
 
         //connect to db
         DBConnector.connect();
-        id = Integer.parseInt(Update.downloadSelected("selected"));
-        fullname.setText(Load.loadSinglePatient("Firstname", id) + " " + Load.loadSinglePatient("Surname", id));
-        conditionsArea.setText("Conditions: " + Load.loadSinglePatient("Medical_Conditions", id) + "\nAllergies: " + Load.loadSinglePatient("Allergy", id));
-        consults = Integer.parseInt(Load.loadSinglePatient("numConsult", id));
+        id = Integer.parseInt(SelectedOption.downloadSelected("selected"));
+        fullname.setText(Patient.loadSinglePatient("Firstname", id) + " " + Patient.loadSinglePatient("Surname", id));
+        conditionsArea.setText("Conditions: " + Patient.loadSinglePatient("Medical_Conditions", id) + "\nAllergies: " + Patient.loadSinglePatient("Allergy", id));
+        consults = Integer.parseInt(Patient.loadSinglePatient("numConsult", id));
         newestconsult=consults;
     }
 
@@ -257,21 +256,21 @@ public class Consult extends javax.swing.JFrame {
 //change screen
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
-        Update.clearSelected("selected");
+        SelectedOption.clearSelected();
         new Patients().setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void DiagnosisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiagnosisButtonActionPerformed
         // TODO add your handling code here:
-        Update.uploadSelected("diag", "selectedscreen");
+        SelectedOption.uploadSelected("diag", "selectedscreen");
         new SearchScreen().setVisible(true);
         dispose();
     }//GEN-LAST:event_DiagnosisButtonActionPerformed
 
     private void PerscribeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerscribeButtonActionPerformed
         // TODO add your handling code here:
-        Update.uploadSelected("pers", "selectedscreen");
+        SelectedOption.uploadSelected("pers", "selectedscreen");
         new SearchScreen().setVisible(true);
         dispose();
     }//GEN-LAST:event_PerscribeButtonActionPerformed
@@ -286,7 +285,7 @@ public class Consult extends javax.swing.JFrame {
         String med = medication.getText();
         newestconsult = consults;
 
-        Add.addCon(id, diagnosis, med, consults, date, symptom);
+        Consult.addCon(id, diagnosis, med, consults, date, symptom);
 
     }//GEN-LAST:event_LogconsultButtonActionPerformed
 
@@ -295,10 +294,10 @@ public class Consult extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (consults <=newestconsult) {
             consults++;
-            illnesses.setText(ChangeConsult.nextCon(id, consults, newestconsult, "diagnosis"));
-            medication.setText(ChangeConsult.nextCon(id, consults, newestconsult, "medication"));
-            symptoms.setText(ChangeConsult.nextCon(id, consults, newestconsult, "symptom"));
-            dateField.setText(ChangeConsult.nextCon(id, consults, newestconsult, "date"));
+            illnesses.setText(Backend.DB.Consult.nextCon(id, consults, newestconsult, "diagnosis"));
+            medication.setText(Backend.DB.Consult.nextCon(id, consults, newestconsult, "medication"));
+            symptoms.setText(Backend.DB.Consult.nextCon(id, consults, newestconsult, "symptom"));
+            dateField.setText(Backend.DB.Consult.nextCon(id, consults, newestconsult, "date"));
 
         }else{
             JOptionPane.showMessageDialog(null, "This is the newest consult.Click Okay to log a new one");
@@ -316,10 +315,10 @@ public class Consult extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (consults > 1) {
             consults--;
-            illnesses.setText(ChangeConsult.lastCon(id, consults, "diagnosis"));
-            medication.setText(ChangeConsult.lastCon(id, consults, "medication"));
-            symptoms.setText(ChangeConsult.lastCon(id, consults, "symptom"));
-            dateField.setText(ChangeConsult.lastCon(id, consults, "date"));
+            illnesses.setText(Backend.DB.Consult.lastCon(id, consults, "diagnosis"));
+            medication.setText(Backend.DB.Consult.lastCon(id, consults, "medication"));
+            symptoms.setText(Backend.DB.Consult.lastCon(id, consults, "symptom"));
+            dateField.setText(Backend.DB.Consult.lastCon(id, consults, "date"));
         } else{
             JOptionPane.showMessageDialog(null, "This is the oldest consult.");
             

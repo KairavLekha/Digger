@@ -4,10 +4,11 @@
  */
 package FrontEnd;
 
-import Backend.DB.Load;
+import Backend.DB.Illness;
 import Backend.DB.DBConnector;
-import Backend.DB.Search;
-import Backend.DB.Update;
+import Backend.DB.Medicine;
+import Backend.DB.SelectedScreen;
+import Backend.DB.SelectedOption;
 import javax.swing.ImageIcon;
 
 /**
@@ -26,17 +27,17 @@ public class SearchScreen extends javax.swing.JFrame {
         setSize(526, 365);
         setLocationRelativeTo(null);
         DBConnector.connect();
-        System.out.println(Update.downloadSelected("selectedscreen"));
+        System.out.println(SelectedOption.downloadSelected("selectedscreen"));
         //connect to DB
-        if ("diag".equals(Update.downloadSelected("selectedscreen"))) {
-            String[] illness = Load.loadIllnessList();
+        if ("diag".equals(SelectedOption.downloadSelected("selectedscreen"))) {
+            String[] illness = Illness.loadIllnessList();
             List.setListData(illness);
             Title.setText("Diagnose Patient");
             typeLabel.setText("Illness");
             instructions2.setText("Enter The Symptoms:");
             instructions.setText("Separate each sypmtom by a comma");
-        } else if ("pers".equals(Update.downloadSelected("selectedscreen"))){
-            String[] medication = Load.loadMedicationList();
+        } else if ("pers".equals(SelectedOption.downloadSelected("selectedscreen"))){
+            String[] medication = Medicine.loadMedicationList();
             List.setListData(medication);
 
         }
@@ -145,12 +146,12 @@ public class SearchScreen extends javax.swing.JFrame {
     //search
     private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
         // TODO add your handling code here:
-        if ("diag".equals(Update.downloadSelected("selectedscreen"))) {
-            String[] medication = Search.searchMed(searchField.getText(), "illnessTreated");
-            List.setListData(medication);
-        } else {
-            String[] illness = Search.searchIll(searchField.getText(), "Symptoms");
+        if ("diag".equals(SelectedOption.downloadSelected("selectedscreen"))) {
+            String[] illness = Illness.searchIll(searchField.getText(), "Symptoms");
             List.setListData(illness);
+        } else {
+            String[] medication = Medicine.searchMed(searchField.getText(), "illnessTreated");
+            List.setListData(medication);
         }
 
     }//GEN-LAST:event_searchFieldKeyReleased
@@ -158,7 +159,7 @@ public class SearchScreen extends javax.swing.JFrame {
     //change screen
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
-        new Consult().setVisible(true);
+        new Consults().setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutActionPerformed
 

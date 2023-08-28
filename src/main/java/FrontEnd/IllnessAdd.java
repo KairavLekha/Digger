@@ -4,8 +4,9 @@
  */
 package FrontEnd;
 
-import Backend.DB.Add;
+import Backend.DB.Patient;
 import Backend.DB.DBConnector;
+import Backend.DB.Illness;
 import javax.swing.ImageIcon;
 
 /**
@@ -142,7 +143,7 @@ public class IllnessAdd extends javax.swing.JFrame {
     //change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        new Illness().setVisible(true);
+        new Illnesses().setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
@@ -151,7 +152,7 @@ public class IllnessAdd extends javax.swing.JFrame {
         // TODO add your handling code here:
         String illness = nameField.getText();
         String symptoms = symptomsArea.getText();
-        Add.addIll(illness, symptoms);
+        Illness.addIll(illness, symptoms);
     }//GEN-LAST:event_addButtonActionPerformed
 
     /**

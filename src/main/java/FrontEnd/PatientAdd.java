@@ -4,7 +4,7 @@
  */
 package FrontEnd;
 
-import Backend.DB.Add;
+import Backend.DB.Patient;
 import Backend.DB.DBConnector;
 import javax.swing.ImageIcon;
 
@@ -235,7 +235,7 @@ public class PatientAdd extends javax.swing.JFrame {
         String phoneNumber=numberField.getText();
         String conditions=conditionsArea.getText();
 
-        Add.addPat(firstname, surname, DOB, conditions, phoneNumber, address, allergy);
+        Patient.addPat(firstname, surname, DOB, conditions, phoneNumber, address, allergy);
     }//GEN-LAST:event_addButtonActionPerformed
 
     /**

@@ -4,9 +4,10 @@
  */
 package FrontEnd;
 
-import Backend.DB.Update;
+import Backend.DB.SelectedOption;
 import Backend.DB.DBConnector;
-import Backend.DB.Load;
+import Backend.DB.Illness;
+import Backend.DB.Patient;
 import javax.swing.ImageIcon;
 
 /**
@@ -28,16 +29,16 @@ public class PatientUpdate extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         DBConnector.connect();
-        id = Integer.parseInt(Update.downloadSelected("selected"));
+        id = Integer.parseInt(SelectedOption.downloadSelected("selected"));
         //fills in information on selected patient
 
-        firstnameField.setText(Load.loadSinglePatient("Firstname", id));
-        surnameField.setText(Load.loadSinglePatient("Surname", id));
-        AddressField.setText(Load.loadSinglePatient("Address", id));
-        DOBfield.setText(Load.loadSinglePatient("Date_Of_Birth", id));
-        numberField.setText(Load.loadSinglePatient("Phone_Number", id));
-        allergyArea.setText(Load.loadSinglePatient("Allergy", id));
-        conditionsArea.setText(Load.loadSinglePatient("Medical_Conditions", id));
+        firstnameField.setText(Patient.loadSinglePatient("Firstname", id));
+        surnameField.setText(Patient.loadSinglePatient("Surname", id));
+        AddressField.setText(Patient.loadSinglePatient("Address", id));
+        DOBfield.setText(Patient.loadSinglePatient("Date_Of_Birth", id));
+        numberField.setText(Patient.loadSinglePatient("Phone_Number", id));
+        allergyArea.setText(Patient.loadSinglePatient("Allergy", id));
+        conditionsArea.setText(Patient.loadSinglePatient("Medical_Conditions", id));
 
     }
 
@@ -233,7 +234,7 @@ public class PatientUpdate extends javax.swing.JFrame {
    //change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        Update.clearSelected("selected");
+        SelectedOption.clearSelected();
         new Patients().setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
@@ -247,7 +248,7 @@ public class PatientUpdate extends javax.swing.JFrame {
         String DOB = DOBfield.getText();
         String phoneNumber = numberField.getText();
         String conditions = conditionsArea.getText();
-        Update.updatePatient(firstname, surname, DOB, conditions, phoneNumber, address, allergy, id);
+        Patient.updatePatient(firstname, surname, DOB, conditions, phoneNumber, address, allergy, id);
     }//GEN-LAST:event_editButtonActionPerformed
 
     /**

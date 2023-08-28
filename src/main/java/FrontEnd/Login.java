@@ -160,14 +160,14 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(Screens)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(icon)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(MedicationButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PatientButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IllnessButton)))
+                        .addComponent(IllnessButton))
+                    .addComponent(icon))
                 .addGap(18, 18, 18)
                 .addComponent(instruction)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -195,6 +195,7 @@ public class Login extends javax.swing.JFrame {
                 MedicationButton.setVisible(true);
                 IllnessButton.setVisible(true);
                 incorrectCodeLabel.setVisible(false);
+                confirmButton.setVisible(false);
             } else {
                 incorrectCodeLabel.setVisible(true);
                 PasswordField.setText("");
@@ -211,19 +212,19 @@ public class Login extends javax.swing.JFrame {
     private void PatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientButtonActionPerformed
         // TODO add your handling code here:
         new Patients().setVisible(true);
-        dispose();
+        
     }//GEN-LAST:event_PatientButtonActionPerformed
 
     private void MedicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MedicationButtonActionPerformed
         // TODO add your handling code here:
         new Medication().setVisible(true);
-        dispose();
+        
     }//GEN-LAST:event_MedicationButtonActionPerformed
 
     private void IllnessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IllnessButtonActionPerformed
         // TODO add your handling code here:
-        new Illness().setVisible(true);
-        dispose();
+        new Illnesses().setVisible(true);
+       
     }//GEN-LAST:event_IllnessButtonActionPerformed
 
     /**

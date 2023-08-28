@@ -4,6 +4,7 @@
  */
 package Backend.DB;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -11,34 +12,42 @@ import javax.swing.JOptionPane;
  *
  * @author Kairav
  */
-public class Delete {
-        
-    public static void deleteMed(String x){
-           String sql = "DELETE FROM medication WHERE medicationName ='"+x+"';";
-        try {
-            DBConnector.update(sql);
-             JOptionPane.showMessageDialog(null, x + " has been deleted");
+public class SelectedScreen {
+    public static String downloadSelected(){
+      String sql = "select identifier FROM selectedscreen;";
+      String id = null;
+      //download
+      try {
+          ResultSet rs = DBConnector.read(sql);
+            while (rs.next()) {
+                id = rs.getString("identifier");
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        }   
+        return id;
     }
     
-    public static void deletePat( String w, int x){
-           String sql = "DELETE FROM patient WHERE PatientNumber='"+x+"';";
+    public static void uploadSelected(String x,String y){
+      String sql = "UPDATE selectedscreen SET identifier='"+x+"'WHERE selectedID=1;";
         try {
             DBConnector.update(sql);
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
-           String qry = "DELETE FROM consults WHERE idPatient='"+x+"';";
-        try {
-            DBConnector.update(sql);
-             JOptionPane.showMessageDialog(null, w + " has been deleted");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
+        }   
     }
+    
+    public static void clearSelected(String x){
+      String sql = "UPDATE selectedscreen SET identifier=''WHERE selectedID=1;";
+        try {
+            DBConnector.update(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }   
+    }
+    
+    
 }

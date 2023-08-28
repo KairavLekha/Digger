@@ -5,11 +5,12 @@
 package FrontEnd;
 
 import Backend.DB.DBConnector;
-import Backend.DB.Delete;
+import Backend.DB.Medicine;
 import Backend.Other;
-import Backend.DB.Update;
-import Backend.DB.Load;
-import Backend.DB.Search;
+import Backend.DB.SelectedOption;
+import Backend.DB.Illness;
+import Backend.DB.Patient;
+import Backend.DB.SelectedScreen;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -31,7 +32,7 @@ public class Patients extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         DBConnector.connect();
-        String[] names = Load.loadPatientList();
+        String[] names = Patient.loadPatientList();
         //populates list with patients
         patientList.setListData(names);
     }
@@ -204,7 +205,7 @@ public class Patients extends javax.swing.JFrame {
         // TODO add your handling code here:
         String selected = patientList.getSelectedValue();
         String id = "" + (Other.getId(selected));
-        Update.uploadSelected(id,"selected");
+        SelectedOption.uploadSelected(id,"selected");
         new PatientUpdate().setVisible(true);
 
         dispose();
@@ -220,7 +221,6 @@ public class Patients extends javax.swing.JFrame {
 //change screen
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
-        new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
     private void newPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPatientButtonActionPerformed
@@ -233,7 +233,7 @@ public class Patients extends javax.swing.JFrame {
 //search
     private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
-        String[] names = Search.searchPat(filterInput.getText(), Criteria);
+        String[] names = Patient.searchPat(filterInput.getText(), Criteria);
         patientList.setListData(names);
     }//GEN-LAST:event_filterInputKeyReleased
 
@@ -244,12 +244,12 @@ public class Patients extends javax.swing.JFrame {
         try {
             String selected = patientList.getSelectedValue();
             String id = "" + (Other.getId(selected));
-            Update.uploadSelected(id,"selected");
+            SelectedOption.uploadSelected(id,"selected");
         } catch (java.lang.NullPointerException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Select An option first.");
         }
-        new Consult().setVisible(true);
+        new Consults().setVisible(true);
         dispose();
     }//GEN-LAST:event_viewButtonActionPerformed
 
@@ -259,8 +259,8 @@ public class Patients extends javax.swing.JFrame {
         try {
             String selected =  patientList.getSelectedValue();;
             int id = Other.getId(selected);
-            Delete.deletePat(selected, id);
-            String names[] = Load.loadPatientList();
+            Patient.deletePat(selected, id);
+            String names[] = Patient.loadPatientList();
             patientList.setListData(names);
      
         } catch (java.lang.NullPointerException ex) {

@@ -5,11 +5,11 @@
 package FrontEnd;
 
 import javax.swing.JOptionPane;
-import Backend.DB.Update;
-import Backend.DB.Load;
+import Backend.DB.SelectedOption;
+import Backend.DB.Illness;
 import Backend.DB.DBConnector;
-import Backend.DB.Delete;
-import Backend.DB.Search;
+import Backend.DB.Medicine;
+import Backend.DB.SelectedScreen;
 import javax.swing.ImageIcon;
 
 /**
@@ -31,7 +31,7 @@ public class Medication extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         DBConnector.connect();
-        String[] medication = Load.loadMedicationList();
+        String[] medication = Medicine.loadMedicationList();
 
         //populates the list with medication
         MedicationList.setListData(medication);
@@ -179,7 +179,7 @@ public class Medication extends javax.swing.JFrame {
         if (selected == null) {
             JOptionPane.showMessageDialog(null, "Select An option first.");
         } else {
-            Update.uploadSelected(selected,"selected");
+            SelectedOption.uploadSelected(selected,"selected");
             new MedicationUpdate().setVisible(true);
             dispose();
         }
@@ -189,7 +189,6 @@ public class Medication extends javax.swing.JFrame {
 //change screen
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
-        new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
@@ -203,7 +202,7 @@ public class Medication extends javax.swing.JFrame {
     //search
     private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
-        String[] medication = Search.searchMed(filterInput.getText(), "medicationName");
+        String[] medication = Medicine.searchMed(filterInput.getText(), "medicationName");
         MedicationList.setListData(medication);
 
     }//GEN-LAST:event_filterInputKeyReleased
@@ -216,8 +215,8 @@ public class Medication extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Select An option first.");
         } else {
             JOptionPane.showMessageDialog(rootPane, selected + " has been deleted");
-            Delete.deleteMed(selected);
-            String names[] = Load.loadMedicationList();
+            Medicine.deleteMed(selected);
+            String names[] = Medicine.loadMedicationList();
             MedicationList.setListData(names);
         }
     }//GEN-LAST:event_deleteButtonActionPerformed

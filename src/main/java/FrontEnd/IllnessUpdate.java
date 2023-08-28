@@ -4,9 +4,9 @@
  */
 package FrontEnd;
 
-import Backend.DB.Update;
+import Backend.DB.SelectedOption;
 import Backend.DB.DBConnector;
-import Backend.DB.Load;
+import Backend.DB.Illness;
 import javax.swing.ImageIcon;
 
 /**
@@ -29,11 +29,11 @@ public class IllnessUpdate extends javax.swing.JFrame {
 
         DBConnector.connect();
 
-        id = Update.downloadSelected("selected");
+        id = SelectedOption.downloadSelected("selected");
 
         // fills in information on selected option
-        nameField.setText(Load.loadSingleIllness(id, "Illness"));
-        symptomsArea.setText(Load.loadSingleIllness(id, "Symptoms"));
+        nameField.setText(Illness.loadSingleIllness(id, "Illness"));
+        symptomsArea.setText(Illness.loadSingleIllness(id, "Symptoms"));
 
     }
 
@@ -151,8 +151,8 @@ public class IllnessUpdate extends javax.swing.JFrame {
 //change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        Update.clearSelected("selected");
-        new Illness().setVisible(true);
+        SelectedOption.clearSelected();
+        new Illnesses().setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
@@ -162,7 +162,7 @@ public class IllnessUpdate extends javax.swing.JFrame {
         String illness = nameField.getText();
         String symptoms = symptomsArea.getText();
 
-        Update.updateIllness(illness, symptoms, id);
+        Illness.updateIllness(illness, symptoms, id);
     }//GEN-LAST:event_editButtonActionPerformed
 
     /**

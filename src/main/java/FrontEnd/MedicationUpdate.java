@@ -4,12 +4,10 @@
  */
 package FrontEnd;
 
-import Backend.DB.Update;
+import Backend.DB.SelectedOption;
 import Backend.DB.DBConnector;
-import Backend.DB.Load;
-import java.sql.SQLException;
+import Backend.DB.Medicine;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,14 +29,14 @@ public class MedicationUpdate extends javax.swing.JFrame {
 
         
         DBConnector.connect();
-        id = Update.downloadSelected("selected");
+        id = SelectedOption.downloadSelected("selected");
 
         //fills in information on selected option
-        nameField.setText(Load.loadSingleMedication("medicationName", id));
-        allergyArea.setText(Load.loadSingleMedication("allergens", id));
-        effectsArea.setText(Load.loadSingleMedication("sideEffects", id));
-        treatedArea.setText(Load.loadSingleMedication("illnessTreated", id));
-        stockField.setText(Load.loadSingleMedication("stockRemaining", id));
+        nameField.setText(Medicine.loadSingleMedication("medicationName", id));
+        allergyArea.setText(Medicine.loadSingleMedication("allergens", id));
+        effectsArea.setText(Medicine.loadSingleMedication("sideEffects", id));
+        treatedArea.setText(Medicine.loadSingleMedication("illnessTreated", id));
+        stockField.setText(Medicine.loadSingleMedication("stockRemaining", id));
         
         
     }
@@ -223,7 +221,7 @@ public class MedicationUpdate extends javax.swing.JFrame {
    //change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        Update.clearSelected("selected");
+        SelectedOption.clearSelected();
         new Medication().setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
@@ -237,7 +235,7 @@ public class MedicationUpdate extends javax.swing.JFrame {
     String allergens=allergyArea.getText();
     String treated=treatedArea.getText();
     
-       Update.updateMedication(name, stock, effects, allergens, treated, id);
+       Medicine.updateMedication(name, stock, effects, allergens, treated, id);
     }//GEN-LAST:event_editButtonActionPerformed
 
     /**

@@ -5,9 +5,9 @@
 package FrontEnd;
 
 import Backend.DB.DBConnector;
-import Backend.DB.Update;
-import Backend.DB.Load;
-import Backend.DB.Search;
+import Backend.DB.SelectedOption;
+import Backend.DB.Illness;
+import Backend.DB.SelectedScreen;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -18,12 +18,12 @@ import javax.swing.JOptionPane;
 //ColumnNames
 //Illness 
 //Symptoms
-public class Illness extends javax.swing.JFrame {
+public class Illnesses extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
-    public Illness() {
+    public Illnesses() {
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
             this.setIconImage(pic.getImage());
@@ -32,7 +32,7 @@ public class Illness extends javax.swing.JFrame {
 
         //connect to DB 
         DBConnector.connect();
-        String[] illness=Load.loadIllnessList();
+        String[] illness=Illness.loadIllnessList();
         illnessList.setListData(illness);
     }
 
@@ -165,12 +165,12 @@ public class Illness extends javax.swing.JFrame {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
 
         String selected = illnessList.getSelectedValue();
-        Update.uploadSelected(selected,"selected");
+        SelectedOption.uploadSelected(selected,"selected");
      
         if (selected==null) {  
         JOptionPane.showMessageDialog(null, "Select An option first.");
         }else{
-            Update.uploadSelected(selected,"selected");
+            SelectedOption.uploadSelected(selected,"selected");
             new IllnessUpdate().setVisible(true);
             dispose();
         }
@@ -179,7 +179,6 @@ public class Illness extends javax.swing.JFrame {
 //change screen
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
-        new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
@@ -193,7 +192,7 @@ public class Illness extends javax.swing.JFrame {
 //search
     private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
-        String[] names= Search.searchIll(filterInput.getText(), "Illness");
+        String[] names= Illness.searchIll(filterInput.getText(), "Illness");
         illnessList.setListData(names);
     }//GEN-LAST:event_filterInputKeyReleased
     
