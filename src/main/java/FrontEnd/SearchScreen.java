@@ -7,7 +7,6 @@ package FrontEnd;
 import Backend.DB.Illness;
 import Backend.DB.DBConnector;
 import Backend.DB.Medicine;
-import Backend.DB.SelectedScreen;
 import Backend.DB.SelectedOption;
 import javax.swing.ImageIcon;
 

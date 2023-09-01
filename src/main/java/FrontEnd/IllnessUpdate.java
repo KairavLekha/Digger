@@ -151,7 +151,7 @@ public class IllnessUpdate extends javax.swing.JFrame {
 //change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        SelectedOption.clearSelected();
+        
         new Illnesses().setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed

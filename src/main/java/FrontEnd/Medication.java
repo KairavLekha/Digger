@@ -6,10 +6,8 @@ package FrontEnd;
 
 import javax.swing.JOptionPane;
 import Backend.DB.SelectedOption;
-import Backend.DB.Illness;
 import Backend.DB.DBConnector;
 import Backend.DB.Medicine;
-import Backend.DB.SelectedScreen;
 import javax.swing.ImageIcon;
 
 /**
@@ -179,7 +177,7 @@ public class Medication extends javax.swing.JFrame {
         if (selected == null) {
             JOptionPane.showMessageDialog(null, "Select An option first.");
         } else {
-            SelectedOption.uploadSelected(selected,"selected");
+            SelectedOption.uploadSelected(selected);
             new MedicationUpdate().setVisible(true);
             dispose();
         }

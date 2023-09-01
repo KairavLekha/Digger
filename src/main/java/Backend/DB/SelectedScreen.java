@@ -29,7 +29,7 @@ public class SelectedScreen {
         return id;
     }
     
-    public static void uploadSelected(String x,String y){
+    public static void uploadSelected(String x){
       String sql = "UPDATE selectedscreen SET identifier='"+x+"'WHERE selectedID=1;";
         try {
             DBConnector.update(sql);
@@ -39,15 +39,6 @@ public class SelectedScreen {
         }   
     }
     
-    public static void clearSelected(String x){
-      String sql = "UPDATE selectedscreen SET identifier=''WHERE selectedID=1;";
-        try {
-            DBConnector.update(sql);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }   
-    }
     
     
 }

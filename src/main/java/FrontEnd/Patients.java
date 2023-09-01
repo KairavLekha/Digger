@@ -5,12 +5,9 @@
 package FrontEnd;
 
 import Backend.DB.DBConnector;
-import Backend.DB.Medicine;
 import Backend.Other;
 import Backend.DB.SelectedOption;
-import Backend.DB.Illness;
 import Backend.DB.Patient;
-import Backend.DB.SelectedScreen;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -205,7 +202,7 @@ public class Patients extends javax.swing.JFrame {
         // TODO add your handling code here:
         String selected = patientList.getSelectedValue();
         String id = "" + (Other.getId(selected));
-        SelectedOption.uploadSelected(id,"selected");
+        SelectedOption.uploadSelected(id);
         new PatientUpdate().setVisible(true);
 
         dispose();
@@ -244,7 +241,7 @@ public class Patients extends javax.swing.JFrame {
         try {
             String selected = patientList.getSelectedValue();
             String id = "" + (Other.getId(selected));
-            SelectedOption.uploadSelected(id,"selected");
+            SelectedOption.uploadSelected(id);
         } catch (java.lang.NullPointerException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Select An option first.");

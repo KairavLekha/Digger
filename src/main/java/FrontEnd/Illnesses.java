@@ -7,7 +7,6 @@ package FrontEnd;
 import Backend.DB.DBConnector;
 import Backend.DB.SelectedOption;
 import Backend.DB.Illness;
-import Backend.DB.SelectedScreen;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -165,12 +164,12 @@ public class Illnesses extends javax.swing.JFrame {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
 
         String selected = illnessList.getSelectedValue();
-        SelectedOption.uploadSelected(selected,"selected");
+        SelectedOption.uploadSelected(selected);
      
         if (selected==null) {  
         JOptionPane.showMessageDialog(null, "Select An option first.");
         }else{
-            SelectedOption.uploadSelected(selected,"selected");
+            SelectedOption.uploadSelected(selected);
             new IllnessUpdate().setVisible(true);
             dispose();
         }

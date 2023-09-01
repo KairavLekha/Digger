@@ -8,6 +8,7 @@ import Backend.DB.Patient;
 import Backend.DB.DBConnector;
 import Backend.DB.SelectedOption;
 import Backend.DB.Consult;
+import Backend.DB.SelectedScreen;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -256,21 +257,20 @@ public class Consults extends javax.swing.JFrame {
 //change screen
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
-        SelectedOption.clearSelected();
         new Patients().setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void DiagnosisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiagnosisButtonActionPerformed
         // TODO add your handling code here:
-        SelectedOption.uploadSelected("diag", "selectedscreen");
+        SelectedScreen.uploadSelected("diag");
         new SearchScreen().setVisible(true);
         dispose();
     }//GEN-LAST:event_DiagnosisButtonActionPerformed
 
     private void PerscribeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerscribeButtonActionPerformed
         // TODO add your handling code here:
-        SelectedOption.uploadSelected("pers", "selectedscreen");
+        SelectedScreen.uploadSelected("pers");
         new SearchScreen().setVisible(true);
         dispose();
     }//GEN-LAST:event_PerscribeButtonActionPerformed

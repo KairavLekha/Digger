@@ -6,7 +6,6 @@ package FrontEnd;
 
 import Backend.DB.SelectedOption;
 import Backend.DB.DBConnector;
-import Backend.DB.Illness;
 import Backend.DB.Patient;
 import javax.swing.ImageIcon;
 
@@ -234,7 +233,6 @@ public class PatientUpdate extends javax.swing.JFrame {
    //change screen
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        SelectedOption.clearSelected();
         new Patients().setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
