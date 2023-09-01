@@ -22,15 +22,15 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
         this.setIconImage(pic.getImage());
-
+        setSize(526, 365);
+        setLocationRelativeTo(null);
         incorrectCodeLabel.setVisible(false);
         Screens.setVisible(false);
         PatientButton.setVisible(false);
         MedicationButton.setVisible(false);
         IllnessButton.setVisible(false);
         logoutButton.setVisible(false);
-        setSize(526, 365);
-        setLocationRelativeTo(null);
+
     }
 
     /**
@@ -232,19 +232,19 @@ public class Login extends javax.swing.JFrame {
     private void PatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientButtonActionPerformed
         // TODO add your handling code here:
         new Patients().setVisible(true);
-        
+
     }//GEN-LAST:event_PatientButtonActionPerformed
 
     private void MedicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MedicationButtonActionPerformed
         // TODO add your handling code here:
         new Medication().setVisible(true);
-        
+
     }//GEN-LAST:event_MedicationButtonActionPerformed
 
     private void IllnessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IllnessButtonActionPerformed
         // TODO add your handling code here:
         new Illnesses().setVisible(true);
-       
+
     }//GEN-LAST:event_IllnessButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
