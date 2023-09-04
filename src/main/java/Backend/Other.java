@@ -9,8 +9,7 @@ package Backend;
  * @author Kairav
  */
 public class Other {
-    
-    
+
     public static String criteria(String x) {
         if ("Firstname".equals(x)) {
             x = "Surname";
@@ -28,19 +27,12 @@ public class Other {
     }
 
     public static int getId(String x) {
-        int id = 0;
-        int i=0;
-        String[] arrOfStr = x.split(":", 0);
-        for (String a : arrOfStr) {
-            i++;
-            if (i == 2) {
-                id = Integer.parseInt(a);
-            }
-        }
+        String[] patientinfo = x.split(":", 0);
+        int id = Integer.parseInt(patientinfo[1]);
         return id;
     }
-    
-    public static boolean login(String x){
-        return x.equalsIgnoreCase("4807");  
+
+    public static boolean login(String x) {
+        return x.equalsIgnoreCase("4807");
     }
 }
