@@ -23,7 +23,7 @@ public class SearchScreen extends javax.swing.JFrame {
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
         this.setIconImage(pic.getImage());
-        setSize(526, 365);
+        setSize(600,440);
         setLocationRelativeTo(null);
         DBConnector.connect();
         System.out.println(SelectedOption.downloadSelected("selectedscreen"));
