@@ -50,33 +50,30 @@ public class PatientUpdate extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        titleLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
-        firstnameField = new javax.swing.JTextField();
-        DOBfield = new javax.swing.JTextField();
-        numberField = new javax.swing.JTextField();
-        nameLabel = new javax.swing.JLabel();
-        dateLabel = new javax.swing.JLabel();
-        addressLabel = new javax.swing.JLabel();
-        numberLabel = new javax.swing.JLabel();
-        conditionsLabel = new javax.swing.JLabel();
-        SubtitleLabel = new javax.swing.JLabel();
         editButton = new javax.swing.JButton();
+        conditionsLabel = new javax.swing.JLabel();
         surnameLabel = new javax.swing.JLabel();
+        firstnameField = new javax.swing.JTextField();
         surnameField = new javax.swing.JTextField();
+        DOBfield = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         AddressField = new javax.swing.JTextPane();
+        numberField = new javax.swing.JTextField();
+        nameLabel = new javax.swing.JLabel();
         AllergyLabel = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         allergyArea = new javax.swing.JTextArea();
+        addressLabel = new javax.swing.JLabel();
+        numberLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         conditionsArea = new javax.swing.JTextArea();
+        SubtitleLabel = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-
-        titleLabel.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        titleLabel.setText("Doctor Information Terminal");
 
         backButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Kairav\\OneDrive\\Pictures\\logoutIcon.png")); // NOI18N
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -85,33 +82,7 @@ public class PatientUpdate extends javax.swing.JFrame {
             }
         });
 
-        firstnameField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        DOBfield.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        numberField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        nameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        nameLabel.setText("Name:");
-
-        dateLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        dateLabel.setText("Date Of Birth:");
-
-        addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addressLabel.setText("Address:");
-
-        numberLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        numberLabel.setText("Phone Number:");
-
-        conditionsLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        conditionsLabel.setText("Medical Conditions:");
-
-        SubtitleLabel.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        SubtitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SubtitleLabel.setText("Patient Information");
-        SubtitleLabel.setOpaque(true);
-
-        editButton.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
+        editButton.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         editButton.setText("Update Information ");
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,23 +90,52 @@ public class PatientUpdate extends javax.swing.JFrame {
             }
         });
 
-        surnameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        conditionsLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        conditionsLabel.setText("Medical Conditions:");
+
+        surnameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         surnameLabel.setText("Surname:");
 
-        surnameField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        firstnameField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        surnameField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        DOBfield.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jScrollPane4.setViewportView(AddressField);
 
-        AllergyLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        numberField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        nameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        nameLabel.setText("Name:");
+
+        AllergyLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         AllergyLabel.setText("Allergies:");
+
+        dateLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dateLabel.setText("Date Of Birth:");
 
         allergyArea.setColumns(20);
         allergyArea.setRows(5);
         jScrollPane1.setViewportView(allergyArea);
 
+        addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addressLabel.setText("Address:");
+
+        numberLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        numberLabel.setText("Phone Number:");
+
         conditionsArea.setColumns(20);
         conditionsArea.setRows(5);
         jScrollPane2.setViewportView(conditionsArea);
+
+        SubtitleLabel.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        SubtitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SubtitleLabel.setText("Patient Information");
+        SubtitleLabel.setOpaque(true);
+
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 3, 30)); // NOI18N
+        titleLabel.setText("Doctor Information Terminal");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,88 +144,89 @@ public class PatientUpdate extends javax.swing.JFrame {
             .addComponent(SubtitleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(titleLabel)
-                        .addGap(90, 90, 90))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(backButton)
-                                .addGap(97, 97, 97)
-                                .addComponent(editButton))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(nameLabel)
-                                            .addGap(21, 21, 21))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(dateLabel)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(DOBfield, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(numberLabel))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(firstnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(60, 60, 60)
-                                            .addComponent(surnameLabel))
-                                        .addComponent(AllergyLabel)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(conditionsLabel)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(52, 52, 52)
-                                    .addComponent(addressLabel))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(33, Short.MAX_VALUE))))
+                .addComponent(backButton)
+                .addGap(97, 97, 97)
+                .addComponent(editButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(83, Short.MAX_VALUE)
+                .addComponent(titleLabel)
+                .addGap(58, 58, 58))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(nameLabel)
+                            .addGap(21, 21, 21))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(addressLabel)
+                                .addComponent(dateLabel)
+                                .addComponent(conditionsLabel))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(DOBfield, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(numberLabel))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(firstnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(60, 60, 60)
+                            .addComponent(surnameLabel))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(AllergyLabel))
+                        .addComponent(jScrollPane2))
+                    .addGap(18, 18, 18)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(titleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SubtitleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel)
-                    .addComponent(firstnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(surnameLabel)
-                    .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateLabel)
-                    .addComponent(DOBfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AllergyLabel)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addressLabel)))
-                    .addComponent(conditionsLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(editButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(86, 86, 86)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(nameLabel)
+                        .addComponent(firstnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(surnameLabel)
+                        .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(dateLabel)
+                        .addComponent(DOBfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(numberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(addressLabel)
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(AllergyLabel))
+                            .addGap(26, 26, 26)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(conditionsLabel)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(87, Short.MAX_VALUE)))
         );
 
         pack();
