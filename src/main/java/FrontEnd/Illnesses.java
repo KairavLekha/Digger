@@ -24,17 +24,16 @@ public class Illnesses extends javax.swing.JFrame {
      */
     public Illnesses() {
         initComponents();
+        setSize(600,440);
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
-            this.setIconImage(pic.getImage());
-        setSize(526, 365);
+        this.setIconImage(pic.getImage());
         setLocationRelativeTo(null);
 
         //connect to DB 
         DBConnector.connect();
-        String[] illness=Illness.loadIllnessList();
+        String[] illness = Illness.loadIllnessList();
         illnessList.setListData(illness);
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,10 +60,10 @@ public class Illnesses extends javax.swing.JFrame {
         setUndecorated(true);
         setSize(new java.awt.Dimension(526, 350));
 
-        titleLabel.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 3, 30)); // NOI18N
         titleLabel.setText("Doctor Information Terminal");
 
-        editButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        editButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         editButton.setText("Update/View");
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,14 +71,19 @@ public class Illnesses extends javax.swing.JFrame {
             }
         });
 
-        listLabel.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        listLabel.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         listLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         listLabel.setText("List Of Illnesses");
 
-        illnessList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        illnessList.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         PatientList.setViewportView(illnessList);
 
-        filterInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        filterInput.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        filterInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterInputActionPerformed(evt);
+            }
+        });
         filterInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 filterInputKeyReleased(evt);
@@ -93,7 +97,7 @@ public class Illnesses extends javax.swing.JFrame {
             }
         });
 
-        newIllnessButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        newIllnessButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         newIllnessButton.setText("Add Illness");
         newIllnessButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,7 +105,7 @@ public class Illnesses extends javax.swing.JFrame {
             }
         });
 
-        instruction.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        instruction.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         instruction.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         instruction.setText("Search an Illness");
 
@@ -109,52 +113,55 @@ public class Illnesses extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 105, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(86, 86, 86)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(editButton)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(newIllnessButton))
-                                .addComponent(PatientList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(titleLabel)
+                        .addGap(81, 81, 81))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(filterInput, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                            .addComponent(instruction, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                            .addComponent(listLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(185, 185, 185))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(listLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(filterInput, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(instruction, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(titleLabel)))
-                .addContainerGap(110, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(PatientList, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(editButton)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(newIllnessButton)))
+                                .addGap(133, 133, 133)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(titleLabel)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(instruction, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(listLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(instruction, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(listLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(PatientList, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PatientList, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(editButton)
-                            .addComponent(newIllnessButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                            .addComponent(newIllnessButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(editButton))
+                        .addContainerGap(60, Short.MAX_VALUE))))
         );
 
         pack();
@@ -165,10 +172,10 @@ public class Illnesses extends javax.swing.JFrame {
 
         String selected = illnessList.getSelectedValue();
         SelectedOption.uploadSelected(selected);
-     
-        if (selected==null) {  
-        JOptionPane.showMessageDialog(null, "Select An option first.");
-        }else{
+
+        if (selected == null) {
+            JOptionPane.showMessageDialog(null, "Select An option first.");
+        } else {
             SelectedOption.uploadSelected(selected);
             new IllnessUpdate().setVisible(true);
             dispose();
@@ -191,15 +198,17 @@ public class Illnesses extends javax.swing.JFrame {
 //search
     private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
         // TODO add your handling code here:
-        String[] names= Illness.searchIll(filterInput.getText(), "Illness");
+        String[] names = Illness.searchIll(filterInput.getText(), "Illness");
         illnessList.setListData(names);
     }//GEN-LAST:event_filterInputKeyReleased
-    
+
+    private void filterInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_filterInputActionPerformed
 
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane PatientList;

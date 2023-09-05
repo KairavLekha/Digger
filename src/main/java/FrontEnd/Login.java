@@ -20,9 +20,9 @@ public class Login extends javax.swing.JFrame {
     public Login() {
 
         initComponents();
+        setSize(600,440);
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
         this.setIconImage(pic.getImage());
-        setSize(526, 365);
         setLocationRelativeTo(null);
         incorrectCodeLabel.setVisible(false);
         Screens.setVisible(false);
@@ -43,6 +43,8 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
         Title = new javax.swing.JLabel();
         PasswordField = new javax.swing.JPasswordField();
         confirmButton = new javax.swing.JButton();
@@ -56,35 +58,43 @@ public class Login extends javax.swing.JFrame {
         IllnessButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
 
+        jScrollPane1.setViewportView(jEditorPane1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Title.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        Title.setFont(new java.awt.Font("Segoe UI", 3, 30)); // NOI18N
         Title.setText("Doctor Information Terminal");
+        getContentPane().add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 13, -1, -1));
 
-        PasswordField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        PasswordField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         PasswordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(PasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 277, 172, -1));
 
-        confirmButton.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        confirmButton.setFont(new java.awt.Font("Segoe UI", 3, 20)); // NOI18N
         confirmButton.setText("Confirm");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(confirmButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 352, 164, -1));
 
-        Screens.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        Screens.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         Screens.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Screens.setText("Screens:");
         Screens.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(Screens, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 67, 104, -1));
 
-        incorrectCodeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        incorrectCodeLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         incorrectCodeLabel.setForeground(new java.awt.Color(153, 0, 0));
         incorrectCodeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         incorrectCodeLabel.setText("Invalid Code");
         incorrectCodeLabel.setToolTipText("");
         incorrectCodeLabel.setInheritsPopupMenu(false);
         incorrectCodeLabel.setVerifyInputWhenFocusTarget(false);
+        getContentPane().add(incorrectCodeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 312, 172, -1));
 
         exitButton.setBackground(new java.awt.Color(255, 0, 0));
         exitButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -95,35 +105,44 @@ public class Login extends javax.swing.JFrame {
                 exitButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(544, 11, -1, 50));
 
-        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pulseNew.png"))); // NOI18N
+        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pulse.png"))); // NOI18N
         icon.setText("jLabel2");
+        getContentPane().add(icon, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 67, 265, -1));
 
+        MedicationButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         MedicationButton.setText("Medication");
         MedicationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MedicationButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(MedicationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 110, -1, -1));
 
-        instruction.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        instruction.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         instruction.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         instruction.setText("Enter Your Code");
         instruction.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(instruction, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 233, 265, -1));
 
+        PatientButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         PatientButton.setText("Patients");
         PatientButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PatientButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(PatientButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 144, 104, -1));
 
+        IllnessButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         IllnessButton.setText("Illness");
         IllnessButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IllnessButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(IllnessButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 178, 104, -1));
 
         logoutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoutIcon.png"))); // NOI18N
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
@@ -131,72 +150,7 @@ public class Login extends javax.swing.JFrame {
                 logoutButtonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(Title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(exitButton)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(MedicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Screens, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PatientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(IllnessButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(180, 180, 180))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(incorrectCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(instruction, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Title)
-                    .addComponent(exitButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(Screens)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(MedicationButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(PatientButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(IllnessButton))
-                            .addComponent(icon))
-                        .addGap(18, 18, 18)
-                        .addComponent(instruction)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(incorrectCodeLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
+        getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(544, 372, 45, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -304,6 +258,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel icon;
     private javax.swing.JLabel incorrectCodeLabel;
     private javax.swing.JLabel instruction;
+    private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logoutButton;
     // End of variables declaration//GEN-END:variables
 }
