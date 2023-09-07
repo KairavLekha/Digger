@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  * @author Kairav
  */
 public class SelectedOption {
-    public static String downloadSelected(String x){
+    public static String downloadSelected(){
       String sql = "select identifier FROM selected;";
       String id = null;
       //download
@@ -29,8 +29,8 @@ public class SelectedOption {
         return id;
     }
     
-    public static void uploadSelected(String x){
-      String sql = "UPDATE selected SET identifier='"+x+"'WHERE selectedID=1;";
+    public static void uploadSelected(String option){
+      String sql = "UPDATE selected SET identifier='"+option+"'WHERE selectedID=1;";
         try {
             DBConnector.update(sql);
         } catch (SQLException ex) {

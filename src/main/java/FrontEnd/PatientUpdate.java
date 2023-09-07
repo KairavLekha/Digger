@@ -28,7 +28,7 @@ public class PatientUpdate extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         DBConnector.connect();
-        id = Integer.parseInt(SelectedOption.downloadSelected("selected"));
+        id = Integer.parseInt(SelectedOption.downloadSelected());
         //fills in information on selected patient
 
         firstnameField.setText(Patient.loadSinglePatient("Firstname", id));

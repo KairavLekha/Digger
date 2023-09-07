@@ -29,7 +29,7 @@ public class IllnessUpdate extends javax.swing.JFrame {
 
         DBConnector.connect();
 
-        id = SelectedOption.downloadSelected("selected");
+        id = SelectedOption.downloadSelected();
 
         // fills in information on selected option
         nameField.setText(Illness.loadSingleIllness(id, "Illness"));

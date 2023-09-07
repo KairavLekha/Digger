@@ -4,7 +4,6 @@
  */
 package FrontEnd;
 
-import Backend.DB.Patient;
 import Backend.DB.DBConnector;
 import Backend.DB.Medicine;
 import javax.swing.ImageIcon;

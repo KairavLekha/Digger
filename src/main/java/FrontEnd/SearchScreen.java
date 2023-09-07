@@ -7,7 +7,7 @@ package FrontEnd;
 import Backend.DB.Illness;
 import Backend.DB.DBConnector;
 import Backend.DB.Medicine;
-import Backend.DB.SelectedOption;
+import Backend.DB.SelectedScreen;
 import javax.swing.ImageIcon;
 
 /**
@@ -26,16 +26,16 @@ public class SearchScreen extends javax.swing.JFrame {
         setSize(600,440);
         setLocationRelativeTo(null);
         DBConnector.connect();
-        System.out.println(SelectedOption.downloadSelected("selectedscreen"));
+        
         //connect to DB
-        if ("diag".equals(SelectedOption.downloadSelected("selectedscreen"))) {
+        if ("diag".equals(SelectedScreen.downloadSelected())) {
             String[] illness = Illness.loadIllnessList();
             List.setListData(illness);
             Title.setText("Diagnose Patient");
             typeLabel.setText("Illness");
             instructions2.setText("Enter The Symptoms:");
             instructions.setText("Separate each sypmtom by a comma");
-        } else if ("pers".equals(SelectedOption.downloadSelected("selectedscreen"))){
+        } else if ("pers".equals(SelectedScreen.downloadSelected())){
             String[] medication = Medicine.loadMedicationList();
             List.setListData(medication);
 
@@ -148,7 +148,7 @@ public class SearchScreen extends javax.swing.JFrame {
     //search
     private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
         // TODO add your handling code here:
-        if ("diag".equals(SelectedOption.downloadSelected("selectedscreen"))) {
+        if ("diag".equals(SelectedScreen.downloadSelected())) {
             String[] illness = Illness.searchIll(searchField.getText(), "Symptoms");
             List.setListData(illness);
         } else {

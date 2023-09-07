@@ -14,14 +14,14 @@ import javax.swing.JOptionPane;
  */
 public class Consult {
 
-    public static String nextCon(int u, int x, int y, String z) {
+    public static String nextCon(int id, int currentCon, int newCon, String column) {
         String info = null;
-        if (x <= y) {
-            String sql = "SELECT diagnosis, medication, date, symptom FROM consults WHERE patientConsult='" + x + "' AND idPatient='" + u + " ';";
+        if (currentCon <= newCon) {
+            String sql = "SELECT diagnosis, medication, date, symptom FROM consults WHERE patientConsult='" + currentCon + "' AND idPatient='" + id + " ';";
             try {
                 ResultSet rs = DBConnector.read(sql);
                 while (rs.next()) {
-                    info = rs.getString(z);
+                    info = rs.getString(column);
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -34,42 +34,15 @@ public class Consult {
         }
         return info;
     }
-    public static void addCon(int u,String v, String w, int x, String y, String z) {
-       String sql = "INSERT INTO consults (idPatient, diagnosis, medication, patientConsult, date, symptom) VALUES ('" + u + "','" + v + "','" + w + "','" + x + "','" + y + "','" + z + "');";
-        try {
-            Backend.DB.DBConnector.update(sql);
-            x++;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
 
-        String qry = "UPDATE patient SET numConsult='" + x + "'WHERE PatientNumber="+u+";";
-        try {
-            Backend.DB.DBConnector.update(qry);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
-        int a =(Integer.parseInt(Medicine.loadSingleMedication("stockRemaining", w))-1);
-        String qry1 = "UPDATE medication SET stockRemaining='" +a + "'WHERE medicationName LIKE '%" + w + "%'";
-        try {
-            Backend.DB.DBConnector.update(qry1);
-            JOptionPane.showMessageDialog(null, "This consult has been Logged");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
-        }
-        
-}
-    public static String lastCon(int x, int y, String z) {
+    public static String lastCon(int id, int currentCon, String column) {
         String info = null;
 
-        String sql = "SELECT diagnosis, medication, date, symptom FROM consults WHERE patientConsult='" + y + "'AND idPatient='" + x + " ';";
+        String sql = "SELECT diagnosis, medication, date, symptom FROM consults WHERE patientConsult='" + currentCon + "'AND idPatient='" + id + " ';";
         try {
             ResultSet rs = DBConnector.read(sql);
             while (rs.next()) {
-                info = rs.getString(z);
+                info = rs.getString(column);
 
             }
         } catch (SQLException ex) {
@@ -79,4 +52,36 @@ public class Consult {
 
         return info;
     }
+
+    public static void addCon(int id, String illness, String med, int currentCon, String date, String symptoms) {
+        String sql = "INSERT INTO consults (idPatient, diagnosis, medication, patientConsult, date, symptom) VALUES ('" + id + "','" + illness + "','" + med + "','" + currentCon + "','" + date + "','" + symptoms + "');";
+        try {
+            Backend.DB.DBConnector.update(sql);
+            currentCon++;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+
+        String qry = "UPDATE patient SET numConsult='" + currentCon + "'WHERE PatientNumber=" + id + ";";
+        try {
+            Backend.DB.DBConnector.update(qry);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+        
+        int stock = (Integer.parseInt(Medicine.loadSingleMedication("stockRemaining", med)) - 1);
+        
+        String qry2 = "UPDATE medication SET stockRemaining='" + stock + "'WHERE medicationName LIKE '%" + med + "%'";
+        try {
+            DBConnector.update(qry2);
+            JOptionPane.showMessageDialog(null, "This consult has been Logged");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        }
+
+    }
+
 }

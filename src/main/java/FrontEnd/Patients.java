@@ -5,7 +5,6 @@
 package FrontEnd;
 
 import Backend.DB.DBConnector;
-import Backend.Password;
 import Backend.DB.SelectedOption;
 import Backend.DB.Patient;
 import javax.swing.ImageIcon;

@@ -6,7 +6,6 @@ package FrontEnd;
 
 import Backend.DB.Patient;
 import Backend.DB.DBConnector;
-import Backend.DB.SelectedOption;
 import Backend.DB.Consult;
 import Backend.DB.SelectedScreen;
 import javax.swing.ImageIcon;
@@ -34,7 +33,7 @@ public class Consults extends javax.swing.JFrame {
 
         //connect to db
         DBConnector.connect();
-        id = Integer.parseInt(SelectedOption.downloadSelected("selected"));
+        id = Integer.parseInt(SelectedScreen.downloadSelected());
         fullname.setText(Patient.loadSinglePatient("Firstname", id) + " " + Patient.loadSinglePatient("Surname", id));
         conditionsArea.setText("Conditions: " + Patient.loadSinglePatient("Medical_Conditions", id) + "\nAllergies: " + Patient.loadSinglePatient("Allergy", id));
         consults = Integer.parseInt(Patient.loadSinglePatient("numConsult", id));
@@ -306,10 +305,10 @@ public class Consults extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (consults <=newestconsult) {
             consults++;
-            illnesses.setText(Backend.DB.Consult.nextCon(id, consults, newestconsult, "diagnosis"));
-            medication.setText(Backend.DB.Consult.nextCon(id, consults, newestconsult, "medication"));
-            symptoms.setText(Backend.DB.Consult.nextCon(id, consults, newestconsult, "symptom"));
-            dateField.setText(Backend.DB.Consult.nextCon(id, consults, newestconsult, "date"));
+            illnesses.setText(Consult.nextCon(id, consults, newestconsult, "diagnosis"));
+            medication.setText(Consult.nextCon(id, consults, newestconsult, "medication"));
+            symptoms.setText(Consult.nextCon(id, consults, newestconsult, "symptom"));
+            dateField.setText(Consult.nextCon(id, consults, newestconsult, "date"));
 
         }else{
             JOptionPane.showMessageDialog(null, "This is the newest consult.Click Okay to log a new one");
@@ -327,10 +326,10 @@ public class Consults extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (consults > 1) {
             consults--;
-            illnesses.setText(Backend.DB.Consult.lastCon(id, consults, "diagnosis"));
-            medication.setText(Backend.DB.Consult.lastCon(id, consults, "medication"));
-            symptoms.setText(Backend.DB.Consult.lastCon(id, consults, "symptom"));
-            dateField.setText(Backend.DB.Consult.lastCon(id, consults, "date"));
+            illnesses.setText(Consult.lastCon(id, consults, "diagnosis"));
+            medication.setText(Consult.lastCon(id, consults, "medication"));
+            symptoms.setText(Consult.lastCon(id, consults, "symptom"));
+            dateField.setText(Consult.lastCon(id, consults, "date"));
         } else{
             JOptionPane.showMessageDialog(null, "This is the oldest consult.");
             
