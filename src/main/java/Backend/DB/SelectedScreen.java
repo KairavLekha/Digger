@@ -29,8 +29,8 @@ public class SelectedScreen {
         return id;
     }
     
-    public static void uploadSelected(String x){
-      String sql = "UPDATE selectedscreen SET identifier='"+x+"'WHERE selectedID=1;";
+    public static void uploadSelected(String screen){
+      String sql = "UPDATE selectedscreen SET identifier='"+screen+"'WHERE selectedID=1;";
         try {
             DBConnector.update(sql);
         } catch (SQLException ex) {

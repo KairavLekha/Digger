@@ -3,8 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package FrontEnd;
-
-import Backend.Other;
+import Backend.Password;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -162,7 +161,7 @@ public class Login extends javax.swing.JFrame {
         if (PasswordField.getText() == null) {
             JOptionPane.showMessageDialog(null, "Enter A Code Then Press Confirm");
         } else {
-            if (Other.login(PasswordField.getText()) == true) {
+            if (Password.login(PasswordField.getText()) == true) {
                 Screens.setVisible(true);
                 PatientButton.setVisible(true);
                 MedicationButton.setVisible(true);

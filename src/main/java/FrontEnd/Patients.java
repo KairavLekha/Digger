@@ -5,7 +5,7 @@
 package FrontEnd;
 
 import Backend.DB.DBConnector;
-import Backend.Other;
+import Backend.Password;
 import Backend.DB.SelectedOption;
 import Backend.DB.Patient;
 import javax.swing.ImageIcon;
@@ -214,7 +214,7 @@ public class Patients extends javax.swing.JFrame {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
         String selected = patientList.getSelectedValue();
-        String id = "" + (Other.getId(selected));
+        String id = "" + (Patient.getId(selected));
         SelectedOption.uploadSelected(id);
         new PatientUpdate().setVisible(true);
 
@@ -224,8 +224,8 @@ public class Patients extends javax.swing.JFrame {
     private void criteriaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criteriaButtonActionPerformed
         // TODO add your handling code here:
 
-        Criteria = Other.criteria(Criteria);
-        instructionLabel.setText("Search Criteria: " + Other.criteriaOut(Criteria));
+        Criteria = Patient.criteria(Criteria);
+        instructionLabel.setText("Search Criteria: " + Patient.criteriaOut(Criteria));
 
     }//GEN-LAST:event_criteriaButtonActionPerformed
 //change screen
@@ -253,7 +253,7 @@ public class Patients extends javax.swing.JFrame {
         
         try {
             String selected = patientList.getSelectedValue();
-            String id = "" + (Other.getId(selected));
+            String id = "" + (Patient.getId(selected));
             SelectedOption.uploadSelected(id);
         } catch (java.lang.NullPointerException ex) {
             ex.printStackTrace();
@@ -268,7 +268,7 @@ public class Patients extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             String selected =  patientList.getSelectedValue();;
-            int id = Other.getId(selected);
+            int id = Patient.getId(selected);
             Patient.deletePat(selected, id);
             String names[] = Patient.loadPatientList();
             patientList.setListData(names);
