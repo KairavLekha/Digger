@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
  */
 public class Illness {
 
-    public static void updateIllness(String x, String y, String z) {
-        String sql = "UPDATE illnesses SET Illness='" + x + "',Symptoms='" + y + "' WHERE Illness='" + z + "';";
+    public static void updateIllness(String illName, String symp, String input) {
+        String sql = "UPDATE illnesses SET Illness='" + illName + "',Symptoms='" + symp + "' WHERE Illness='" + input + "';";
         try {
             DBConnector.update(sql);
             JOptionPane.showMessageDialog(null, "Information Has Been Updated");
@@ -25,13 +25,13 @@ public class Illness {
         }
     }
 
-    public static String loadSingleIllness(String x, String y) {
-        String sql = "select Illness,Symptoms FROM illnesses WHERE Illness='" + x + "';";
+    public static String loadSingleIllness(String illName, String column) {
+        String sql = "select Illness,Symptoms FROM illnesses WHERE Illness='" + illName + "';";
         String info = null;
         try {
             ResultSet rs = DBConnector.read(sql);
             while (rs.next()) {
-                info = rs.getString(y);
+                info = rs.getString(column);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -58,12 +58,12 @@ public class Illness {
         return illness;
     }
 
-    public static void addIll(String x, String y) {
+    public static void addIll(String illName, String symp) {
 
-        String sql = "INSERT INTO illnesses (Illness, Symptoms) VALUES ('" + x + "','" + y + "');";
+        String sql = "INSERT INTO illnesses (Illness, Symptoms) VALUES ('" + illName + "','" + symp + "');";
         try {
             Backend.DB.DBConnector.update(sql);
-            JOptionPane.showMessageDialog(null, x + " has been added");
+            JOptionPane.showMessageDialog(null, illName + " has been added");
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
@@ -71,8 +71,8 @@ public class Illness {
 
     }
 
-    public static String[] searchIll(String x, String y) {
-        String sql = "SELECT Illness FROM illnesses WHERE " + y + " LIKE '%" + x + "%'  ORDER BY idIllnesses";
+    public static String[] searchIll(String input, String crit) {
+        String sql = "SELECT Illness FROM illnesses WHERE " + crit + " LIKE '%" + input + "%'  ORDER BY idIllnesses";
         String[] illness = new String[10000];
 
         try {

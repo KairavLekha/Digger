@@ -7,6 +7,7 @@ package FrontEnd;
 import Backend.DB.Patient;
 import Backend.DB.DBConnector;
 import Backend.DB.Consult;
+import Backend.DB.SelectedOption;
 import Backend.DB.SelectedScreen;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -28,16 +29,28 @@ public class Consults extends javax.swing.JFrame {
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
         this.setIconImage(pic.getImage());
-        setSize(600,440);
         setLocationRelativeTo(null);
 
         //connect to db
         DBConnector.connect();
-        id = Integer.parseInt(SelectedScreen.downloadSelected());
+        id = Integer.parseInt(SelectedOption.downloadSelected());
         fullname.setText(Patient.loadSinglePatient("Firstname", id) + " " + Patient.loadSinglePatient("Surname", id));
         conditionsArea.setText("Conditions: " + Patient.loadSinglePatient("Medical_Conditions", id) + "\nAllergies: " + Patient.loadSinglePatient("Allergy", id));
-        consults = Integer.parseInt(Patient.loadSinglePatient("numConsult", id));
-        newestconsult=consults;
+        newestconsult = Integer.parseInt(Patient.loadSinglePatient("numConsult", id));
+
+        if (newestconsult >= 1) {
+            consults = newestconsult;
+
+            illnesses.setText(Consult.nextCon(id, consults, "diagnosis"));
+            medication.setText(Consult.nextCon(id, consults, "medication"));
+            symptoms.setText(Consult.nextCon(id, consults, "symptom"));
+            dateField.setText(Consult.nextCon(id, consults, "date"));
+        } else {
+            consults = newestconsult + 1;
+
+        }
+
+        JOptionPane.showMessageDialog(null, consults + "vs" + newestconsult);
     }
 
     /**
@@ -49,7 +62,7 @@ public class Consults extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        exitButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         DiagnosisButton = new javax.swing.JButton();
         PerscribeButton = new javax.swing.JButton();
@@ -68,21 +81,24 @@ public class Consults extends javax.swing.JFrame {
         conditionsArea = new javax.swing.JTextArea();
         dateField = new javax.swing.JTextField();
         dateLabel = new javax.swing.JLabel();
-        NextConsultButton1 = new javax.swing.JButton();
+        NextConsultButton = new javax.swing.JButton();
         PreviousConsultButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoutIcon.png"))); // NOI18N
-        exitButton.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoutIcon.png"))); // NOI18N
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitButtonActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 381, 45, 48));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         jLabel1.setText("Consultation");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 0, -1, -1));
 
         DiagnosisButton.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         DiagnosisButton.setText("Diagnose Patient");
@@ -91,6 +107,7 @@ public class Consults extends javax.swing.JFrame {
                 DiagnosisButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(DiagnosisButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 398, 168, -1));
 
         PerscribeButton.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         PerscribeButton.setText("Perscribe Medication");
@@ -99,29 +116,39 @@ public class Consults extends javax.swing.JFrame {
                 PerscribeButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(PerscribeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(311, 399, -1, 29));
 
         patientName.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         patientName.setText("Patient Name:");
+        getContentPane().add(patientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 79, -1, -1));
 
         fullname.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        getContentPane().add(fullname, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 79, 170, 24));
 
         illnessLabel.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         illnessLabel.setText("Illness:");
+        getContentPane().add(illnessLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 148, -1, -1));
 
         medicationLabel.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         medicationLabel.setText("Medication:");
+        getContentPane().add(medicationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 183, -1, -1));
 
         symptomsLabel.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         symptomsLabel.setText("Symptoms:");
+        getContentPane().add(symptomsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 213, -1, -1));
 
         symptoms.setColumns(20);
         symptoms.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         symptoms.setRows(5);
         jScrollPane1.setViewportView(symptoms);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 216, 180, 47));
+
         illnesses.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        getContentPane().add(illnesses, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 149, 180, -1));
 
         medication.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        getContentPane().add(medication, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 185, 180, -1));
 
         LogconsultButton.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         LogconsultButton.setText("Log Consult");
@@ -130,27 +157,34 @@ public class Consults extends javax.swing.JFrame {
                 LogconsultButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(LogconsultButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 356, 163, -1));
 
         conditionsLabel.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         conditionsLabel.setText("Conditions and Allergies:");
+        getContentPane().add(conditionsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 269, -1, -1));
 
         conditionsArea.setColumns(20);
         conditionsArea.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         conditionsArea.setRows(5);
         jScrollPane2.setViewportView(conditionsArea);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 269, 180, 59));
+
         dateField.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        getContentPane().add(dateField, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 117, 180, -1));
 
         dateLabel.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         dateLabel.setText("Date:");
+        getContentPane().add(dateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 113, -1, -1));
 
-        NextConsultButton1.setFont(new java.awt.Font("Dialog", 0, 17)); // NOI18N
-        NextConsultButton1.setText("Next Consult");
-        NextConsultButton1.addActionListener(new java.awt.event.ActionListener() {
+        NextConsultButton.setFont(new java.awt.Font("Dialog", 0, 17)); // NOI18N
+        NextConsultButton.setText("Next Consult");
+        NextConsultButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NextConsultButton1ActionPerformed(evt);
+                NextConsultButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(NextConsultButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(411, 24, 161, -1));
 
         PreviousConsultButton.setFont(new java.awt.Font("Dialog", 0, 17)); // NOI18N
         PreviousConsultButton.setText("Previous Consult");
@@ -159,118 +193,17 @@ public class Consults extends javax.swing.JFrame {
                 PreviousConsultButtonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(medicationLabel)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(symptomsLabel)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(32, 32, 32)
-                                    .addComponent(illnessLabel)))
-                            .addComponent(patientName)
-                            .addComponent(dateLabel)
-                            .addComponent(conditionsLabel)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(86, 86, 86)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                            .addComponent(medication)
-                                            .addComponent(illnesses)
-                                            .addComponent(dateField)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(88, 88, 88)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(fullname, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(PreviousConsultButton)
-                                    .addComponent(NextConsultButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(DiagnosisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(PerscribeButton)
-                                        .addGap(34, 34, 34))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(LogconsultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(136, 136, 136)))
-                                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(fullname, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14)
-                                .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(7, 7, 7)
-                                .addComponent(illnesses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(11, 11, 11)
-                                .addComponent(medication, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(patientName)
-                                .addGap(10, 10, 10)
-                                .addComponent(dateLabel)
-                                .addGap(11, 11, 11)
-                                .addComponent(illnessLabel)
-                                .addGap(11, 11, 11)
-                                .addComponent(medicationLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(symptomsLabel))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(NextConsultButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PreviousConsultButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(conditionsLabel)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(LogconsultButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(DiagnosisButton)
-                            .addComponent(PerscribeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(exitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
+        getContentPane().add(PreviousConsultButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(411, 62, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 //change screen
-    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         new Patients().setVisible(true);
         dispose();
-    }//GEN-LAST:event_exitButtonActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
     private void DiagnosisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiagnosisButtonActionPerformed
         // TODO add your handling code here:
@@ -289,50 +222,56 @@ public class Consults extends javax.swing.JFrame {
     //log new consult
     private void LogconsultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogconsultButtonActionPerformed
         // TODO add your handling code here:
-        consults++;
+        JOptionPane.showMessageDialog(null, consults + "vs" + newestconsult);
         String diagnosis = illnesses.getText();
         String symptom = symptoms.getText();
         String date = dateField.getText();
         String med = medication.getText();
+        Consult.addCon(id, diagnosis, med, consults, date, symptom, newestconsult);
         newestconsult = consults;
 
-        Consult.addCon(id, diagnosis, med, consults, date, symptom);
 
     }//GEN-LAST:event_LogconsultButtonActionPerformed
 
     //view other consults
-    private void NextConsultButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextConsultButton1ActionPerformed
+    private void NextConsultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextConsultButtonActionPerformed
         // TODO add your handling code here:
-        if (consults <=newestconsult) {
-            consults++;
-            illnesses.setText(Consult.nextCon(id, consults, newestconsult, "diagnosis"));
-            medication.setText(Consult.nextCon(id, consults, newestconsult, "medication"));
-            symptoms.setText(Consult.nextCon(id, consults, newestconsult, "symptom"));
-            dateField.setText(Consult.nextCon(id, consults, newestconsult, "date"));
-
-        }else{
+        consults++;
+        if (consults > newestconsult) {
+            consults = newestconsult + 1;
             JOptionPane.showMessageDialog(null, "This is the newest consult.Click Okay to log a new one");
             illnesses.setText("");
             medication.setText("");
             symptoms.setText("");
             dateField.setText("");
-            
-            
+            JOptionPane.showMessageDialog(null, consults + "vs" + newestconsult);
+        } else {
+
+            illnesses.setText(Consult.nextCon(id, consults, "diagnosis"));
+            medication.setText(Consult.nextCon(id, consults, "medication"));
+            symptoms.setText(Consult.nextCon(id, consults, "symptom"));
+            dateField.setText(Consult.nextCon(id, consults, "date"));
         }
 
-    }//GEN-LAST:event_NextConsultButton1ActionPerformed
+
+    }//GEN-LAST:event_NextConsultButtonActionPerformed
 
     private void PreviousConsultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousConsultButtonActionPerformed
-        // TODO add your handling code here:
-        if (consults > 1) {
-            consults--;
+        // TODO add your handling code here
+        consults--;
+        if (consults <= 1) {
+            consults = 1;
+            JOptionPane.showMessageDialog(null, "This is the oldest consult.");
             illnesses.setText(Consult.lastCon(id, consults, "diagnosis"));
             medication.setText(Consult.lastCon(id, consults, "medication"));
             symptoms.setText(Consult.lastCon(id, consults, "symptom"));
             dateField.setText(Consult.lastCon(id, consults, "date"));
-        } else{
-            JOptionPane.showMessageDialog(null, "This is the oldest consult.");
             
+        } else {
+            illnesses.setText(Consult.lastCon(id, consults, "diagnosis"));
+            medication.setText(Consult.lastCon(id, consults, "medication"));
+            symptoms.setText(Consult.lastCon(id, consults, "symptom"));
+            dateField.setText(Consult.lastCon(id, consults, "date"));
         }
     }//GEN-LAST:event_PreviousConsultButtonActionPerformed
 
@@ -343,14 +282,14 @@ public class Consults extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DiagnosisButton;
     private javax.swing.JButton LogconsultButton;
-    private javax.swing.JButton NextConsultButton1;
+    private javax.swing.JButton NextConsultButton;
     private javax.swing.JButton PerscribeButton;
     private javax.swing.JButton PreviousConsultButton;
+    private javax.swing.JButton backButton;
     private javax.swing.JTextArea conditionsArea;
     private javax.swing.JLabel conditionsLabel;
     private javax.swing.JTextField dateField;
     private javax.swing.JLabel dateLabel;
-    private javax.swing.JButton exitButton;
     private javax.swing.JLabel fullname;
     private javax.swing.JLabel illnessLabel;
     private javax.swing.JTextField illnesses;

@@ -22,7 +22,6 @@ public class IllnessUpdate extends javax.swing.JFrame {
 
     public IllnessUpdate() {
         initComponents();
-        setSize(600,440);
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
         this.setIconImage(pic.getImage());
         setLocationRelativeTo(null);
@@ -32,7 +31,7 @@ public class IllnessUpdate extends javax.swing.JFrame {
         id = SelectedOption.downloadSelected();
 
         // fills in information on selected option
-        nameField.setText(Illness.loadSingleIllness(id, "Illness"));
+        illnessNameField.setText(Illness.loadSingleIllness(id, "Illness"));
         symptomsArea.setText(Illness.loadSingleIllness(id, "Symptoms"));
 
     }
@@ -48,7 +47,7 @@ public class IllnessUpdate extends javax.swing.JFrame {
 
         titleLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
-        nameField = new javax.swing.JTextField();
+        illnessNameField = new javax.swing.JTextField();
         nameLabel = new javax.swing.JLabel();
         subTitleLabel = new javax.swing.JLabel();
         editButton = new javax.swing.JButton();
@@ -69,7 +68,7 @@ public class IllnessUpdate extends javax.swing.JFrame {
             }
         });
 
-        nameField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        illnessNameField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         nameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nameLabel.setText("Name:");
@@ -119,7 +118,7 @@ public class IllnessUpdate extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                            .addComponent(nameField))
+                            .addComponent(illnessNameField))
                         .addGap(170, 170, 170))))
         );
         layout.setVerticalGroup(
@@ -131,14 +130,12 @@ public class IllnessUpdate extends javax.swing.JFrame {
                 .addComponent(subTitleLabel)
                 .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(illnessNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameLabel))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(symptomsLabel)
-                        .addGap(71, 71, 71)))
+                    .addComponent(symptomsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(editButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,7 +157,7 @@ public class IllnessUpdate extends javax.swing.JFrame {
     //update DB
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
-        String illness = nameField.getText();
+        String illness = illnessNameField.getText();
         String symptoms = symptomsArea.getText();
 
         Illness.updateIllness(illness, symptoms, id);
@@ -174,8 +171,8 @@ public class IllnessUpdate extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton editButton;
+    private javax.swing.JTextField illnessNameField;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel subTitleLabel;
     private javax.swing.JTextArea symptomsArea;

@@ -14,13 +14,13 @@ import javax.swing.JOptionPane;
  */
 public class Medicine {
 
-    public static String loadSingleMedication(String x, String y) {
-        String sql = "SELECT medicationName, stockRemaining, sideEffects, allergens, illnessTreated  FROM medication WHERE medicationName='" + y + "';";
+    public static String loadSingleMedication(String column, String input) {
+        String sql = "SELECT medicationName, stockRemaining, sideEffects, allergens, illnessTreated  FROM medication WHERE medicationName='" + input + "';";
         String info = null;
         try {
             ResultSet rs = DBConnector.read(sql);
             while (rs.next()) {
-                info = rs.getString(x);
+                info = rs.getString(column);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -31,32 +31,32 @@ public class Medicine {
 
     }
 
-    public static String[] searchMed(String x, String y) {
-        String sql = "SELECT medicationName FROM medication WHERE " + y + " LIKE '%" + x + "%'  ORDER BY idmedication";
-        String[] medication = new String[10000];
+    public static String[] searchMed(String input, String crit) {
+        String sql = "SELECT medicationName FROM medication WHERE " + crit + " LIKE '%" + input + "%'  ORDER BY idmedication";
+        String[] medlist = new String[10000];
 
         try {
             ResultSet rs = DBConnector.read(sql);
 
             int i = 0;
             while (rs.next()) {
-                String name = rs.getString("medicationName");
-                medication[i] = name;
+                String medName = rs.getString("medicationName");
+                medlist[i] = medName;
                 i++;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
-        return medication;
+        return medlist;
 
     }
 
-    public static void addMed(String v, String w, String x, String y, int z) {
-        String sql = "INSERT INTO medication (medicationName, allergens , sideEffects,illnessTreated, stockRemaining ) VALUES ('" + v + "','" + w + "','" + x + "','" + y + "','" + z + "');";
+    public static void addMed(String medName, String allergen, String effects, String treats, int stock) {
+        String sql = "INSERT INTO medication (medicationName, allergens , sideEffects,illnessTreated, stockRemaining ) VALUES ('" + medName + "','" + allergen + "','" + effects + "','" + treats + "','" + stock + "');";
         try {
             Backend.DB.DBConnector.update(sql);
-            JOptionPane.showMessageDialog(null, v + " has been added");
+            JOptionPane.showMessageDialog(null, medName + " has been added");
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
@@ -65,24 +65,24 @@ public class Medicine {
 
     public static String[] loadMedicationList() {
         String sql = "SELECT medicationName FROM medication ORDER BY stockRemaining;";
-        String[] medication = new String[10000];
+        String[] medlist = new String[10000];
         try {
             ResultSet rs = DBConnector.read(sql);
             int i = 0;
             while (rs.next()) {
                 String name = rs.getString("medicationName");
-                medication[i] = name;
+                medlist[i] = name;
                 i++;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
-        return medication;
+        return medlist;
     }
 
-    public static void updateMedication(String v, int w, String x, String y, String u, String z) {
-        String sql = "UPDATE medication SET medicationName='" + v + "', stockRemaining='" + w + "', sideEffects='" + x + "', allergens='" + y + "', illnessTreated='" + u + "' WHERE medicationName='" + z + "';";
+    public static void updateMedication(String medName, int stock, String effects, String allergen, String treats, String input) {
+        String sql = "UPDATE medication SET medicationName='" + medName + "', stockRemaining='" + stock + "', sideEffects='" + effects + "', allergens='" + allergen + "', illnessTreated='" + treats + "' WHERE medicationName='" + input + "';";
         try {
             DBConnector.update(sql);
             JOptionPane.showMessageDialog(null, "Information Has Been Updated");
@@ -93,11 +93,11 @@ public class Medicine {
 
     }
 
-    public static void deleteMed(String x) {
-        String sql = "DELETE FROM medication WHERE medicationName ='" + x + "';";
+    public static void deleteMed(String medName) {
+        String sql = "DELETE FROM medication WHERE medicationName ='" + medName + "';";
         try {
             DBConnector.update(sql);
-            JOptionPane.showMessageDialog(null, x + " has been deleted");
+            JOptionPane.showMessageDialog(null, medName + " has been deleted");
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");

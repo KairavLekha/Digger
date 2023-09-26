@@ -21,8 +21,7 @@ public class MedicationAdd extends javax.swing.JFrame {
     public MedicationAdd() {
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
-            this.setIconImage(pic.getImage());    
-        setSize(600,440);
+            this.setIconImage(pic.getImage());   
         setLocationRelativeTo(null);
         
         DBConnector.connect();
@@ -41,7 +40,7 @@ public class MedicationAdd extends javax.swing.JFrame {
         AddButton = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
         effectsLabel = new javax.swing.JLabel();
-        nameField = new javax.swing.JTextField();
+        medNameField = new javax.swing.JTextField();
         instructionLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -58,6 +57,7 @@ public class MedicationAdd extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         backButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Kairav\\OneDrive\\Pictures\\logoutIcon.png")); // NOI18N
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +65,7 @@ public class MedicationAdd extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 377, 53, 52));
 
         AddButton.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         AddButton.setText("Add");
@@ -73,140 +74,66 @@ public class MedicationAdd extends javax.swing.JFrame {
                 AddButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(AddButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 384, 114, 37));
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 3, 30)); // NOI18N
         titleLabel.setText("Doctor Information Terminal");
+        getContentPane().add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 12, -1, -1));
 
         effectsLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         effectsLabel.setText("Side Effects:");
+        getContentPane().add(effectsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 202, -1, 40));
 
-        nameField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        medNameField.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        getContentPane().add(medNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 152, 120, 30));
 
         instructionLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         instructionLabel.setText("If no allergens  or Side Effects write 'N/A'");
+        getContentPane().add(instructionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 83, -1, -1));
 
         nameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nameLabel.setText("Name:");
+        getContentPane().add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 142, -1, 40));
 
         treatedArea.setColumns(20);
         treatedArea.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         treatedArea.setRows(5);
         jScrollPane3.setViewportView(treatedArea);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 282, 360, 70));
+
         subTitleLabel.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         subTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         subTitleLabel.setText("Medication Information");
         subTitleLabel.setOpaque(true);
+        getContentPane().add(subTitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 52, 600, -1));
 
         treatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         treatedLabel.setText("Illnesses Treated:");
+        getContentPane().add(treatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 272, -1, 40));
 
         stockLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         stockLabel.setText("Stock:");
+        getContentPane().add(stockLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 142, -1, 40));
+        getContentPane().add(stockField, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 152, 122, 30));
 
         allergyArea.setColumns(20);
         allergyArea.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         allergyArea.setRows(5);
         jScrollPane1.setViewportView(allergyArea);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 202, 122, 60));
+
         AllergyLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         AllergyLabel.setText("Allergens:");
+        getContentPane().add(AllergyLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 202, -1, 40));
 
         sideEffectsArea.setColumns(20);
         sideEffectsArea.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         sideEffectsArea.setRows(5);
         jScrollPane2.setViewportView(sideEffectsArea);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 257, Short.MAX_VALUE)
-                .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(189, 189, 189)
-                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(150, 150, 150)
-                            .addComponent(instructionLabel))
-                        .addComponent(subTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(100, 100, 100)
-                            .addComponent(titleLabel))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(80, 80, 80)
-                            .addComponent(nameLabel)
-                            .addGap(17, 17, 17)
-                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(70, 70, 70)
-                            .addComponent(stockLabel)
-                            .addGap(12, 12, 12)
-                            .addComponent(stockField, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(60, 60, 60)
-                            .addComponent(AllergyLabel)
-                            .addGap(9, 9, 9)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(effectsLabel)
-                            .addGap(12, 12, 12)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(treatedLabel)
-                            .addGap(11, 11, 11)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(377, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(71, 71, 71)
-                            .addComponent(instructionLabel))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(40, 40, 40)
-                            .addComponent(subTitleLabel))
-                        .addComponent(titleLabel))
-                    .addGap(34, 34, 34)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(stockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(stockField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGap(20, 20, 20)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(AllergyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(effectsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(treatedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(88, Short.MAX_VALUE)))
-        );
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 202, 122, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -221,7 +148,7 @@ public class MedicationAdd extends javax.swing.JFrame {
 // add to DB
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
         // TODO add your handling code here:
-        String name=nameField.getText();
+        String name=medNameField.getText();
         String allergy=allergyArea.getText();
         String sideEffects=sideEffectsArea.getText();
         String treatedIllnesses=treatedArea.getText();
@@ -245,7 +172,7 @@ public class MedicationAdd extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField nameField;
+    private javax.swing.JTextField medNameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextArea sideEffectsArea;
     private javax.swing.JTextField stockField;

@@ -7,6 +7,7 @@ package FrontEnd;
 import Backend.DB.DBConnector;
 import Backend.DB.SelectedOption;
 import Backend.DB.Illness;
+import Backend.Password;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -24,7 +25,6 @@ public class Illnesses extends javax.swing.JFrame {
      */
     public Illnesses() {
         initComponents();
-        setSize(600,440);
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
         this.setIconImage(pic.getImage());
         setLocationRelativeTo(null);
@@ -51,8 +51,8 @@ public class Illnesses extends javax.swing.JFrame {
         listLabel = new javax.swing.JLabel();
         PatientList = new javax.swing.JScrollPane();
         illnessList = new javax.swing.JList<>();
-        filterInput = new javax.swing.JTextField();
-        logoutButton = new javax.swing.JButton();
+        searchField = new javax.swing.JTextField();
+        backButton = new javax.swing.JButton();
         newIllnessButton = new javax.swing.JButton();
         instruction = new javax.swing.JLabel();
 
@@ -78,22 +78,22 @@ public class Illnesses extends javax.swing.JFrame {
         illnessList.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         PatientList.setViewportView(illnessList);
 
-        filterInput.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        filterInput.addActionListener(new java.awt.event.ActionListener() {
+        searchField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filterInputActionPerformed(evt);
+                searchFieldActionPerformed(evt);
             }
         });
-        filterInput.addKeyListener(new java.awt.event.KeyAdapter() {
+        searchField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                filterInputKeyReleased(evt);
+                searchFieldKeyReleased(evt);
             }
         });
 
-        logoutButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Kairav\\OneDrive\\Pictures\\logoutIcon.png")); // NOI18N
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Kairav\\OneDrive\\Pictures\\logoutIcon.png")); // NOI18N
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtonActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -121,7 +121,7 @@ public class Illnesses extends javax.swing.JFrame {
                         .addGap(81, 81, 81))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(filterInput, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                            .addComponent(searchField, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                             .addComponent(instruction, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                             .addComponent(listLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(185, 185, 185))
@@ -132,7 +132,7 @@ public class Illnesses extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(newIllnessButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(PatientList, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(133, 133, 133)))
@@ -146,13 +146,13 @@ public class Illnesses extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(instruction, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
                         .addComponent(listLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -171,10 +171,9 @@ public class Illnesses extends javax.swing.JFrame {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
 
         String selected = illnessList.getSelectedValue();
-        SelectedOption.uploadSelected(selected);
 
         if (selected == null) {
-            JOptionPane.showMessageDialog(null, "Select An option first.");
+            JOptionPane.showMessageDialog(null, "Select An Illness first.");
         } else {
             SelectedOption.uploadSelected(selected);
             new IllnessUpdate().setVisible(true);
@@ -183,10 +182,12 @@ public class Illnesses extends javax.swing.JFrame {
     }//GEN-LAST:event_editButtonActionPerformed
 
 //change screen
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
+        Password.loggedIn=true;
+        new Login().setVisible(true);
         dispose();
-    }//GEN-LAST:event_logoutButtonActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
     private void newIllnessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newIllnessButtonActionPerformed
         // TODO add your handling code here
@@ -196,15 +197,15 @@ public class Illnesses extends javax.swing.JFrame {
     }//GEN-LAST:event_newIllnessButtonActionPerformed
 
 //search
-    private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
+    private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
         // TODO add your handling code here:
-        String[] names = Illness.searchIll(filterInput.getText(), "Illness");
+        String[] names = Illness.searchIll(searchField.getText(), "Illness");
         illnessList.setListData(names);
-    }//GEN-LAST:event_filterInputKeyReleased
+    }//GEN-LAST:event_searchFieldKeyReleased
 
-    private void filterInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterInputActionPerformed
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_filterInputActionPerformed
+    }//GEN-LAST:event_searchFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,13 +213,13 @@ public class Illnesses extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane PatientList;
+    private javax.swing.JButton backButton;
     private javax.swing.JButton editButton;
-    private javax.swing.JTextField filterInput;
     private javax.swing.JList<String> illnessList;
     private javax.swing.JLabel instruction;
     private javax.swing.JLabel listLabel;
-    private javax.swing.JButton logoutButton;
     private javax.swing.JButton newIllnessButton;
+    private javax.swing.JTextField searchField;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

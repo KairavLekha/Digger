@@ -9,14 +9,10 @@ package Backend;
  * @author Kairav
  */
 public class Password {
-
-   
-
-  
-
-
+    public static boolean loggedIn=false;
+    public static String code = "4807";
 
     public static boolean login(String input) {
-        return input.equalsIgnoreCase("4807");
+        return input.equalsIgnoreCase(code);
     }
 }

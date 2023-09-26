@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import Backend.DB.SelectedOption;
 import Backend.DB.DBConnector;
 import Backend.DB.Medicine;
+import Backend.Password;
 import javax.swing.ImageIcon;
 
 /**
@@ -25,8 +26,8 @@ public class Medication extends javax.swing.JFrame {
         initComponents();
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
         this.setIconImage(pic.getImage());
-        setSize(600,440);
         setLocationRelativeTo(null);
+//        setSize(600,440);
 
         DBConnector.connect();
         String[] medication = Medicine.loadMedicationList();
@@ -51,18 +52,20 @@ public class Medication extends javax.swing.JFrame {
         listLabel = new javax.swing.JLabel();
         PatientList = new javax.swing.JScrollPane();
         MedicationList = new javax.swing.JList<>();
-        filterInput = new javax.swing.JTextField();
+        searchField = new javax.swing.JTextField();
         instruction = new javax.swing.JLabel();
-        logoutButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
         newMedicationButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setSize(new java.awt.Dimension(526, 350));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 3, 30)); // NOI18N
         titleLabel.setText("Doctor Information Terminal");
+        getContentPane().add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 12, -1, -1));
 
         editButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         editButton.setText("Update/View");
@@ -71,31 +74,38 @@ public class Medication extends javax.swing.JFrame {
                 editButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(editButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, -1, -1));
 
         listLabel.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         listLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         listLabel.setText("List Of Medication");
+        getContentPane().add(listLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 154, 214, -1));
 
         MedicationList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PatientList.setViewportView(MedicationList);
 
-        filterInput.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        filterInput.addKeyListener(new java.awt.event.KeyAdapter() {
+        getContentPane().add(PatientList, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 204, 293, 130));
+
+        searchField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                filterInputKeyReleased(evt);
+                searchFieldKeyReleased(evt);
             }
         });
+        getContentPane().add(searchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 114, 206, 28));
 
         instruction.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         instruction.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         instruction.setText("Search a Medication");
+        getContentPane().add(instruction, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 77, 206, -1));
 
-        logoutButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Kairav\\OneDrive\\Pictures\\logoutIcon.png")); // NOI18N
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Kairav\\OneDrive\\Pictures\\logoutIcon.png")); // NOI18N
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtonActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 50, 44));
 
         newMedicationButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         newMedicationButton.setText("Add Medication");
@@ -104,6 +114,7 @@ public class Medication extends javax.swing.JFrame {
                 newMedicationButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(newMedicationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 400, -1, -1));
 
         deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/deleteIcon.png"))); // NOI18N
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -111,62 +122,7 @@ public class Medication extends javax.swing.JFrame {
                 deleteButtonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(editButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(newMedicationButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(PatientList, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(instruction, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(listLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(75, 75, 75)
-                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(titleLabel)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(titleLabel)
-                .addGap(32, 32, 32)
-                .addComponent(instruction)
-                .addGap(18, 18, 18)
-                .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(listLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PatientList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(editButton)
-                        .addComponent(newMedicationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
+        getContentPane().add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 390, 45, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -187,10 +143,12 @@ public class Medication extends javax.swing.JFrame {
     }//GEN-LAST:event_editButtonActionPerformed
 
 //change screen
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
+        Password.loggedIn=true;
+        new Login().setVisible(true);
         dispose();
-    }//GEN-LAST:event_logoutButtonActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
     private void newMedicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedicationButtonActionPerformed
         // TODO add your handling code here
@@ -200,21 +158,20 @@ public class Medication extends javax.swing.JFrame {
     }//GEN-LAST:event_newMedicationButtonActionPerformed
 
     //search
-    private void filterInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterInputKeyReleased
+    private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
         // TODO add your handling code here:
-        String[] medication = Medicine.searchMed(filterInput.getText(), "medicationName");
+        String[] medication = Medicine.searchMed(searchField.getText(), "medicationName");
         MedicationList.setListData(medication);
 
-    }//GEN-LAST:event_filterInputKeyReleased
+    }//GEN-LAST:event_searchFieldKeyReleased
 
 //delete from DB
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
         selected = MedicationList.getSelectedValue();
         if (selected == null) {
-            JOptionPane.showMessageDialog(null, "Select An option first.");
+            JOptionPane.showMessageDialog(null, "Select A Medication first.");
         } else {
-            JOptionPane.showMessageDialog(rootPane, selected + " has been deleted");
             Medicine.deleteMed(selected);
             String names[] = Medicine.loadMedicationList();
             MedicationList.setListData(names);
@@ -229,13 +186,13 @@ public class Medication extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> MedicationList;
     private javax.swing.JScrollPane PatientList;
+    private javax.swing.JButton backButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
-    private javax.swing.JTextField filterInput;
     private javax.swing.JLabel instruction;
     private javax.swing.JLabel listLabel;
-    private javax.swing.JButton logoutButton;
     private javax.swing.JButton newMedicationButton;
+    private javax.swing.JTextField searchField;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

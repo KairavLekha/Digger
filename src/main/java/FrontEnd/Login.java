@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package FrontEnd;
+
 import Backend.Password;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -13,22 +14,28 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Screen1
-     */
+    
+            /**
+             * Creates new form Screen1
+             */
+
     public Login() {
 
         initComponents();
-        setSize(600,440);
+
         ImageIcon pic = new ImageIcon("src\\main\\resources\\pulseNew.png");
         this.setIconImage(pic.getImage());
         setLocationRelativeTo(null);
+        setSize(600,440);
         incorrectCodeLabel.setVisible(false);
-        Screens.setVisible(false);
-        PatientButton.setVisible(false);
-        MedicationButton.setVisible(false);
-        IllnessButton.setVisible(false);
-        logoutButton.setVisible(false);
+        Screens.setVisible(Password.loggedIn);
+        PatientButton.setVisible(Password.loggedIn);
+        MedicationButton.setVisible(Password.loggedIn);
+        IllnessButton.setVisible(Password.loggedIn);
+        logoutButton.setVisible(Password.loggedIn);
+        if (Password.loggedIn==true) {
+            PasswordField.setText(Password.code); 
+        }
 
     }
 
@@ -69,7 +76,7 @@ public class Login extends javax.swing.JFrame {
 
         PasswordField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         PasswordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(PasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 277, 172, -1));
+        getContentPane().add(PasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 172, -1));
 
         confirmButton.setFont(new java.awt.Font("Segoe UI", 3, 20)); // NOI18N
         confirmButton.setText("Confirm");
@@ -78,7 +85,7 @@ public class Login extends javax.swing.JFrame {
                 confirmButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(confirmButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 352, 164, -1));
+        getContentPane().add(confirmButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 164, -1));
 
         Screens.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         Screens.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -93,7 +100,7 @@ public class Login extends javax.swing.JFrame {
         incorrectCodeLabel.setToolTipText("");
         incorrectCodeLabel.setInheritsPopupMenu(false);
         incorrectCodeLabel.setVerifyInputWhenFocusTarget(false);
-        getContentPane().add(incorrectCodeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 312, 172, -1));
+        getContentPane().add(incorrectCodeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, 172, -1));
 
         exitButton.setBackground(new java.awt.Color(255, 0, 0));
         exitButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -108,7 +115,7 @@ public class Login extends javax.swing.JFrame {
 
         icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pulse.png"))); // NOI18N
         icon.setText("jLabel2");
-        getContentPane().add(icon, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 67, 265, -1));
+        getContentPane().add(icon, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 265, -1));
 
         MedicationButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         MedicationButton.setText("Medication");
@@ -123,7 +130,7 @@ public class Login extends javax.swing.JFrame {
         instruction.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         instruction.setText("Enter Your Code");
         instruction.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(instruction, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 233, 265, -1));
+        getContentPane().add(instruction, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 265, -1));
 
         PatientButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         PatientButton.setText("Patients");
@@ -185,18 +192,21 @@ public class Login extends javax.swing.JFrame {
     private void PatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientButtonActionPerformed
         // TODO add your handling code here:
         new Patients().setVisible(true);
+        dispose();
 
     }//GEN-LAST:event_PatientButtonActionPerformed
 
     private void MedicationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MedicationButtonActionPerformed
         // TODO add your handling code here:
         new Medication().setVisible(true);
+        dispose();
 
     }//GEN-LAST:event_MedicationButtonActionPerformed
 
     private void IllnessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IllnessButtonActionPerformed
         // TODO add your handling code here:
         new Illnesses().setVisible(true);
+        dispose();
 
     }//GEN-LAST:event_IllnessButtonActionPerformed
 
@@ -208,6 +218,7 @@ public class Login extends javax.swing.JFrame {
         IllnessButton.setVisible(false);
         logoutButton.setVisible(true);
         PasswordField.setText("");
+        confirmButton.setVisible(true);
     }//GEN-LAST:event_logoutButtonActionPerformed
 
     /**

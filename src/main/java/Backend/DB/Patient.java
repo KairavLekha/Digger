@@ -14,63 +14,63 @@ import javax.swing.JOptionPane;
  */
 public class Patient {
 
-    public static int getId(String x) {
-        String[] patientinfo = x.split(":", 0);
+    public static int getId(String listItem) {
+        String[] patientinfo = listItem.split(":", 0);
         int id = Integer.parseInt(patientinfo[1]);
         return id;
     }
 
-    public static String criteria(String x) {
-        switch (x) {
+    public static String criteria(String crit) {
+        switch (crit) {
             case "Firstname":
-                x = "Surname";
+                crit = "Surname";
                 break;
             case "Surname":
-                x = "Address";
+                crit = "Address";
                 break;
             case "Address":
-                x = "Phone_Number";
+                crit = "Phone_Number";
                 break;
             case "Phone_Number":
-                x = "Date_Of_Birth";
+                crit = "Date_Of_Birth";
                 break;
             case "Date_Of_Birth":
-                x = "Firstname";
+                crit = "Firstname";
                 break;
             default:
                 break;
         }
-        return x;
+        return crit;
 
     }
 
-    public static String criteriaOut(String x) {
-        String y = "";
-        switch (x) {
+    public static String criteriaOut(String crit) {
+        String critOut = "";
+        switch (crit) {
             case "Firstname":
-                y = "Surname";
+                critOut = "Firstname";
                 break;
             case "Surname":
-                y = "Address";
+                critOut = "Surname";
                 break;
             case "Address":
-                y = "Phone Number";
+                critOut = "Address";
                 break;
             case "Phone_Number":
-                y = "Date Of Birth";
+                critOut = "Phone Number";
                 break;
             case "Date_Of_Birth":
-                y = "Firstname";
+                critOut = "Date Of Birth";
                 break;
             default:
                 break;
         }
-        return y;
+        return critOut;
 
     }
 
-    public static void updatePatient(String s, String t, String u, String v, String w, String x, String y, int z) {
-        String sql = "UPDATE patient SET Firstname='" + s + "', Surname='" + t + "', Date_Of_Birth='" + u + "', Medical_Conditions='" + v + "', Phone_Number='" + w + "', Address= '" + x + "', Allergy='" + y + "' WHERE PatientNumber=" + z + ";";
+    public static void updatePatient(String name, String surname, String DOB, String medCon, String phoneNum, String address, String allergy, int id) {
+        String sql = "UPDATE patient SET Firstname='" + name + "', Surname='" + surname + "', Date_Of_Birth='" + DOB + "', Medical_Conditions='" + medCon + "', Phone_Number='" + phoneNum + "', Address= '" + address + "', Allergy='" + allergy + "' WHERE PatientNumber=" + id + ";";
         try {
             DBConnector.update(sql);
             JOptionPane.showMessageDialog(null, "Information Has Been Updated");
@@ -80,11 +80,11 @@ public class Patient {
         }
     }
 
-    public static void addPat(String t, String u, String v, String w, String x, String y, String z) {
-        String sql = "INSERT INTO patient (Firstname, Surname, Date_Of_Birth, Medical_Conditions, Phone_Number, Address, Allergy, numConsult ) VALUES ('" + t + "','" + u + "','" + v + "','" + w + "','" + x + "','" + y + "','" + z + "', 0);";
+    public static void addPat(String name, String surname, String DOB, String medCon, String phoneNum, String address, String allergy) {
+        String sql = "INSERT INTO patient (Firstname, Surname, Date_Of_Birth, Medical_Conditions, Phone_Number, Address, Allergy, numConsult ) VALUES ('" + name + "','" + surname + "','" + DOB + "','" + medCon+ "','" + phoneNum + "','" + address + "','" + allergy + "', 0);";
         try {
             Backend.DB.DBConnector.update(sql);
-            JOptionPane.showMessageDialog(null, t + " has been added");
+            JOptionPane.showMessageDialog(null, name + " has been added");
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
@@ -92,52 +92,52 @@ public class Patient {
 
     }
 
-    public static String[] searchPat(String x, String y) {
-        String query2 = "select firstname, surname, PatientNumber FROM Patient WHERE " + y + " LIKE '" + x + "%'ORDER BY firstname;";
-        String[] names = new String[10000];
+    public static String[] searchPat(String input, String crit) {
+        String sql = "select firstname, surname, PatientNumber FROM Patient WHERE " + crit + " LIKE '" + input + "%'ORDER BY firstname;";
+        String[] list = new String[10000];
         try {
-            ResultSet rs = DBConnector.read(query2);
+            ResultSet rs = DBConnector.read(sql);
             int i = 0;
             while (rs.next()) {
                 String name = rs.getString("firstname");
                 String surname = rs.getString("surname");
                 int patientNum = rs.getInt("PatientNumber");
-                names[i] = name + " " + surname + " Patient ID:" + patientNum;
+                list[i] = name + " " + surname + " Patient ID:" + patientNum;
                 i++;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
-        return names;
+        return list;
 
     }
 
-    public static void deletePat(String w, int x) {
-        String sql = "DELETE FROM patient WHERE PatientNumber='" + x + "';";
+    public static void deletePat(String name, int id) {
+        String sql = "DELETE FROM patient WHERE PatientNumber='" + id + "';";
         try {
             DBConnector.update(sql);
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
-        String qry = "DELETE FROM consults WHERE idPatient='" + x + "';";
+        String qry = "DELETE FROM consults WHERE idPatient='" + id + "';";
         try {
-            DBConnector.update(sql);
-            JOptionPane.showMessageDialog(null, w + " has been deleted");
+            DBConnector.update(qry);
+            JOptionPane.showMessageDialog(null, name + " has been deleted");
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
     }
 
-    public static String loadSinglePatient(String x, int y) {
-        String sql = "SELECT " + x + " FROM patient WHERE PatientNumber='" + y + "';";
+    public static String loadSinglePatient(String column, int id) {
+        String sql = "SELECT " + column + " FROM patient WHERE PatientNumber='" + id + "';";
         String info = null;
         try {
             ResultSet rs = DBConnector.read(sql);
             while (rs.next()) {
-                info = rs.getString(x);
+                info = rs.getString(column);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -148,7 +148,7 @@ public class Patient {
 
     public static String[] loadPatientList() {
         String sql = "select firstname, surname, PatientNumber FROM Patient ORDER BY firstname;";
-        String[] names = new String[10000];
+        String[] list = new String[10000];
         try {
             ResultSet rs = DBConnector.read(sql);
             int i = 0;
@@ -156,13 +156,13 @@ public class Patient {
                 String name = rs.getString("firstname");
                 String surname = rs.getString("surname");
                 int patientNum = rs.getInt("PatientNumber");
-                names[i] = name + " " + surname + " Patient ID:" + patientNum;
+                list[i] = name + " " + surname + " Patient ID:" + patientNum;
                 i++;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error in SQL query");
         }
-        return names;
+        return list;
     }
 }
