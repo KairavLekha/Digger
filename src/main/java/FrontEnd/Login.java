@@ -33,6 +33,7 @@ public class Login extends javax.swing.JFrame {
         MedicationButton.setVisible(Password.loggedIn);
         IllnessButton.setVisible(Password.loggedIn);
         logoutButton.setVisible(Password.loggedIn);
+        confirmButton.setVisible(!Password.loggedIn);
         if (Password.loggedIn==true) {
             PasswordField.setText(Password.code); 
         }
@@ -186,6 +187,7 @@ public class Login extends javax.swing.JFrame {
     //Close app
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 

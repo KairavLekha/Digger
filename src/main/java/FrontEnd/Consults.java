@@ -50,7 +50,7 @@ public class Consults extends javax.swing.JFrame {
 
         }
 
-        JOptionPane.showMessageDialog(null, consults + "vs" + newestconsult);
+        
     }
 
     /**
@@ -72,9 +72,8 @@ public class Consults extends javax.swing.JFrame {
         medicationLabel = new javax.swing.JLabel();
         symptomsLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        symptoms = new javax.swing.JTextArea();
+        medication = new javax.swing.JTextArea();
         illnesses = new javax.swing.JTextField();
-        medication = new javax.swing.JTextField();
         LogconsultButton = new javax.swing.JButton();
         conditionsLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -83,6 +82,8 @@ public class Consults extends javax.swing.JFrame {
         dateLabel = new javax.swing.JLabel();
         NextConsultButton = new javax.swing.JButton();
         PreviousConsultButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        symptoms = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -120,35 +121,32 @@ public class Consults extends javax.swing.JFrame {
 
         patientName.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         patientName.setText("Patient Name:");
-        getContentPane().add(patientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 79, -1, -1));
+        getContentPane().add(patientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
 
         fullname.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        getContentPane().add(fullname, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 79, 170, 24));
+        getContentPane().add(fullname, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 170, 24));
 
         illnessLabel.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         illnessLabel.setText("Illness:");
-        getContentPane().add(illnessLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 148, -1, -1));
+        getContentPane().add(illnessLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
 
         medicationLabel.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         medicationLabel.setText("Medication:");
-        getContentPane().add(medicationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 183, -1, -1));
+        getContentPane().add(medicationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
 
         symptomsLabel.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         symptomsLabel.setText("Symptoms:");
-        getContentPane().add(symptomsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 213, -1, -1));
+        getContentPane().add(symptomsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, -1, -1));
 
-        symptoms.setColumns(20);
-        symptoms.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        symptoms.setRows(5);
-        jScrollPane1.setViewportView(symptoms);
+        medication.setColumns(20);
+        medication.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        medication.setRows(5);
+        jScrollPane1.setViewportView(medication);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 216, 180, 47));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 180, 47));
 
         illnesses.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        getContentPane().add(illnesses, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 149, 180, -1));
-
-        medication.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        getContentPane().add(medication, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 185, 180, -1));
+        getContentPane().add(illnesses, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 180, -1));
 
         LogconsultButton.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         LogconsultButton.setText("Log Consult");
@@ -161,21 +159,21 @@ public class Consults extends javax.swing.JFrame {
 
         conditionsLabel.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         conditionsLabel.setText("Conditions and Allergies:");
-        getContentPane().add(conditionsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 269, -1, -1));
+        getContentPane().add(conditionsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
 
         conditionsArea.setColumns(20);
         conditionsArea.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         conditionsArea.setRows(5);
         jScrollPane2.setViewportView(conditionsArea);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 269, 180, 59));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 180, 59));
 
         dateField.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        getContentPane().add(dateField, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 117, 180, -1));
+        getContentPane().add(dateField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 180, -1));
 
         dateLabel.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         dateLabel.setText("Date:");
-        getContentPane().add(dateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 113, -1, -1));
+        getContentPane().add(dateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, -1, -1));
 
         NextConsultButton.setFont(new java.awt.Font("Dialog", 0, 17)); // NOI18N
         NextConsultButton.setText("Next Consult");
@@ -194,6 +192,13 @@ public class Consults extends javax.swing.JFrame {
             }
         });
         getContentPane().add(PreviousConsultButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(411, 62, -1, -1));
+
+        symptoms.setColumns(20);
+        symptoms.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        symptoms.setRows(5);
+        jScrollPane3.setViewportView(symptoms);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 180, 47));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -222,7 +227,6 @@ public class Consults extends javax.swing.JFrame {
     //log new consult
     private void LogconsultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogconsultButtonActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, consults + "vs" + newestconsult);
         String diagnosis = illnesses.getText();
         String symptom = symptoms.getText();
         String date = dateField.getText();
@@ -244,7 +248,7 @@ public class Consults extends javax.swing.JFrame {
             medication.setText("");
             symptoms.setText("");
             dateField.setText("");
-            JOptionPane.showMessageDialog(null, consults + "vs" + newestconsult);
+            
         } else {
 
             illnesses.setText(Consult.nextCon(id, consults, "diagnosis"));
@@ -268,10 +272,7 @@ public class Consults extends javax.swing.JFrame {
             dateField.setText(Consult.lastCon(id, consults, "date"));
             
         } else {
-            illnesses.setText(Consult.lastCon(id, consults, "diagnosis"));
-            medication.setText(Consult.lastCon(id, consults, "medication"));
-            symptoms.setText(Consult.lastCon(id, consults, "symptom"));
-            dateField.setText(Consult.lastCon(id, consults, "date"));
+          
         }
     }//GEN-LAST:event_PreviousConsultButtonActionPerformed
 
@@ -296,7 +297,8 @@ public class Consults extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField medication;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea medication;
     private javax.swing.JLabel medicationLabel;
     private javax.swing.JLabel patientName;
     private javax.swing.JTextArea symptoms;
