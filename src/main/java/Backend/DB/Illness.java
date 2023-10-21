@@ -59,14 +59,18 @@ public class Illness {
     }
 
     public static void addIll(String illName, String symp) {
-
-        String sql = "INSERT INTO illnesses (Illness, Symptoms) VALUES ('" + illName + "','" + symp + "');";
-        try {
-            Backend.DB.DBConnector.update(sql);
-            JOptionPane.showMessageDialog(null, illName + " has been added");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        if (illName.isBlank()||symp.isBlank()) {
+            JOptionPane.showMessageDialog(null, "A field cannot be left blank");
+        }else{
+            String sql = "INSERT INTO illnesses (Illness, Symptoms) VALUES ('" + illName + "','" + symp + "');";
+            try {
+                Backend.DB.DBConnector.update(sql);
+                JOptionPane.showMessageDialog(null, illName + " has been added");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error in SQL query");
+            }
+            
         }
 
     }

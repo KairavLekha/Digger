@@ -231,6 +231,8 @@ public class Consults extends javax.swing.JFrame {
         String symptom = symptoms.getText();
         String date = dateField.getText();
         String med = medication.getText();
+        if (med.isEmpty()==true);
+        
         Consult.addCon(id, diagnosis, med, consults, date, symptom, newestconsult);
         newestconsult = consults;
 

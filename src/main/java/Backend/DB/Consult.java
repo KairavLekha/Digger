@@ -54,24 +54,27 @@ public class Consult {
 
     public static void addCon(int id, String illness, String med, int currentCon, String date, String symptoms, int newCon) {
         if (currentCon >= newCon) {
-            currentCon++;
+            if (med.isBlank() || illness.isBlank() || date.isBlank() || symptoms.isBlank()) {
+                JOptionPane.showMessageDialog(null, "A field cannot be left blank");
+            } else {
+                String sql = "INSERT INTO consults (idPatient, diagnosis, medication, patientConsult, date, symptom) VALUES ('" + id + "','" + illness + "','" + med + "','" + currentCon + "','" + date + "','" + symptoms + "');";
+                try {
+                    Backend.DB.DBConnector.update(sql);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error in SQL query");
+                }
 
-            String sql = "INSERT INTO consults (idPatient, diagnosis, medication, patientConsult, date, symptom) VALUES ('" + id + "','" + illness + "','" + med + "','" + currentCon + "','" + date + "','" + symptoms + "');";
-            try {
-                Backend.DB.DBConnector.update(sql);
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error in SQL query");
-            }
+                String qry = "UPDATE patient SET numConsult='" + currentCon + "'WHERE PatientNumber=" + id + ";";
+                try {
+                    Backend.DB.DBConnector.update(qry);
+                    JOptionPane.showMessageDialog(null, "The consult has been logged");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error in SQL query");
+                }
 
-            String qry = "UPDATE patient SET numConsult='" + currentCon + "'WHERE PatientNumber=" + id + ";";
-            try {
-                Backend.DB.DBConnector.update(qry);
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error in SQL query");
             }
-            JOptionPane.showMessageDialog(null, "The consult has been logged");
 
         } else {
             JOptionPane.showMessageDialog(null, "Go to the newest consult before attempting to log a new one.");

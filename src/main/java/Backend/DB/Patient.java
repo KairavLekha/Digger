@@ -82,12 +82,17 @@ public class Patient {
 
     public static void addPat(String name, String surname, String DOB, String medCon, String phoneNum, String address, String allergy) {
         String sql = "INSERT INTO patient (Firstname, Surname, Date_Of_Birth, Medical_Conditions, Phone_Number, Address, Allergy, numConsult ) VALUES ('" + name + "','" + surname + "','" + DOB + "','" + medCon+ "','" + phoneNum + "','" + address + "','" + allergy + "', 0);";
-        try {
-            Backend.DB.DBConnector.update(sql);
-            JOptionPane.showMessageDialog(null, name + " has been added");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        if (name.isBlank()||surname.isBlank()||DOB.isBlank()||medCon.isBlank()||phoneNum.isBlank()||address.isBlank()||allergy.isBlank()) {
+            JOptionPane.showMessageDialog(null, "A field cannot be left blank");
+        }else{
+            try {
+                Backend.DB.DBConnector.update(sql);
+                JOptionPane.showMessageDialog(null, name + " has been added");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error in SQL query");
+            }
+            
         }
 
     }

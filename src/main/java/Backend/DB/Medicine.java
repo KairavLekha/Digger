@@ -53,14 +53,21 @@ public class Medicine {
     }
 
     public static void addMed(String medName, String allergen, String effects, String treats, int stock) {
-        String sql = "INSERT INTO medication (medicationName, allergens , sideEffects,illnessTreated, stockRemaining ) VALUES ('" + medName + "','" + allergen + "','" + effects + "','" + treats + "','" + stock + "');";
-        try {
-            Backend.DB.DBConnector.update(sql);
-            JOptionPane.showMessageDialog(null, medName + " has been added");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error in SQL query");
+        if (medName.isBlank() || allergen.isBlank() || effects.isBlank() || treats.isBlank() || ("" + stock).isBlank()) {
+
+            JOptionPane.showMessageDialog(null, "A field cannot be left blank");
+        } else {
+
+            String sql = "INSERT INTO medication (medicationName, allergens , sideEffects,illnessTreated, stockRemaining ) VALUES ('" + medName + "','" + allergen + "','" + effects + "','" + treats + "','" + stock + "');";
+            try {
+                Backend.DB.DBConnector.update(sql);
+                JOptionPane.showMessageDialog(null, medName + " has been added");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error in SQL query");
+            }
         }
+
     }
 
     public static String[] loadMedicationList() {
